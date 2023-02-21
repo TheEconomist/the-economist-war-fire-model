@@ -1,6 +1,6 @@
 # *The Economist's* Ukraine war-fire model
 
-This repository contains the source code *The Economist’s* Ukraine war-fire model. 
+This repository contains the source code and data associated with *The Economist’s* Ukraine war-fire model. 
 
 ## Scripts, sources and output data
 
