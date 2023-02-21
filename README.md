@@ -16,7 +16,7 @@ This model was first published on February 24th, 2023, one year after the war be
 
 This model has been constructed by [Sondre Ulvund Solstad](https://twitter.com/sondreus). *The Economist* gratefully acknowledge input from Daniel Arribas-Bel and Francisco Rowe of the University of Liverpool on the construction of training features, and helpful discussion about modelling approach.
 
-If you have any suggestions, please email [sondresolstad@economist.com](mailto:sondresolstad@economist.com).
+If you have any suggestions, please email [sondresolstad@economist.com](mailto:sondresolstad@economist.com) or open an issue.
 
 ## Licence
 
