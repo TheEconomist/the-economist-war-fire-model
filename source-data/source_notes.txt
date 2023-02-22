@@ -1,0 +1,3 @@
+Note:
+
+Because we do not have the rights to share the underlying data files (which also, are very large), we cannot provide those here. However, as all our work draws on public sources, downloading the relevant files is easily possible by following the instructions given in the various scripts detailed in the readme file. Should you have any issues accessing these files, please open an issue. 
