@@ -12,11 +12,11 @@ Generating the model ensemble, as well as model outputs, relies on running a ser
 
 This model was first published on February 24th, 2023, one year after the war began. 
 
-## Authors
+## Acknowledgements
 
-This model has been constructed by [Sondre Ulvund Solstad](https://twitter.com/sondreus). *The Economist* gratefully acknowledge input from Daniel Arribas-Bel and Francisco Rowe of the University of Liverpool on the construction of training features, and helpful discussion about modelling approach.
+*The Economist* gratefully acknowledge input from Daniel Arribas-Bel and Francisco Rowe of the University of Liverpool on the construction of training features, and helpful discussion about modelling approach.
 
-If you have any suggestions, please email [sondresolstad@economist.com](mailto:sondresolstad@economist.com) or open an issue.
+If you have any suggestions or questions, please email [sondresolstad@economist.com](mailto:sondresolstad@economist.com) or open a ticket.
 
 ## Licence
 
