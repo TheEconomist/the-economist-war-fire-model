@@ -19,11 +19,9 @@ All details on the procedure used to classify events are available in the above 
 This model was first published on February 23th, 2023. 
 
 ## Limitations
-We use a statistical method to determine if a fire event as recorded by satelites as war-related or not, investigating every such event in Ukraine since February 23rd, 2022. However, that does not mean that all war events are captured, or that all events in the dataset are related to the war. 
+Many war events do not produce heat at a level detectible by the satellite systems we use, and even if they do, events may go unrecorded because they happen under cloud cover, which regularly obscures much of the country from such satellite monitoring, or have their locations have cooled by the time the satellites pass overhead. This means not all war events are detected. 
 
-Many war events do not produce heat at a level detectible by the satellite systems we use, and even if they do, event may go unrecorded because they happen under cloud cover, which regularly obscures much of the country from such satellite monitoring, or have their locations have cooled by the time the satellites pass overhead. 
-
-Moreover, our statistical method classifying events as war-related (or not war-related) is probabilistic. This means that it will sometimes categorize events which were unrelated to the war as war-related, and more frequently, given our strict thresholds, classify events related to the fighting as insufficiently abnormal to be labelled war-related.  
+Moreover, our statistical method classifying events as war-related (or not war-related) is probabilistic. This means that it will sometimes categorize events which were unrelated to the war as war-related, and more frequently, given our strict thresholds, classify events related to the fighting as insufficiently abnormal to be labelled war-related. 
 
 ## Acknowledgements
 
