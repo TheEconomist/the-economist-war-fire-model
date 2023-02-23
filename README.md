@@ -30,7 +30,7 @@ This model was first published on February 23th, 2023.
 
 ## Acknowledgements
 
-*The Economist* gratefully acknowledge helpful discussions with Daniel Arribas-Bel and Francisco Rowe of the University of Liverpool on the construction of training features, and modelling approach. Their help has improved this work. 
+*The Economist* gratefully acknowledge helpful discussions with Daniel Arribas-Bel and Francisco Rowe of the University of Liverpool on the construction of training features and modelling approach.
 
 If you have any suggestions or questions, please email [sondresolstad@economist.com](mailto:sondresolstad@economist.com) or open a ticket.
 
