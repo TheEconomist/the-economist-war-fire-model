@@ -12,7 +12,7 @@ This script in turn calls the component scripts as well as auxilliary scripts. T
 
 ![Chart of fire events assessed as war-related](plots/ukraine_fire_map.png)  
 
-## Note on thresholds used to classify events
+## Classification of events
 
 All details on the procedure used to classify events are available in the above scripts. But in brief, events are classified as war-related if they met the following thresholds:
 * Excess fire activity in a given 0.1 latitude by 0.1 longitude area of Ukraine on a given day is so large as to have less than 5% probability of occuring in a normal year.
