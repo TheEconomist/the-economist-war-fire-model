@@ -1,6 +1,6 @@
 # *The Economist's* Ukraine war-fire model
 
-This repository contains the source code and data associated with *The Economist’s* Ukraine war-fire model. This model uses statistical techniques from machine learning and satelitte data on temperature anamolies to detect war events. As of February 18th, 2023, we detected 14,068 such events in the country.  
+This repository contains the source code and data associated with *The Economist’s* Ukraine war-fire model. This model uses statistical techniques from machine learning and satellite data on temperature anamolies to detect war events. As of February 18th, 2023, we detected 14,068 such events in the country.  
 
 ## Scripts, sources and output data
 
