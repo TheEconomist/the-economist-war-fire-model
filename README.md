@@ -1,6 +1,6 @@
 # *The Economist's* Ukraine war-fire model
 
-This repository contains the source code and data associated with *The Economist’s* Ukraine war-fire model. 
+This repository contains the source code and data associated with *The Economist’s* Ukraine war-fire model. This model uses statistical techniques from machine learning and satelitte data on temperature anamolies to detect war events. As of February 18th, 2023, we detected 14,068 such events in the country.  
 
 ## Scripts, sources and output data
 
@@ -8,9 +8,22 @@ Generating the model ensemble, as well as model outputs, relies on running a ser
 
 * [`TK.R`](scripts/TK.R):  TKTK
 
+## Note on thresholds used to classify events
+All details on the procedure used to classify events are available in the above scripts. But in brief, events are classified as war-related if they met the following thresholds:
+* Excess fire activity in a given 0.1 latitude by 0.1 longitude area of Ukraine on a given day is so large as to have less than 5% probability of occuring in a normal year.
+* Such excess happens in this cell is registered on at least two occassions, at least 7 days apart.
+* or: A fire event takes place in a cell less than 10 days after it has meet the above two requirements. (In other words, other activity producing fire events, typically from agriculture, does not resume until 10 days after an area has seen a war events.)
+
 ## Historical versions and sources
 
-This model was first published on February 24th, 2023, one year after the war began. 
+This model was first published on February 23th, 2023. 
+
+## Words of caution
+We use a statistical method to determine if a fire event as recorded by satelites as war-related or not, investigating every such event in Ukraine since February 23rd, 2022. However, that does not mean that all war events are captured, or that all events in the dataset are related to the war. 
+
+Many war events do not produce heat at a level detectible by the satellite systems we use, and even if they do, event may go unrecorded because they happen under cloud cover, which regularly obscures much of the country from such satellite monitoring, or have their locations have cooled by the time the satellites pass overhead. 
+
+Moreover, our statistical method classifying events as war-related (or not war-related) is probabilistic. This means that it will sometimes categorize events which were unrelated to the war as war-related, and more frequently, given our strict thresholds, classify events related to the fighting as insufficiently abnormal to be labelled war-related.  
 
 ## Acknowledgements
 
