@@ -4,24 +4,27 @@ This repository contains the source code and data associated with *The Economist
 
 ## Scripts, sources and output data
 
-Generating the model ensemble, as well as model outputs, relies on running a series of scripts in sequence. These are:
+Generating the model ensemble, as well as model outputs, maps, and analysis charts can be done by running the master script: 
 
-* [`TK.R`](scripts/TK.R):  TKTK
+* [`scripts/00-master-script.R`](00-master-script.R)
+
+![Chart of fire events assessed as war-related](plots/ukraine_fire_map.png)  
 
 ## Note on thresholds used to classify events
+
 All details on the procedure used to classify events are available in the above scripts. But in brief, events are classified as war-related if they met the following thresholds:
 * Excess fire activity in a given 0.1 latitude by 0.1 longitude area of Ukraine on a given day is so large as to have less than 5% probability of occuring in a normal year.
 * Such excess happens in this cell is registered on at least two occassions, at least 7 days apart.
 * or: A fire event takes place in a cell less than 10 days after it has meet the above two requirements. (In other words, other activity producing fire events, typically from agriculture, does not resume until 10 days after an area has seen a war events.)
 
-## Historical versions and sources
-
-This model was first published on February 23th, 2023. 
-
 ## Limitations
+
 Many war events do not produce heat at a level detectible by the satellite systems we use, and even if they do, events may go unrecorded because they happen under cloud cover, which regularly obscures much of the country from such satellite monitoring, or have their locations have cooled by the time the satellites pass overhead. This means not all war events are detected. 
 
 Moreover, our statistical method classifying events as war-related (or not war-related) is probabilistic. This means that it will sometimes categorize events which were unrelated to the war as war-related, and more frequently, given our strict thresholds, classify events related to the fighting as insufficiently abnormal to be labelled war-related. 
+
+## Historical versions and sources
+This model was first published on February 23th, 2023. 
 
 ## Acknowledgements
 
@@ -36,4 +39,4 @@ This software is published by [*The Economist*](https://www.economist.com) under
 The data and files that we have generated from open sources are freely available for public use, as long as *The Economist* is cited as a source.
 
 ## Suggested citation
-TK
+The Economist and Solstad, Sondre. (corresponding author), 2023. Data from satellites reveal the vast extent of fighting in Ukraine [online] The Economist. First published in the article "A hail of destruction", The Economist, February 25th issue, 2023.
