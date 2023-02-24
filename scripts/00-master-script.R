@@ -111,11 +111,11 @@ saveRDS(X_fire, 'output-data/X_analysis_data.RDS')
 ukraine <- st_read('source-data/ukraine-detailed-map/ukr_admbnda_adm3_sspe_20230201.shp')
 ukraine <- st_transform(ukraine, "WGS84")
 
-ggplot()+geom_sf(data=ukraine, col=NA, fill='lightgray')+
+ggplot()+geom_sf(data=st_union(ukraine), col=NA, fill='lightgray')+
   geom_point(data = X_fire[X_fire$war_fire == 0, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
-             col = 'black', alpha = 0.02)+
+             col = 'black', alpha = 0.01, cex = 0.2)+
   geom_point(data = X_fire[X_fire$war_fire == 1, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
-             alpha = 0.05, col='red')+
+             alpha = 0.02, col='red', cex = 0.2)+
   theme_void()+theme(legend.position = 'none')
 ggsave('plots/ukraine_fire_map.png', width = 5, height = 4)
 
