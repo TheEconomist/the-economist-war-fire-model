@@ -8,7 +8,7 @@ Generating the model ensemble, as well as model outputs, maps, and analysis char
 
 * [`scripts/00-master-script.R`](00-master-script.R)
 
-This script calls component scripts as well as auxiliary scripts. This produces, among other things, the following map, where each of the 14,068 dots is a fire event with a precise location (in most cases, to within 500m accuracy), date, and time of day.
+This script calls component scripts as well as auxiliary scripts. These produce, among other things, the following map, where each of the 14,068 dots is a fire event with a precise location (in most cases, to within 500m accuracy), a date, and a time of day.
 
 ![Chart of fire events assessed as war-related](plots/ukraine_fire_map.png)  
 
