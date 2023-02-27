@@ -113,13 +113,16 @@ ukraine <- st_transform(ukraine, "WGS84")
 
 ggplot()+geom_sf(data=st_union(ukraine), col=NA, fill='lightgray')+
   geom_point(data = X_fire[X_fire$war_fire == 0, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
-             col = 'black', alpha = 0.01, cex = 0.2)+
+             col = 'black', alpha = 0.01, cex = 0.5)+
   geom_point(data = X_fire[X_fire$war_fire == 1, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
-             alpha = 0.02, col='red', cex = 0.2)+
+             alpha = 0.02, col='red', cex = 0.5)+
   theme_void()+theme(legend.position = 'none')
-ggsave('plots/ukraine_fire_map.png', width = 5, height = 4)
+ggsave('plots/ukraine_fire_map.png', width = 10, height = 8)
 
 # Step 11: Generate analysis charts: -----------------------------------
 # These charts are saved in the "plots" folder
 source('scripts/aux_generate_analysis_charts.R')
 
+# Step 12: Export fire location data minimal files: -----------------------------------
+write_csv(X_fire[, c('LATITUDE', 'LONGITUDE', 'ACQ_TIME', 'date', 'war_fire')], 'output-data/all_fires_small.csv')
+write_csv(X_fire[X_fire$war_fire == 1, c('LATITUDE', 'LONGITUDE', 'ACQ_TIME', 'date', 'war_fire')], 'output-data/war_fires_small.csv')
