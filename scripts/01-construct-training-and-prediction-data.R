@@ -223,7 +223,7 @@ saveRDS(X, 'output-data/X_matrix.RDS') # Save cache
 # 7. Add nightlights data ------------------------------
 cat('7. Add nightlights data\n')
 
-# source('scripts/ukraine-fire-get-nightlights-data.R')
+# source('scripts/aux_get_nightlights_data.R')
 nightlights <- readRDS('output-data/nightlights.RDS')
 nightlights <- nightlights[nightlights$id %in% X$id, ]
 
