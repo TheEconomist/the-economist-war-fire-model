@@ -21,6 +21,15 @@ library(lubridate)
 
 # Data on past fires:
 # Source: https://earthdata.nasa.gov/earth-observation-data/near-real-time/firms
+
+# Detailed instructions:
+# Data is best downloaded by going to the following link https://firms.modaps.eosdis.nasa.gov/download/create.php and selecting "Ukraine" checking for all systems, and selecting "shapefile" as the output option. 
+# To replicate:
+# 1. Download fires from 2000 until 03-10-2022 (or some other recent date), unzip and place in directory named "2000-2022-03-10"
+# 2. Download fires from 03-10-2022 (or some other recent date), unzip and place in directory named "2022-2023-02-18". 
+# Note: this latter download will give two sets of files, one named "archive" and one named "nrt", as it includes very recent data. 
+# 3. Fix file names: the function "st_read" should be loading the relevant shp objects in these folders
+
 fire_raw <- st_read('source-data/2000-2022-03-10/fire_archive_SV-C2_256359.shp')
 fire_raw <- rbind(fire_raw, st_read("source-data/2000-2022-03-10/fire_archive_M-C61_256357.shp"))
 
