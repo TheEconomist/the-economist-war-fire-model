@@ -3,7 +3,7 @@
 # 1. Define function to get excess: ----------------------------------------
 get_excess <- function(comparison,
                        current,
-                       n,
+                       n = 1,
                        offset = 1,
                        offset_months = 1:12,
                        X_fire = readRDS('output-data/all_fires_all_cols_exact_pop.RDS'),
@@ -286,7 +286,6 @@ pred_mat <- pred_mat[, c('predicted_fire', 'year', 'time_of_year', 'id', 'id_5x5
 
 # 3. Predict: ----------------------------------------
 X_fire_exp <- get_excess(current = X_mat[X_mat$date > as.Date('2022-02-23'), ],
-                         n = 1,
                          use_prediction = T,
                          prediction = pred_mat,
                          offset = 2,
