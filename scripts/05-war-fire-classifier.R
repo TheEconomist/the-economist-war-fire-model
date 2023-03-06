@@ -14,85 +14,93 @@ get_excess <- function(comparison,
                        assign_to_war_fire_after_large_excess = F){
   cat('\n Load data...\n')
 
-  # Order comparison data:
-  comparison <- comparison[order(comparison$date), ]
-
-  # Calculate mean:
-  comparison$mean_fire <- ave(comparison$fire, comparison$id, FUN = function(x){
-    mean(x, na.rm = T)
-  })
-
-  # Calculate max:
-  comparison$max_fire <- ave(comparison$fire, comparison$id, FUN = function(x){
-    max(x, na.rm = T)
-  })
-
-  # Use the ceiling:
-  comparison$mean_fire <- ceiling(comparison$mean_fire)
-  comparison$max_fire <- ceiling(comparison$max_fire)
-
-  # Get id-mean-fire-data set:
-  comparison <- unique(comparison[, c('mean_fire', 'max_fire', 'id')])
-
-  cat('\n Calculate means, maxes, and merge data...\n')
-
   if(manually_exclude){
+
     # Remove the swamp fire in the Danube basin natural park:
-    current$fire[current$y <= 45.545 & current$x >= 29.356 & current$x <= 29.844] <- 0
+    current$fire[current$y <= 45.545 & current$x >= 29.356 & current$x <= 29.844 & current$year == 2022] <- 0
 
     # Remove crop and swamp fires near Danube (inspected manually):
-    current$fire[current$y <= 45.545 & current$x >= 28.21 & current$x <= 29.356] <- 0
+    current$fire[current$y <= 45.545 & current$x >= 28.21 & current$x <= 29.356 & current$year == 2022] <- 0
 
     # Remove the crop fires north of the Danube basin natural park:
-    current$fire[current$y <= 45.845 & current$x >= 28.21 & current$x <= 30.356] <- 0
+    current$fire[current$y <= 45.845 & current$x >= 28.21 & current$x <= 30.356 & current$year == 2022] <- 0
 
     # Remove three forest fires (some possibly crop) west of the Carpathian mountains (inspected manually):
     current$fire[current$y <= 48.48 & current$y >=  48.43 &
-                   current$x >= 22.32 & current$x <= 22.36] <- 0
+                   current$x >= 22.32 & current$x <= 22.36 & current$year == 2022] <- 0
     current$fire[current$y <= 48.32 & current$y >=  48.29 &
-                   current$x >= 22.99 & current$x <= 23.02] <- 0
+                   current$x >= 22.99 & current$x <= 23.02 & current$year == 2022] <- 0
     current$fire[current$y <= 48.88 & current$y >=  48.84 &
-                   current$x >= 22.50 & current$x <= 22.55] <- 0
+                   current$x >= 22.50 & current$x <= 22.55 & current$year == 2022] <- 0
 
     # Remove forest fire (and possibly part crop fire) at Moldovian border:
     current$fire[current$y <= 46.60 & current$y >= 46.52 &
-                   current$x >= 29.85 & current$x <= 29.98] <- 0
+                   current$x >= 29.85 & current$x <= 29.98 & current$year == 2022] <- 0
 
     current$fire[current$y <= 47.28 & current$y >= 47.18 &
-                   current$x >= 29.53 & current$x <= 29.69] <- 0
+                   current$x >= 29.53 & current$x <= 29.69 & current$year == 2022] <- 0
 
     # Remove forest/crop fires near Piddubivka
     current$fire[current$y <= 50.30 & current$y >= 50.25 &
-                      current$x >= 32.18 & current$x <= 32.23] <- 0
+                   current$x >= 32.18 & current$x <= 32.23 & current$year == 2022] <- 0
     current$fire[current$y <= 50.55 & current$y >= 50.45 &
-                      current$x >= 31.90 & current$x <= 31.99] <- 0
+                   current$x >= 31.90 & current$x <= 31.99 & current$year == 2022] <- 0
 
     # Remove fire in field south of Armashivka
     current$fire[current$y <= 47.252 & current$y >= 47.185 &
-                   current$x >= 30.124 & current$x <= 30.225] <- 0
+                   current$x >= 30.124 & current$x <= 30.225 & current$year == 2022] <- 0
 
     # Remove forest fires near border of Belarus north of Ivankiv
     current$fire[current$y <= 51.55 & current$y >= 50.30 &
                    current$x >= 29.455 & current$x <= 30.24 & current$date %in% as.Date('2022-06-01'):as.Date('2022-11-01')] <- 0
 
-    }
+  }
 
   # Read current year data:
   current$fire_in_window <- current$fire
   current$mean_fire_in_window <- ceiling(ave(current$fire_in_window, current$id, FUN = function(x) mean(x, na.rm = T)))
-  cells <- merge(comparison, current, by = c('id'))
 
-  # Merge current year and comparison data:
-  X_fire <- merge(X_fire, cells[, c('id', 'mean_fire', 'fire_in_window', 'mean_fire_in_window', 'time_of_year', 'year')])
-  X_fire$id_w_time <- paste0(X_fire$id, '-', X_fire$time_of_year, '-', X_fire$year)
+  if(!use_prediction){
+    # Order comparison data:
+    comparison <- comparison[order(comparison$date), ]
 
-  # Specify offset:
-  X_fire$offset <- offset
-  if(!missing(offset_months)){
-    X_fire$offset <- 0
-    library(lubridate)
-    X_fire$offset[month(X_fire$date) %in% offset_months] <- offset
-  }
+    # Calculate mean:
+    comparison$mean_fire <- ave(comparison$fire, comparison$id, FUN = function(x){
+      mean(x, na.rm = T)
+    })
+
+    # Calculate max:
+    comparison$max_fire <- ave(comparison$fire, comparison$id, FUN = function(x){
+      max(x, na.rm = T)
+    })
+
+    # Use the ceiling:
+    comparison$mean_fire <- ceiling(comparison$mean_fire)
+    comparison$max_fire <- ceiling(comparison$max_fire)
+
+    # Get id-mean-fire-data set:
+    comparison <- unique(comparison[, c('mean_fire', 'max_fire', 'id')])
+
+    cat('\n Calculate means, maxes, and merge data...\n')
+
+    cells <- merge(comparison, current, by = c('id'))
+    } else {
+    cells <- current
+    cells$mean_fire <- NA
+    cells$max_fire <- NA
+    }
+
+    # Merge current year and comparison data:
+    X_fire <- merge(X_fire, cells[, c('id', 'mean_fire', 'fire_in_window', 'mean_fire_in_window', 'time_of_year', 'year')])
+    X_fire$id_w_time <- paste0(X_fire$id, '-', X_fire$time_of_year, '-', X_fire$year)
+
+    # Specify offset:
+    X_fire$offset <- offset
+    if(!missing(offset_months)){
+      X_fire$offset <- 0
+      library(lubridate)
+      X_fire$offset[month(X_fire$date) %in% offset_months] <- offset
+    }
 
   if(use_prediction){
     X_fire <- merge(X_fire, prediction[, c('predicted_fire', 'year', 'time_of_year', 'id', 'id_5x5')], by = c('year', 'time_of_year', 'id'), all.x=T)
@@ -150,6 +158,7 @@ get_excess <- function(comparison,
     if(vector[1] > length(vector)){
       X_fire$war_fire[X_fire$id_w_time == i] <- 1
     } else {
+      set.seed(112358)
       X_fire$war_fire[X_fire$id_w_time == i] <- sample(c(rep(1, vector[1]), rep(0, length(vector)-vector[1])))
     }
     cat(paste0('\r\r\r\r calculating for: ', i, '// time per cell & day: ', round(difftime(Sys.time(), start, units = 'secs'), 5), 's // ', round(100*ind/total, 5), '% complete...............'))
@@ -157,41 +166,44 @@ get_excess <- function(comparison,
 
   if(manually_exclude){
     # Remove the swamp fire in the Danube basin natural park:
-    X_fire$war_fire[X_fire$LATITUDE <= 45.545 & X_fire$LONGITUDE >= 29.356 & X_fire$LONGITUDE <= 29.844] <- 0
+    X_fire$war_fire[X_fire$LATITUDE <= 45.545 & X_fire$LONGITUDE >= 29.356
+                    & X_fire$LONGITUDE <= 29.844 & X_fire$year == 2022] <- 0
     # Remove crop and swamp fires near Danube (inspected manually):
-    X_fire$war_fire[X_fire$LATITUDE <= 45.545 & X_fire$LONGITUDE >= 28.21 & X_fire$LONGITUDE <= 29.356] <- 0
+    X_fire$war_fire[X_fire$LATITUDE <= 45.545 & X_fire$LONGITUDE >= 28.21
+                    & X_fire$LONGITUDE <= 29.356 & X_fire$year == 2022] <- 0
     # Remove the crop fires north of the Danube basin natural park (inspected manually):
-    X_fire$war_fire[X_fire$LATITUDE <= 45.845 & X_fire$LONGITUDE >= 29.356 & X_fire$LONGITUDE <= 30.844] <- 0
+    X_fire$war_fire[X_fire$LATITUDE <= 45.845 & X_fire$LONGITUDE >= 29.356
+                    & X_fire$LONGITUDE <= 30.844 & X_fire$year == 2022] <- 0
 
     # Remove three forest fires west of the Carpathian mountains (inspected manually):
     X_fire$war_fire[X_fire$LATITUDE <= 48.48 & X_fire$LATITUDE >= 48.43 &
-                      X_fire$LONGITUDE >= 22.32 & X_fire$LONGITUDE <= 22.36] <- 0
+                      X_fire$LONGITUDE >= 22.32 & X_fire$LONGITUDE <= 22.36 & X_fire$year == 2022] <- 0
     X_fire$war_fire[X_fire$LATITUDE <= 48.32 & X_fire$LATITUDE >= 48.29 &
-                      X_fire$LONGITUDE >= 22.99 & X_fire$LONGITUDE <= 23.02] <- 0
+                      X_fire$LONGITUDE >= 22.99 & X_fire$LONGITUDE <= 23.02 & X_fire$year == 2022] <- 0
     X_fire$war_fire[X_fire$LATITUDE <= 48.88 & X_fire$LATITUDE >= 48.84 &
-                      X_fire$LONGITUDE >= 22.50 & X_fire$LONGITUDE <= 22.55] <- 0
+                      X_fire$LONGITUDE >= 22.50 & X_fire$LONGITUDE <= 22.55 & X_fire$year == 2022] <- 0
 
     # Remove forest fire (and possibly crop fire) at Moldovian border:
     X_fire$war_fire[X_fire$LATITUDE <= 46.60 & X_fire$LATITUDE >= 46.52 &
-                      X_fire$LONGITUDE >= 29.85 & X_fire$LONGITUDE <= 29.98] <- 0
+                      X_fire$LONGITUDE >= 29.85 & X_fire$LONGITUDE <= 29.98 & X_fire$year == 2022] <- 0
 
     X_fire$war_fire[X_fire$LATITUDE <= 47.28 & X_fire$LATITUDE >= 47.18 &
-                  X_fire$LONGITUDE >= 29.53 & X_fire$LONGITUDE <= 29.69] <- 0
+                  X_fire$LONGITUDE >= 29.53 & X_fire$LONGITUDE <= 29.69 & X_fire$year == 2022] <- 0
 
     # Remove fire in field south of Armashivka
     X_fire$war_fire[X_fire$LATITUDE <= 47.252 & X_fire$LATITUDE >= 47.185 &
-                      X_fire$LONGITUDE >= 30.124 & X_fire$LONGITUDE <= 30.225] <- 0
+                      X_fire$LONGITUDE >= 30.124 & X_fire$LONGITUDE <= 30.225 & X_fire$year == 2022] <- 0
 
     # Remove forest/crop fires near Piddubivka
     X_fire$war_fire[X_fire$LATITUDE <= 50.30 & X_fire$LATITUDE >= 50.25 &
-                      X_fire$LONGITUDE >= 32.18 & X_fire$LONGITUDE <= 32.23] <- 0
+                      X_fire$LONGITUDE >= 32.18 & X_fire$LONGITUDE <= 32.23 & X_fire$year == 2022] <- 0
     X_fire$war_fire[X_fire$LATITUDE <= 50.55 & X_fire$LATITUDE >= 50.45 &
-                      X_fire$LONGITUDE >= 31.90 & X_fire$LONGITUDE <= 31.99] <- 0
+                      X_fire$LONGITUDE >= 31.90 & X_fire$LONGITUDE <= 31.99 & X_fire$year == 2022] <- 0
 
     # Remove forest fires near border of Belarus north of Ivankiv
     X_fire$war_fire[X_fire$LATITUDE <= 51.55 & X_fire$LATITUDE >= 50.30 &
                       X_fire$LONGITUDE >= 29.455 & X_fire$LONGITUDE <= 30.24 &
-                      X_fire$date %in% as.Date('2022-06-01'):as.Date('2022-11-01')] <- 0
+                      X_fire$date %in% as.Date('2022-06-01'):as.Date('2022-11-01') & X_fire$year == 2022] <- 0
 
   }
 
@@ -223,8 +235,27 @@ get_excess <- function(comparison,
     }
   })
 
-  # Exclude locations which see anomalous events spanning less than 5 days
-  X_fire$war_fire[X_fire$length_of_war_fire_area <= min_length_of_fire_in_area] <- 0
+  # Exclude locations which see anomalous events spanning less than x days within the same year
+  X_fire$sustained_excess <- NA
+  X_fire$sustained_excess[X_fire$war_fire == 1] <- X_fire$date[X_fire$war_fire == 1]
+  X_fire$sustained_excess <- ave(X_fire$sustained_excess, X_fire$id, FUN = function(x) {
+    x <- na.omit(unique(x))
+    if(length(x) <= 1){
+      F
+    } else {
+      if(length(x) > 3*min_length_of_fire_in_area){
+         T
+      } else {
+        if(any(abs(combn(x, 2)[1, ] - combn(x, 2)[2, ]) %in% (min_length_of_fire_in_area-1):(365-1))){
+          T
+        } else {
+          F
+        }
+      }
+    }
+  })
+
+  X_fire$war_fire[!X_fire$sustained_excess] <- 0
 
   # Save this version of the classifier, which does not leverage the theoretical prediction that normal activity takes 10 days to resume after a large war-related event in a location.
   X_fire$war_fire_restrictive <- X_fire$war_fire
@@ -254,13 +285,11 @@ pred_mat$predicted_fire <- ceiling(pred_mat$predicted_fire)
 pred_mat <- pred_mat[, c('predicted_fire', 'year', 'time_of_year', 'id', 'id_5x5')]
 
 # 3. Predict: ----------------------------------------
-X_fire_exp <- get_excess(comparison = X_mat[X_mat$year %in% 2019:2021, ],
-                             current = X_mat[X_mat$date > as.Date('2022-02-23'), ],
-                             n = 1,
-                             use_prediction = T,
-                             prediction = pred_mat,
-                             offset = 2,
-                         offset_months = 1:12,
+X_fire_exp <- get_excess(current = X_mat[X_mat$date > as.Date('2022-02-23'), ],
+                         n = 1,
+                         use_prediction = T,
+                         prediction = pred_mat,
+                         offset = 2,
                          min_length_of_fire_in_area = 7,
                          assign_to_war_fire_after_large_excess = T)
 
