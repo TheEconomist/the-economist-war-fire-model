@@ -41,4 +41,4 @@ This software is published by [*The Economist*](https://www.economist.com) under
 The data and files that we have generated from open sources are freely available for public use, as long as *The Economist* is cited as a source.
 
 ## Suggested citation
-The Economist and Solstad, Sondre. (corresponding author), 2023. Data from satellites reveal the vast extent of fighting in Ukraine [online] The Economist. First published in the article "A hail of destruction", The Economist, February 25th issue, 2023.
+The Economist and Solstad, Sondre (corresponding author), 2023. The Economist war-fire model. First published in the article "A hail of destruction", The Economist, February 25th issue, 2023.
