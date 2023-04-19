@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin/>
+        <origin/>
+        <pubdate>20121108</pubdate>
+        <title>World Urban Areas, LandScan, 1:10 million (2012)</title>
+        <edition>2.0.0</edition>
+        <geoform>vector digital data</geoform>
+        <pubinfo>
+          <publish>North American Cartographic Information Society</publish>
+        </pubinfo>
+        <othercit>These data were downloaded from the Natural Earth website (http://www.naturalearthdata.com) on June 15, 2014. </othercit>
+        <onlink>http://purl.stanford.edu/yk247bg4748</onlink>
+        <lworkcit>
+          <citeinfo>
+            <origin/>
+            <origin/>
+            <pubdate>20121108</pubdate>
+            <title>Natural Earth</title>
+            <edition>2.0.0</edition>
+            <pubinfo>
+              <publish>North American Cartographic Information Society</publish>
+            </pubinfo>
+          </citeinfo>
+        </lworkcit>
+      </citeinfo>
+    </citation>
+    <descript>
+      <abstract>This polygon shapefile depicts boundaries of urban areas with dense areas of human habitation worldwide. Regional significance is favored over population census in determining selection of places. Use the scale rankings to filter the number of towns that appear on your map. This layer also provides population estimates derived from the Oak Ridge National Laboratory's LandScan population database for 90% of the cities depicted. Population estimates account for the total metropolitan population rather than it's administrative boundary population. These data were converted from raster to vector and pixels with fewer than 200 persons per square kilometer were removed from the dataset as they were classified as rural. Once urban pixels were selected, these pixels were aggregated into contiguous units. Concurrently Thiessen polygons were created based on the selected city points. The Thiessen polygons were used to intersect the contiguous city boundaries to produce bounded areas for the cities. As a result, our estimates capture a metropolitan and micropolitan populations per city regardless of administrative units. Once intersected, the contiguous polygons were recalculated, using aerial interpolation assuming uniform population distribution within each pixel, to determine the population total. This process was conducted multiple times, for each scale level, to produce population estimates for each city at nested scales of 1:300 million, 1:110 million, 1:50 million, 1:20 million, and 1:10 million. These data are represented at 1:10,000,000 scale. This layer is part of the Natural Earth Collection (v.2.0.0).</abstract>
+      <purpose>Natural Earth is a public domain map dataset available at 1:10, 1:50 and 1:110 million scales. Featuring tightly integrated vector and raster data, with Natural Earth you can make a variety of visually pleasing, well-crafted maps with cartography or GIS software.</purpose>
+    </descript>
+    <timeperd>
+      <timeinfo>
+        <sngdate>
+          <caldate>20121108</caldate>
+        </sngdate>
+      </timeinfo>
+      <current>ground condition</current>
+    </timeperd>
+    <status>
+      <progress>Complete</progress>
+      <update>Unknown</update>
+    </status>
+    <spdom>
+      <bounding>
+        <westbc>-175.233333</westbc>
+        <eastbc>178.533333</eastbc>
+        <northbc>77.491667</northbc>
+        <southbc>-54.850000</southbc>
+      </bounding>
+    </spdom>
+    <keywords>
+      <theme>
+        <themekt>lcsh</themekt>
+        <themekey>Countries</themekey>
+        <themekey>Cities and towns</themekey>
+        <themekey>Capitals (Cities)</themekey>
+        <themekey>Metropolitan areas</themekey>
+        <themekey>Urban density</themekey>
+        <themekey>Population statistics</themekey>
+      </theme>
+      <theme>
+        <themekt>ISO 19115 Topic Categories</themekt>
+        <themekey>society</themekey>
+        <themekey>boundaries</themekey>
+      </theme>
+      <place>
+        <placekt>geonames</placekt>
+        <placekey>Earth (Planet)</placekey>
+      </place>
+    </keywords>
+    <accconst>All versions of Natural Earth raster and vector map data are in the public domain. </accconst>
+    <useconst>None</useconst>
+    <ptcontac>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>Natural Earth</cntorg>
+          <cntper>Nathaniel Vaughn Kelso</cntper>
+        </cntorgp>
+        <cntpos>Project manager</cntpos>
+        <cntemail>nathaniel@naturalearthdata.com</cntemail>
+      </cntinfo>
+    </ptcontac>
+    <datacred>Kelso, N.V. and Patterson, T. (2012). World Urban Areas, LandScan, 1:10 million (2012). Made with Natural Earth, online at http://www.naturalearthdata.com.</datacred>
+    <native>Microsoft Windows 7 Version 6.1 (Build 7601) Service Pack 1; Esri ArcGIS 10.2.2.3552</native>
+  </idinfo>
+  <dataqual>
+    <lineage>
+      <procstep>
+        <procdesc>These data were converted from raster to vector and pixels with fewer than 200 persons per square kilometer were removed from the dataset as they were classified as rural. Once urban pixels were selected, these pixels were aggregated into contiguous units. Concurrently Thiessen polygons were created based on the selected city points. The Thiessen polygons were used to intersect the contiguous city boundaries to produce bounded areas for the cities. As a result, our estimates capture a metropolitan and micropolitan populations per city regardless of administrative units.</procdesc>
+      </procstep>
+    </lineage>
+  </dataqual>
+  <spdoinfo>
+    <direct>Vector</direct>
+    <ptvctinf>
+      <sdtsterm>
+        <sdtstype>GT-polygon composed of chains</sdtstype>
+        <ptvctcnt>6018</ptvctcnt>
+      </sdtsterm>
+    </ptvctinf>
+  </spdoinfo>
+  <eainfo>
+    <detailed>
+      <enttyp>
+        <enttypl>ne_10m_urban_areas_landscan</enttypl>
+      </enttyp>
+      <attr>
+        <attrlabl>FID</attrlabl>
+        <attrdef>Internal feature number.</attrdef>
+        <attrdefs>Esri</attrdefs>
+        <attrdomv>
+          <udom>Sequential unique whole numbers that are automatically generated.</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Shape</attrlabl>
+        <attrdef>Feature geometry.</attrdef>
+        <attrdefs>Esri</attrdefs>
+        <attrdomv>
+          <udom>Coordinates defining the features.</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>name_conve</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_pop_al</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_pop_20</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_pop_50</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_pop_30</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_pop_31</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_natsca</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>min_areakm</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_areakm</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>min_areami</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_areami</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>min_perkm</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_perkm</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>min_permi</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_permi</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>min_bb_xmi</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_bb_xmi</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>min_bb_xma</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_bb_xma</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>min_bb_ymi</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_bb_ymi</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>min_bb_yma</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>max_bb_yma</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>mean_bb_xc</attrlabl>
+      </attr>
+      <attr>
+        <attrlabl>mean_bb_yc</attrlabl>
+      </attr>
+    </detailed>
+  </eainfo>
+  <distinfo>
+    <distrib>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>Stanford Geospatial Center</cntorg>
+        </cntorgp>
+        <cntaddr>
+          <addrtype>physical</addrtype>
+          <address>Branner Earth Sciences Library</address>
+          <address>Mitchell Building, 2nd Floor</address>
+          <address>397 Panama Mall</address>
+          <city>Stanford</city>
+          <state>California</state>
+          <postal>94305</postal>
+        </cntaddr>
+        <cntvoice>650-723-2746</cntvoice>
+        <cntemail>brannerlibrary@stanford.edu</cntemail>
+      </cntinfo>
+    </distrib>
+    <distliab>See access and use constraints information.</distliab>
+  </distinfo>
+  <metainfo>
+    <metd>20150609</metd>
+    <metc>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>Stanford Geospatial Center</cntorg>
+        </cntorgp>
+        <cntaddr>
+          <addrtype>mailing and physical</addrtype>
+          <address>Mitchell Bldg. 2nd floor</address>
+          <address>397 Panama Mall</address>
+          <city>Stanford</city>
+          <state>California</state>
+          <postal>94305</postal>
+          <country>US</country>
+        </cntaddr>
+        <cntvoice>650-723-2746</cntvoice>
+        <cntemail>brannerlibrary@stanford.edu</cntemail>
+      </cntinfo>
+    </metc>
+    <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001-1998</metstdv>
+    <mettc>local time</mettc>
+  </metainfo>
+</metadata>

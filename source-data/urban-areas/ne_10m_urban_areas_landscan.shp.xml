@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="en">
+	<Esri>
+		<CreaDate>20150501</CreaDate>
+		<CreaTime>09023600</CreaTime>
+		<ArcGISFormat>1.0</ArcGISFormat>
+		<ArcGISstyle>ISO 19139 Metadata Implementation Specification</ArcGISstyle>
+		<SyncOnce>FALSE</SyncOnce>
+		<DataProperties>
+			<itemProps>
+				<itemName Sync="TRUE">ne_10m_urban_areas_landscan</itemName>
+				<nativeExtBox>
+					<westBL Sync="TRUE">-175.233333</westBL>
+					<eastBL Sync="TRUE">178.533333</eastBL>
+					<southBL Sync="TRUE">-54.850000</southBL>
+					<northBL Sync="TRUE">77.491667</northBL>
+					<exTypeCode Sync="TRUE">1</exTypeCode>
+				</nativeExtBox>
+				<itemSize Sync="TRUE">41.702</itemSize>
+				<itemLocation>
+					<linkage Sync="TRUE">file://\\SUL-GISLAB\GIS_Shared\GIS_Lab\DATA\World_BaseLayers_2010_NaturalEarth2.0.0\natural_earth_vector\10m_cultural\ne_10m_urban_areas_landscan.shp</linkage>
+					<protocol Sync="TRUE">Local Area Network</protocol>
+				</itemLocation>
+				<imsContentType export="False"/>
+			</itemProps>
+			<coordRef>
+				<type Sync="TRUE">Geographic</type>
+				<geogcsn Sync="TRUE">GCS_WGS_1984</geogcsn>
+				<csUnits Sync="TRUE">Angular Unit: Degree (0.017453)</csUnits>
+				<peXml Sync="TRUE">&lt;GeographicCoordinateSystem xsi:type='typens:GeographicCoordinateSystem' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:typens='http://www.esri.com/schemas/ArcGIS/10.1'&gt;&lt;WKT&gt;GEOGCS[&amp;quot;GCS_WGS_1984&amp;quot;,DATUM[&amp;quot;D_WGS_1984&amp;quot;,SPHEROID[&amp;quot;WGS_1984&amp;quot;,6378137.0,298.257223563]],PRIMEM[&amp;quot;Greenwich&amp;quot;,0.0],UNIT[&amp;quot;Degree&amp;quot;,0.0174532925199433],AUTHORITY[&amp;quot;EPSG&amp;quot;,4326]]&lt;/WKT&gt;&lt;XOrigin&gt;-400&lt;/XOrigin&gt;&lt;YOrigin&gt;-400&lt;/YOrigin&gt;&lt;XYScale&gt;11258999068426.238&lt;/XYScale&gt;&lt;ZOrigin&gt;-100000&lt;/ZOrigin&gt;&lt;ZScale&gt;10000&lt;/ZScale&gt;&lt;MOrigin&gt;-100000&lt;/MOrigin&gt;&lt;MScale&gt;10000&lt;/MScale&gt;&lt;XYTolerance&gt;8.983152841195215e-009&lt;/XYTolerance&gt;&lt;ZTolerance&gt;0.001&lt;/ZTolerance&gt;&lt;MTolerance&gt;0.001&lt;/MTolerance&gt;&lt;HighPrecision&gt;true&lt;/HighPrecision&gt;&lt;LeftLongitude&gt;-180&lt;/LeftLongitude&gt;&lt;WKID&gt;4326&lt;/WKID&gt;&lt;LatestWKID&gt;4326&lt;/LatestWKID&gt;&lt;/GeographicCoordinateSystem&gt;</peXml>
+			</coordRef>
+			<copyHistory>
+				<copy date="20150501" dest="\\SUL-GISLAB\GIS_Shared\GIS_Lab\DATA\World_BaseLayers_2010_NaturalEarth2.0.0\natural_earth_vector\SGC" source="Q:\World_Hydrosheds_USGS\SGC" time="09023600"/>
+			</copyHistory>
+		</DataProperties>
+		<SyncDate>20150609</SyncDate>
+		<SyncTime>13141000</SyncTime>
+		<ModDate>20150609</ModDate>
+		<ModTime>13141000</ModTime>
+		<ArcGISProfile>ISO19139</ArcGISProfile>
+		<scaleRange>
+			<minScale>150000000</minScale>
+			<maxScale>5000</maxScale>
+		</scaleRange>
+	</Esri>
+	<mdLang>
+		<languageCode value="eng"/>
+		<countryCode Sync="TRUE" value="USA"/>
+	</mdLang>
+	<mdChar>
+		<CharSetCd value="004"/>
+	</mdChar>
+	<mdParentID>http://purl.stanford.edu/qr604qw5282.mods</mdParentID>
+	<mdHrLv>
+		<ScopeCd value="005"/>
+	</mdHrLv>
+	<distInfo>
+		<distTranOps>
+			<onLineSrc>
+				<linkage>http://purl.stanford.edu/yk247bg4748</linkage>
+				<protocol>http</protocol>
+				<orFunct>
+					<OnFunctCd value="001"/>
+				</orFunct>
+				<orName>ne_10m_urban_areas_landscan.shp</orName>
+			</onLineSrc>
+			<transSize Sync="TRUE">41.702</transSize>
+		</distTranOps>
+		<distributor>
+			<distorCont>
+				<rpOrgName>Stanford Geospatial Center</rpOrgName>
+				<rpCntInfo>
+					<cntAddress addressType="physical">
+						<delPoint>Branner Earth Sciences Library</delPoint>
+						<city>Stanford</city>
+						<adminArea>California</adminArea>
+						<postCode>94305</postCode>
+						<eMailAdd>brannerlibrary@stanford.edu</eMailAdd>
+						<delPoint>Mitchell Building, 2nd Floor</delPoint>
+						<delPoint>397 Panama Mall</delPoint>
+					</cntAddress>
+					<cntPhone>
+						<voiceNum>650-723-2746</voiceNum>
+					</cntPhone>
+				</rpCntInfo>
+				<displayName>Stanford Geospatial Center</displayName>
+				<displayName>Stanford Geospatial Center</displayName>
+				<role>
+					<RoleCd value="005"/>
+				</role>
+				<displayName>Stanford Geospatial Center</displayName>
+			</distorCont>
+		</distributor>
+		<distFormat>
+			<formatName Sync="TRUE">Shapefile</formatName>
+		</distFormat>
+	</distInfo>
+	<dataIdInfo>
+		<idCredit>Kelso, N.V. and Patterson, T. (2012). World Urban Areas, LandScan, 1:10 million (2012). Made with Natural Earth, online at http://www.naturalearthdata.com.</idCredit>
+		<themeKeys>
+			<thesaName>
+				<resTitle>lcsh</resTitle>
+				<date>
+					<reviseDate>2011-04-26T00:00:00</reviseDate>
+				</date>
+				<citId>
+					<identCode>http://id.loc.gov/authorities/subjects.html</identCode>
+				</citId>
+			</thesaName>
+			<keyword>Countries</keyword>
+			<keyword>Cities and towns</keyword>
+			<keyword>Capitals (Cities)</keyword>
+			<keyword>Metropolitan areas</keyword>
+			<keyword>Urban density</keyword>
+			<keyword>Population statistics</keyword>
+		</themeKeys>
+		<placeKeys>
+			<thesaName>
+				<resTitle>geonames</resTitle>
+				<date>
+					<reviseDate>2012-11-01T00:00:00</reviseDate>
+				</date>
+				<resEd>3.1</resEd>
+				<citId>
+					<identCode>http://www.geonames.org/ontology#</identCode>
+				</citId>
+			</thesaName>
+			<keyword>Earth (Planet)</keyword>
+		</placeKeys>
+		<idCitation>
+			<citId>
+				<identCode>http://purl.stanford.edu/yk247bg4748</identCode>
+			</citId>
+			<collTitle>Natural Earth</collTitle>
+			<date>
+				<pubDate>2012-11-08T00:00:00</pubDate>
+			</date>
+			<resTitle Sync="FALSE">World Urban Areas, LandScan, 1:10 million (2012)</resTitle>
+			<citRespParty>
+				<rpOrgName>North American Cartographic Information Society</rpOrgName>
+				<role>
+					<RoleCd value="010"/>
+				</role>
+			</citRespParty>
+			<citRespParty>
+				<rpIndName>Patterson, Tom</rpIndName>
+				<role>
+					<RoleCd value="006"/>
+				</role>
+			</citRespParty>
+			<citRespParty>
+				<rpOrgName>Kelso, Nathaniel Vaughn</rpOrgName>
+				<role>
+					<RoleCd value="006"/>
+				</role>
+			</citRespParty>
+			<resEd>2.0.0</resEd>
+			<otherCitDet>These data were downloaded from the Natural Earth website (http://www.naturalearthdata.com) on June 15, 2014. </otherCitDet>
+			<presForm>
+				<PresFormCd Sync="TRUE" value="005"/>
+			</presForm>
+		</idCitation>
+		<dataLang>
+			<languageCode value="eng"/>
+			<countryCode Sync="TRUE" value="USA"/>
+		</dataLang>
+		<dataChar>
+			<CharSetCd value="004"/>
+		</dataChar>
+		<idPurp>Natural Earth is a public domain map dataset available at 1:10, 1:50 and 1:110 million scales. Featuring tightly integrated vector and raster data, with Natural Earth you can make a variety of visually pleasing, well-crafted maps with cartography or GIS software.</idPurp>
+		<idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This polygon shapefile depicts boundaries of urban areas with dense areas of human habitation worldwide. Regional significance is favored over population census in determining selection of places. Use the scale rankings to filter the number of towns that appear on your map. This layer also provides population estimates derived from the Oak Ridge National Laboratory's LandScan population database for 90% of the cities depicted. Population estimates account for the total metropolitan population rather than it's administrative boundary population. These data were converted from raster to vector and pixels with fewer than 200 persons per square kilometer were removed from the dataset as they were classified as rural. Once urban pixels were selected, these pixels were aggregated into contiguous units. Concurrently Thiessen polygons were created based on the selected city points. The Thiessen polygons were used to intersect the contiguous city boundaries to produce bounded areas for the cities. As a result, our estimates capture a metropolitan and micropolitan populations per city regardless of administrative units. Once intersected, the contiguous polygons were recalculated, using aerial interpolation assuming uniform population distribution within each pixel, to determine the population total. This process was conducted multiple times, for each scale level, to produce population estimates for each city at nested scales of 1:300 million, 1:110 million, 1:50 million, 1:20 million, and 1:10 million. These data are represented at 1:10,000,000 scale. This layer is part of the Natural Earth Collection (v.2.0.0).&lt;/SPAN&gt;&lt;/P&gt;&lt;P&gt;&lt;SPAN /&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs>
+		<idStatus>
+			<ProgCd value="001"/>
+		</idStatus>
+		<dataExt>
+			<geoEle>
+				<GeoBndBox esriExtentType="search">
+					<exTypeCode>1</exTypeCode>
+					<westBL Sync="TRUE">-175.233333</westBL>
+					<eastBL Sync="TRUE">178.533333</eastBL>
+					<northBL Sync="TRUE">77.491667</northBL>
+					<southBL Sync="TRUE">-54.850000</southBL>
+				</GeoBndBox>
+			</geoEle>
+		</dataExt>
+		<dataExt>
+			<exDesc>ground condition</exDesc>
+			<tempEle>
+				<TempExtent>
+					<exTemp>
+						<TM_Instant>
+							<tmPosition>2012-11-08T00:00:00</tmPosition>
+						</TM_Instant>
+					</exTemp>
+				</TempExtent>
+			</tempEle>
+		</dataExt>
+		<aggrInfo>
+			<assocType>
+				<AscTypeCd value="002"/>
+			</assocType>
+			<initType>
+				<InitTypCd value="002"/>
+			</initType>
+			<aggrDSName>
+				<resTitle>Natural Earth</resTitle>
+				<date>
+					<pubDate>2012-11-08T00:00:00</pubDate>
+				</date>
+				<resEd>2.0.0</resEd>
+				<citId>
+					<identCode>http://purl.stanford.edu/qr604qw5282</identCode>
+				</citId>
+				<citRespParty>
+					<rpIndName>Patterson, Tom</rpIndName>
+					<role>
+						<RoleCd value="006"/>
+					</role>
+					<displayName>Patterson, Tom</displayName>
+				</citRespParty>
+				<citRespParty>
+					<rpOrgName>Kelso, Nathaniel Vaughn</rpOrgName>
+					<role>
+						<RoleCd value="006"/>
+					</role>
+					<displayName>Kelso, Nathaniel Vaughn</displayName>
+				</citRespParty>
+				<citRespParty>
+					<rpOrgName>North American Cartographic Information Society</rpOrgName>
+					<role>
+						<RoleCd value="010"/>
+					</role>
+					<displayName>North American Cartographic Information Society</displayName>
+				</citRespParty>
+			</aggrDSName>
+		</aggrInfo>
+		<resConst>
+			<LegConsts>
+				<useConsts>
+					<RestrictCd value="008"/>
+				</useConsts>
+				<othConsts>All versions of Natural Earth raster and vector map data are in the public domain. </othConsts>
+			</LegConsts>
+		</resConst>
+		<idPoC>
+			<rpIndName>Nathaniel Vaughn Kelso</rpIndName>
+			<rpOrgName>Natural Earth</rpOrgName>
+			<rpPosName>Project manager</rpPosName>
+			<role>
+				<RoleCd value="007"/>
+			</role>
+			<rpCntInfo>
+				<cntAddress addressType="">
+					<eMailAdd>nathaniel@naturalearthdata.com</eMailAdd>
+				</cntAddress>
+			</rpCntInfo>
+		</idPoC>
+		<envirDesc Sync="TRUE">Microsoft Windows 7 Version 6.1 (Build 7601) Service Pack 1; Esri ArcGIS 10.2.2.3552</envirDesc>
+		<spatRpType>
+			<SpatRepTypCd Sync="TRUE" value="001"/>
+		</spatRpType>
+		<dataScale>
+			<equScale>
+				<rfDenom>10000000</rfDenom>
+			</equScale>
+		</dataScale>
+		<resMaint>
+			<maintFreq>
+				<MaintFreqCd value="012"/>
+			</maintFreq>
+		</resMaint>
+		<tpCat>
+			<TopicCatCd value="016"/>
+		</tpCat>
+		<tpCat>
+			<TopicCatCd value="003"/>
+		</tpCat>
+	</dataIdInfo>
+	<dataSetURI>http://purl.stanford.edu/yk247bg4748</dataSetURI>
+	<mdFileID>edu.stanford.purl:yk247bg4748</mdFileID>
+	<mdContact>
+		<editorSource>external</editorSource>
+		<editorDigest>8112593d10cd6aa7c8f3c3da6c3533d0</editorDigest>
+		<rpOrgName>Stanford Geospatial Center</rpOrgName>
+		<rpCntInfo>
+			<cntAddress addressType="both">
+				<delPoint>Mitchell Bldg. 2nd floor</delPoint>
+				<city>Stanford</city>
+				<adminArea>California</adminArea>
+				<postCode>94305</postCode>
+				<eMailAdd>brannerlibrary@stanford.edu</eMailAdd>
+				<country>US</country>
+				<delPoint>397 Panama Mall</delPoint>
+			</cntAddress>
+			<cntPhone>
+				<voiceNum tddtty="">650-723-2746</voiceNum>
+			</cntPhone>
+		</rpCntInfo>
+		<displayName>Stanford Geospatial Center</displayName>
+		<editorSave>True</editorSave>
+		<displayName>Stanford Geospatial Center</displayName>
+		<role>
+			<RoleCd value="007"/>
+		</role>
+	</mdContact>
+	<contInfo>
+		<FetCatDesc>
+			<compCode>False</compCode>
+			<catLang>
+				<languageCode value="eng"/>
+			</catLang>
+			<incWithDS>True</incWithDS>
+			<catCitation>
+				<resTitle>
+					<resTitle>Feature Catalog for</resTitle> World Urban Areas, LandScan, 1:10 million (2012)</resTitle>
+				<date>
+					<pubDate>2012-11-08T00:00:00</pubDate>
+				</date>
+				<citId>
+					<identCode>3f5075df-8a6c-4b7a-bcc6-dca0f9658323</identCode>
+				</citId>
+			</catCitation>
+		</FetCatDesc>
+	</contInfo>
+	<mdHrLvName Sync="TRUE">dataset</mdHrLvName>
+	<refSysInfo>
+		<RefSystem>
+			<refSysID>
+				<identCode Sync="TRUE" code="4326"/>
+				<idCodeSpace Sync="TRUE">EPSG</idCodeSpace>
+				<idVersion Sync="TRUE">8.2.6</idVersion>
+			</refSysID>
+		</RefSystem>
+	</refSysInfo>
+	<spatRepInfo>
+		<VectSpatRep><geometObjs Name="ne_10m_urban_areas_landscan"><geoObjTyp><GeoObjTypCd value="002" Sync="TRUE"></GeoObjTypCd></geoObjTyp><geoObjCnt Sync="TRUE">6018</geoObjCnt></geometObjs><topLvl><TopoLevCd value="001" Sync="TRUE"></TopoLevCd></topLvl></VectSpatRep></spatRepInfo>
+	<spdoinfo>
+		<ptvctinf><esriterm Name="ne_10m_urban_areas_landscan"><efeatyp Sync="TRUE">Simple</efeatyp><efeageom code="4" Sync="TRUE"></efeageom><esritopo Sync="TRUE">FALSE</esritopo><efeacnt Sync="TRUE">6018</efeacnt><spindex Sync="TRUE">FALSE</spindex><linrefer Sync="TRUE">FALSE</linrefer></esriterm></ptvctinf></spdoinfo>
+	<eainfo>
+		<detailed Name="ne_10m_urban_areas_landscan">
+			<enttyp>
+				<enttypl Sync="TRUE">ne_10m_urban_areas_landscan</enttypl>
+				<enttypt Sync="TRUE">Feature Class</enttypt>
+				<enttypc Sync="TRUE">6018</enttypc>
+			</enttyp>
+			<attr>
+				<attrlabl Sync="TRUE">FID</attrlabl>
+				<attalias Sync="TRUE">FID</attalias>
+				<attrtype Sync="TRUE">OID</attrtype>
+				<attwidth Sync="TRUE">4</attwidth>
+				<atprecis Sync="TRUE">0</atprecis>
+				<attscale Sync="TRUE">0</attscale>
+				<attrdef Sync="TRUE">Internal feature number.</attrdef>
+				<attrdefs Sync="TRUE">Esri</attrdefs>
+				<attrdomv>
+					<udom Sync="TRUE">Sequential unique whole numbers that are automatically generated.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">Shape</attrlabl>
+				<attalias Sync="TRUE">Shape</attalias>
+				<attrtype Sync="TRUE">Geometry</attrtype>
+				<attwidth Sync="TRUE">0</attwidth>
+				<atprecis Sync="TRUE">0</atprecis>
+				<attscale Sync="TRUE">0</attscale>
+				<attrdef Sync="TRUE">Feature geometry.</attrdef>
+				<attrdefs Sync="TRUE">Esri</attrdefs>
+				<attrdomv>
+					<udom Sync="TRUE">Coordinates defining the features.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">name_conve</attrlabl>
+				<attalias Sync="TRUE">name_conve</attalias>
+				<attrtype Sync="TRUE">String</attrtype>
+				<attwidth Sync="TRUE">41</attwidth>
+				<atprecis Sync="TRUE">0</atprecis>
+				<attscale Sync="TRUE">0</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_pop_al</attrlabl>
+				<attalias Sync="TRUE">max_pop_al</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_pop_20</attrlabl>
+				<attalias Sync="TRUE">max_pop_20</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_pop_50</attrlabl>
+				<attalias Sync="TRUE">max_pop_50</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_pop_30</attrlabl>
+				<attalias Sync="TRUE">max_pop_30</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_pop_31</attrlabl>
+				<attalias Sync="TRUE">max_pop_31</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_natsca</attrlabl>
+				<attalias Sync="TRUE">max_natsca</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">min_areakm</attrlabl>
+				<attalias Sync="TRUE">min_areakm</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_areakm</attrlabl>
+				<attalias Sync="TRUE">max_areakm</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">min_areami</attrlabl>
+				<attalias Sync="TRUE">min_areami</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_areami</attrlabl>
+				<attalias Sync="TRUE">max_areami</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">min_perkm</attrlabl>
+				<attalias Sync="TRUE">min_perkm</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_perkm</attrlabl>
+				<attalias Sync="TRUE">max_perkm</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">min_permi</attrlabl>
+				<attalias Sync="TRUE">min_permi</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_permi</attrlabl>
+				<attalias Sync="TRUE">max_permi</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">min_bb_xmi</attrlabl>
+				<attalias Sync="TRUE">min_bb_xmi</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_bb_xmi</attrlabl>
+				<attalias Sync="TRUE">max_bb_xmi</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">min_bb_xma</attrlabl>
+				<attalias Sync="TRUE">min_bb_xma</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_bb_xma</attrlabl>
+				<attalias Sync="TRUE">max_bb_xma</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">min_bb_ymi</attrlabl>
+				<attalias Sync="TRUE">min_bb_ymi</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_bb_ymi</attrlabl>
+				<attalias Sync="TRUE">max_bb_ymi</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">min_bb_yma</attrlabl>
+				<attalias Sync="TRUE">min_bb_yma</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">max_bb_yma</attrlabl>
+				<attalias Sync="TRUE">max_bb_yma</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">mean_bb_xc</attrlabl>
+				<attalias Sync="TRUE">mean_bb_xc</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">mean_bb_yc</attrlabl>
+				<attalias Sync="TRUE">mean_bb_yc</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">11</attscale>
+			</attr>
+		</detailed>
+	</eainfo>
+	<mdDateSt Sync="TRUE">20150609</mdDateSt>
+	<dqInfo>
+		<dataLineage>
+			<prcStep>
+				<stepDesc>These data were converted from raster to vector and pixels with fewer than 200 persons per square kilometer were removed from the dataset as they were classified as rural. Once urban pixels were selected, these pixels were aggregated into contiguous units. Concurrently Thiessen polygons were created based on the selected city points. The Thiessen polygons were used to intersect the contiguous city boundaries to produce bounded areas for the cities. As a result, our estimates capture a metropolitan and micropolitan populations per city regardless of administrative units.</stepDesc>
+			</prcStep>
+		</dataLineage>
+	</dqInfo>
+	<Binary>
+		<Thumbnail>
+			<Data EsriPropertyType="PictureX">/9j/4AAQSkZJRgABAQEAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCACFAMgDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii
+gAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKA
+CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACikIBHNLQAUU
+UUAFFFFABRRRQAUA5oooAKKhFwOdyPwcDCkg8Z6/nTw475weh7UAPoBBGQcg0xH3jIHGeoINALbC
+BguB3/TNAD6Kbnvzg9BjpQTxgfePSgB1FIM85x14xS0AFFNZ1UgMcE5pQwPTPfqCOlAC0UUUAFFF
+FABRRRQAUUUUAMKKJPM2DcRgsBzjsP1NO4Azg880tISEHTAJ7CgCNyUIbcqLn5ie/YY+vFQRpcOw
+InxGG64BJxxjqeOP1PAq0oROAQNxz1607POKAADAxRSAhhkdKWgA54x+NBzjiijHOaAInDByRGWD
+AggEY6cZz+XFCgogGFxgbUJ5HqM96lpNoJyecHIz2oAhVjbqA5+TO1BnLH05709Nj4YAZXg5GSPb
+NHkJ5xlwN5xyR0xn9cEilZTu3KFBxgEigBHJCFsbDnk8cAdz7UkD703CUSDJBIXHI4I/MGpMZGD3
+9DWH9hubaCW4s5JoZnfdJFtEgY45xnGSeBuPp6EmgDd5z7VmaxrUWlQr8vmTvIqJF0Jz1P0Ayfwq
+3Zfavsq/bRGJ/wCLyzkVKo3H51yVJKsQP0/CgBFBVyTg7zwQvQY6E04AhuMBQMACnUUAFFFFABRR
+RQAUUUUAFFFFABRRRQAU1g+zCsofHUjI/LNOooATA3BucgY60tFIQSOCR9KAFpMdeTz70o9xRQBG
+zyhgFiyueTuxSo5ZVJBGQD/nGafR36/hQA1slHC4ZueG6fQ07HOe9RpCqSySAsWdtx3HOOAOPTpU
+lABUYRklJAXa3Xtj8O5J78dqkooAZIeAuxyG7qcY/X/OKFDIDubeS3GBjA7fp/X6U4qGGGAI9DTV
+83zW3bDHn5cZyOO/40AKqBMhQACScAY69f1yfxp1HPOfwooAKKKKACiiigAooooAKKKKACiiigAp
+GyVOOuKWjPSgAPsaYB85IGBnn3469KUglhyQB6d6dQAUUUUAFFFFADNquVYjJViVyBweR/U07B3E
+7jggDHYf5/pSgYooAKKKKACiiigAoGcc9aKQD5ic59OOlAACDnGeDjkYpaAMDFFABRRRQAUUUUAF
+FFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUU
+UUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRR
+QAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//2Q==</Data>
+		</Thumbnail>
+	</Binary>
+</metadata>

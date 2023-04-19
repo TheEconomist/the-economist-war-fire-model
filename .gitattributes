@@ -2,3 +2,6 @@
 * text=auto
 output-data/model-objects/*.csv filter=lfs diff=lfs merge=lfs -text
 output-data/model-objects/* filter=lfs diff=lfs merge=lfs -text
+source-data/firms_archive_1.csv filter=lfs diff=lfs merge=lfs -text
+source-data/firms_imports/2000-2022/* filter=lfs diff=lfs merge=lfs -text
+source-data/firms-imports/2000-2022/* filter=lfs diff=lfs merge=lfs -text
