@@ -1,2 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+output-data/model-objects/*.csv filter=lfs diff=lfs merge=lfs -text
+output-data/model-objects/* filter=lfs diff=lfs merge=lfs -text

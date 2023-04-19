@@ -1,12 +1,8 @@
-# This script loads the model ensemble and generates predictions. It takes as input model objects, a data matrix, and list of features. Note: this process takes some time, especially for deeply trained models
+# This script defines a function that loads a model ensemble and generates predictions. It takes as input model objects, a data matrix, and list of features. Note: this process takes some time, especially for deeply trained models
+
+ensemble_predict <- function(X_mat,
+                             model_vars = readRDS('output-data/model-objects/model_vars.RDS')){
 library(agtboost)
-
-# Load prediction covariates
-X_mat <- readRDS('output-data/X_matrix.RDS')
-X_mat <- X_mat[X_mat$year >= 2022 & X_mat$date <= Sys.Date()+14, ]
-
-# Load model variables
-model_vars <- readRDS('output-data/model-objects/model_vars.RDS')
 
 # Loop through bootstrap models, generate prediction and save
 res <- data.frame()
@@ -31,6 +27,13 @@ X_mat$prediction_mean <- rowMeans(res)
 X_mat$prediction_upper_95 <- res[, floor(B*0.975)]
 X_mat$prediction_upper_90 <- res[, floor(B*0.95)]
 
-saveRDS(res, 'output-data/X_mat_res_matrix.RDS')
-saveRDS(X_mat, 'output-data/X_mat_with_preds.RDS')
-saveRDS(X_mat[, c('x', 'y', 'time_of_year', 'year')], 'output-data/X_mat_res_matrix_correspondance.RDS')
+X_mat <- X_mat[, c("date", "id",
+                   'id_5x5', "year",
+                   "time_of_year",
+                   "prediction_lower_90",
+                   "prediction_lower_95",
+                   "prediction_median",
+                   "prediction_mean",
+                   "prediction_upper_95",
+                   "prediction_upper_90")]
+return(list(res, X_mat))}

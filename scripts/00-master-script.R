@@ -5,21 +5,37 @@
 library(readr)
 library(ggplot2)
 inspect <- F # Setting this to FALSE means plots used to inspect intermediary outputs are not drawn
-redo <- F # Setting this to FALSE means using the cached urban-density data is used.
+redo <- T # Setting this to FALSE means cached data is used.
 
 # Step 2: Construct training and prediction data, train models, and generate predictions: -----------------------------------
 # Generate grid-cell features and merge in covariates for both training data and recent fires:
-# source('scripts/01-construct-training-and-prediction-data.R') #------ Note: This takes a long time
+source('scripts/01-construct-training-and-prediction-data.R')
+rounding_para <- 0.10
+saveRDS(rounding_para, 'output-data/rounding_para.RDS')
+X <- generate_data(year_min = 2015,
+              rounding_para =  readRDS('output-data/rounding_para.RDS'), # degree lat/long
+              get_urban_areas = T,
+              get_nightlights = T,
+              get_clouds = T,
+              get_engineered_features = T,
+              get_engineered_features_no_cloud_days = T,
+              get_30d_averages = T, save_cache = T) #------ Note: This takes a long time
+saveRDS(X, 'output-data/X_matrix.RDS') # Export final training data set.
 
 # Train model of fire events 2015-2021:
 # source('scripts/02-train-model-ensemble.R') # Note: This takes a long time
 
 # Generate predictions:
-# source('scripts/03-generate-predictions-from-model-ensemble.R') # Note: This takes a long time
+X_mat <- readRDS('output-data/X_matrix.RDS')
+source('scripts/03-generate-predictions-from-model-ensemble.R')
+preds <- ensemble_predict(X_mat = X_mat[X_mat$year >= 2022 & X_mat$date <= Sys.Date()+14, ]) # Note: This takes a long time
+saveRDS(preds[[1]], 'output-data/X_mat_res_matrix.RDS')
+saveRDS(preds[[2]], 'output-data/X_mat_with_preds.RDS')
+saveRDS(preds[[2]][, c('x', 'y', 'time_of_year', 'year')], 'output-data/X_mat_res_matrix_correspondance.RDS')
 
 # Step 3: Get near-exact urban density of fires detected since war began: -----------------------------------
 # Get exact urban density of points:
-# source('scripts/04-get-urban-density-of-points.R') # Note: This takes a long time
+source('scripts/04-get-urban-density-of-points.R') # Note: This takes a long time
 
 # Step 4: Run the classifier to determine which fires are war-related: -----------------------------------
 # Note: this leverages the data created in Step 2 and 3.
