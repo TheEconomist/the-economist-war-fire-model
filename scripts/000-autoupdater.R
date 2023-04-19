@@ -308,7 +308,7 @@ if(update_charts_and_animations){
     ylab('')+xlab('')+theme(legend.pos = 'none')+labs(title = "{closest_state}")+
     scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
     scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))
-  animate(anim,  width = 10, height = 8, units = 'in', res = 150, duration = 20, nframes = length(range(fires$date)[1]:range(fires$date)[2]))
+  animate(anim,  width = 10, height = 8, units = 'in', res = 150, duration = 40, nframes = length(range(fires$date)[1]:range(fires$date)[2]))
   anim_save('plots/live_ukraine_fire_map_animated_day_by_day.gif')
   rm(anim_fires)
 
