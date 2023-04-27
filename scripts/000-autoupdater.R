@@ -176,6 +176,9 @@ if(update_charts_and_animations){
   ukraine <- st_read('source-data/ukraine-detailed-map/ukr_admbnda_adm2_sspe_20230201.shp')
   ukraine <- st_transform(ukraine, "WGS84")
 
+  urban <- st_read('source-data/urban-areas/ne_10m_urban_areas_landscan.shp')
+  urban <- urban
+
   zones_of_control <- st_zm(st_read('source-data/ISW_APR022023/UkraineControlMapAO02APR2023.shp'))
   zones_date <- as.Date('2023-04-02')
 
@@ -188,6 +191,10 @@ if(update_charts_and_animations){
   spotlight_ADM2_EN <- "Bakhmutskyi"
   spotlight_2 <- ukraine[ukraine$ADM2_EN == "Bakhmutskyi", ]
   spotlight_zoom_2 <- st_bbox(spotlight_2)
+  spotlight_zoom_2[1] <- spotlight_zoom_2[1]+0.15
+  spotlight_zoom_2[2] <- spotlight_zoom_2[2]+0.27
+  spotlight_zoom_2[3] <- spotlight_zoom_2[3]-0.35
+  spotlight_zoom_2[4] <- spotlight_zoom_2[4]-0.3
 
   # Generate simplified map for animations
   ukraine_animate <- st_union(ukraine)
@@ -198,8 +205,8 @@ if(update_charts_and_animations){
   ukraine <- st_simplify(ukraine, dTolerance = 0.005)
   clouds <- read_csv('output-data/cloud_cover_in_ukraine_by_day.csv')
 
-  last_week <- fires[fires$date %in% Sys.Date():(Sys.Date()-7), ]
-  last_month <- fires[fires$date %in% Sys.Date():(Sys.Date()-30), ]
+  last_week <- fires[fires$date %in% as.Date(Sys.Date():(Sys.Date()-7)), ]
+  last_month <- fires[fires$date %in% as.Date(Sys.Date():(Sys.Date()-30)), ]
 
   ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+
     geom_point(data = fires[fires$war_fire == 0, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
@@ -266,8 +273,8 @@ if(update_charts_and_animations){
     geom_point(data =last_month[last_month$war_fire == 1, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
                alpha = 0.2, col='red')+
     theme_minimal()+theme(legend.position = 'none')+xlab('')+ylab('')+
-    scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
-    scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))+ggtitle(paste0('Fire activity between ', Sys.Date()-30, ' to ', Sys.Date(), '\n - ', spotlight_ADM2_EN, ' - ', "\n(Zones of control as per ISW, ", zones_date, ")"))+
+    scale_x_continuous(breaks = round(seq(20, 50, by = 0.05),1)) +
+    scale_y_continuous(breaks = round(seq(30, 90, by = 0.05),1))+ggtitle(paste0('Fire activity between ', Sys.Date()-30, ' to ', Sys.Date(), '\n - ', spotlight_ADM2_EN, ' - ', "\n(Zones of control as per ISW, ", zones_date, ")"))+
     coord_sf(xlim=spotlight_zoom_2[c(1,3)],
              ylim=spotlight_zoom_2[c(2,4)], expand = F)
   ggsave('plots/live_ukraine_fire_map_spotlight_3.png', width = 10, height = 8)
