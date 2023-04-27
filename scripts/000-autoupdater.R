@@ -286,7 +286,7 @@ streets <- readRDS('output-data/model-objects/streets.RDS')
     geom_point(data = last_month[last_month$war_fire == 0, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
                col = 'black', alpha = 0.15)+
     geom_point(data =last_month[last_month$war_fire == 1, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
-               alpha = 0.2, col='red')+
+               alpha = 0.4, col='red')+
     theme_minimal()+theme(legend.position = 'none')+xlab('')+ylab('')+
     scale_x_continuous(breaks = round(seq(20, 50, by = 0.05),1)) +
     scale_y_continuous(breaks = round(seq(30, 90, by = 0.05),1))+ggtitle(paste0('Fire activity between ', Sys.Date()-30, ' to ', Sys.Date(), '\n - ', spotlight_ADM2_EN, ' - ', "\n(Zones of control as per ISW, ", zones_date, ")"))+
@@ -305,7 +305,7 @@ streets <- readRDS('output-data/model-objects/streets.RDS')
             color = "black",
             size = .2,
             alpha = .2)+
-    geom_point(data =last_month[, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact, col=date), alpha = 0.2)+theme_minimal()+xlab('')+ylab('')+
+    geom_point(data =last_month[, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact, col=date), alpha = 0.4)+theme_minimal()+xlab('')+ylab('')+
     scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
     scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))+ggtitle(paste0('Fire activity between ', Sys.Date()-30, ' to ', Sys.Date(), '\n - ', spotlight_ADM2_EN, ' - ', "\n(Zones of control as per ISW, ", zones_date, ")"))+
     coord_sf(xlim=spotlight_zoom_2[c(1,3)],
