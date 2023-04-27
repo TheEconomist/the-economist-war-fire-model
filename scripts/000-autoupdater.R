@@ -177,7 +177,8 @@ if(update_charts_and_animations){
   ukraine <- st_transform(ukraine, "WGS84")
 
   urban <- st_read('source-data/urban-areas/ne_10m_urban_areas_landscan.shp')
-  urban <- urban
+  urban <- urban[urban$mean_bb_xc >= 22 & urban$mean_bb_xc <= 40.2 &
+                   urban$mean_bb_yc >= 45 & urban$mean_bb_yc <= 52.5, ]
 
   zones_of_control <- st_zm(st_read('source-data/ISW_APR022023/UkraineControlMapAO02APR2023.shp'))
   zones_date <- as.Date('2023-04-02')
@@ -245,7 +246,7 @@ if(update_charts_and_animations){
   ggsave('plots/live_ukraine_fire_map_last_week.png', width = 10, height = 8)
 
   # Generate spotlight plots:
-  ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+geom_sf(data=spotlight, col='black', alpha = 0.8)+geom_sf(data=zones_of_control, col='red', fill = NA)+
+  ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+geom_sf(data=spotlight, col='black', alpha = 0.8)+geom_sf(data=zones_of_control, col='red', fill = NA)+geom_sf(data=urban, fill = 'darkgray')+
     geom_point(data = last_month[last_month$war_fire == 0, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
                col = 'black', alpha = 0.15)+
     geom_point(data =last_month[last_month$war_fire == 1, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
@@ -257,7 +258,7 @@ if(update_charts_and_animations){
              ylim=spotlight_zoom[c(2,4)], expand = F)
   ggsave('plots/live_ukraine_fire_map_spotlight_1.png', width = 10, height = 8)
 
-  ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+geom_sf(data=spotlight, col='black', alpha = 0.8)+geom_sf(data=zones_of_control, col='red', fill = NA)+
+  ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+geom_sf(data=spotlight, col='black', alpha = 0.8)+geom_sf(data=zones_of_control, col='red', fill = NA)+geom_sf(data=urban, fill = 'darkgray')+
     geom_point(data =last_month[, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact, col=date), alpha = 0.2)+theme_minimal()+xlab('')+ylab('')+
     scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
     scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))+ggtitle(paste0('Fire activity between ', Sys.Date()-30, ' to ', Sys.Date(), '\n - ', spotlight_ADM1_EN, ' - ', "\n(Zones of control as per ISW, ", zones_date, ")"))+
@@ -265,8 +266,22 @@ if(update_charts_and_animations){
              ylim=spotlight_zoom[c(2,4)], expand = F)
   ggsave('plots/live_ukraine_fire_map_spotlight_2.png', width = 10, height = 8)
 
+# We use cache for streets
+# streets <- get_base_map(bbox = spotlight_zoom_2)
+# saveRDS(streets, 'output-data/model-objects/streets.RDS')
+streets <- readRDS('output-data/model-objects/streets.RDS')
 
-  ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+geom_sf(data=spotlight_2, col='black', alpha = 0.8)+
+  ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+geom_sf(data=spotlight_2, col='black', alpha = 0.8)+geom_sf(data=urban, fill = 'darkgray')+geom_sf(data = streets[[1]]$osm_lines, inherit.aes = FALSE, color = "black", size = .4, alpha = .4) +
+    geom_sf(data = streets[[2]]$osm_lines,
+            inherit.aes = FALSE,
+            color = "black",
+            size = .4,
+            alpha = .3)+
+    geom_sf(data = streets[[3]]$osm_lines,
+            inherit.aes = FALSE,
+            color = "black",
+            size = .2,
+            alpha = .2)+
     geom_sf(data=zones_of_control, col='red', fill = NA)+
     geom_point(data = last_month[last_month$war_fire == 0, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
                col = 'black', alpha = 0.15)+
@@ -279,7 +294,17 @@ if(update_charts_and_animations){
              ylim=spotlight_zoom_2[c(2,4)], expand = F)
   ggsave('plots/live_ukraine_fire_map_spotlight_3.png', width = 10, height = 8)
 
-  ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+geom_sf(data=zones_of_control, col='red', fill = NA)+geom_sf(data=spotlight_2, col='black', alpha = 0.8)+
+  ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+geom_sf(data=zones_of_control, col='red', fill = NA)+geom_sf(data=spotlight_2, col='black', alpha = 0.8)+geom_sf(data = streets[[1]]$osm_lines, inherit.aes = FALSE, color = "black", size = .4, alpha = .4) +
+    geom_sf(data = streets[[2]]$osm_lines,
+            inherit.aes = FALSE,
+            color = "black",
+            size = .4,
+            alpha = .3)+
+    geom_sf(data = streets[[3]]$osm_lines,
+            inherit.aes = FALSE,
+            color = "black",
+            size = .2,
+            alpha = .2)+
     geom_point(data =last_month[, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact, col=date), alpha = 0.2)+theme_minimal()+xlab('')+ylab('')+
     scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
     scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))+ggtitle(paste0('Fire activity between ', Sys.Date()-30, ' to ', Sys.Date(), '\n - ', spotlight_ADM2_EN, ' - ', "\n(Zones of control as per ISW, ", zones_date, ")"))+
