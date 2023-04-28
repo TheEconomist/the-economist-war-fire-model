@@ -206,8 +206,8 @@ if(update_charts_and_animations){
   ukraine <- st_simplify(ukraine, dTolerance = 0.005)
   clouds <- read_csv('output-data/cloud_cover_in_ukraine_by_day.csv')
 
-  last_week <- fires[fires$date %in% as.Date(Sys.Date():(Sys.Date()-7)), ]
-  last_month <- fires[fires$date %in% as.Date(Sys.Date():(Sys.Date()-30)), ]
+  last_week <- fires[fires$date %in% as.Date(Sys.Date():(Sys.Date()-7), origin = '1970-01-01'), ]
+  last_month <- fires[fires$date %in% as.Date(Sys.Date():(Sys.Date()-30), origin = '1970-01-01'), ]
 
   ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+
     geom_point(data = fires[fires$war_fire == 0, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
