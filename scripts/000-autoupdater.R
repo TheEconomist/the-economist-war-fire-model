@@ -175,10 +175,12 @@ if(update_charts_and_animations){
 
   ukraine <- st_read('source-data/ukraine-detailed-map/ukr_admbnda_adm2_sspe_20230201.shp')
   ukraine <- st_transform(ukraine, "WGS84")
+  ukraine$date <- Sys.Date()
 
   urban <- st_read('source-data/urban-areas/ne_10m_urban_areas_landscan.shp')
   urban <- urban[urban$mean_bb_xc >= 22 & urban$mean_bb_xc <= 40.2 &
                    urban$mean_bb_yc >= 45 & urban$mean_bb_yc <= 52.5, ]
+  urban$date <- Sys.Dat
 
   zones_of_control <- st_zm(st_read('source-data/ISW_APR022023/UkraineControlMapAO02APR2023.shp'))
   zones_date <- as.Date('2023-04-02')
@@ -311,6 +313,24 @@ streets <- readRDS('output-data/model-objects/streets.RDS')
     coord_sf(xlim=spotlight_zoom_2[c(1,3)],
              ylim=spotlight_zoom_2[c(2,4)], expand = F)
   ggsave('plots/live_ukraine_fire_map_spotlight_4.png', width = 10, height = 8)
+
+  ggplot()+geom_sf(data=ukraine, col=NA, fill=NA)+geom_sf(data=zones_of_control, col='red', fill = NA)+geom_sf(data=spotlight_2, col='black', alpha = 0.8)+geom_sf(data = streets[[1]]$osm_lines, inherit.aes = FALSE, color = "black", size = .4, alpha = .4) +
+    geom_sf(data = streets[[2]]$osm_lines,
+            inherit.aes = FALSE,
+            color = "black",
+            size = .4,
+            alpha = .3)+
+    geom_sf(data = streets[[3]]$osm_lines,
+            inherit.aes = FALSE,
+            color = "black",
+            size = .2,
+            alpha = .2)+
+    geom_point(data =last_month[, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact, col=date), alpha = 0.4)+theme_minimal()+xlab('')+ylab('')+theme(legend.position = 'none')+
+    scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
+    scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))+ggtitle(paste0('Fire activity between ', Sys.Date()-30, ' to ', Sys.Date(), '\n - ', spotlight_ADM2_EN, ' - ', "\n(Zones of control as per ISW, ", zones_date, ")\nby week"))+
+    coord_sf(xlim=spotlight_zoom_2[c(1,3)],
+             ylim=spotlight_zoom_2[c(2,4)], expand = F)+facet_wrap(week(date)~.)
+  ggsave('plots/live_ukraine_fire_map_spotlight_4_by_week.png', width = 10, height = 8)
 
   # Save animation of fire activity so far
   rm(ukraine)
