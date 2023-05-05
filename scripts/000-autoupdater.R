@@ -149,8 +149,8 @@ if(nrow(temp) > 0){
   for(i in 1:nrow(temp)){
     distances <- distm(unique(old[old$war_fire == T, c('x', 'y')]),
                       temp[i, ], fun = distHaversine)
-    if(!any(distances < 200000)){
-      cat(paste0('- War fire detected more than 200km from past activity: lat=', temp[i, 'y'],' lng=', temp[i, 'x']))
+    if(!any(distances < 2000000)){
+      cat(paste0('- War fire detected more than 2000km from past activity: lat=', temp[i, 'y'],' lng=', temp[i, 'x']))
       new_area <- T
     }
   }
