@@ -150,7 +150,7 @@ if(nrow(temp) > 0){
     distances <- distm(unique(old[old$war_fire == T, c('x', 'y')]),
                       temp[i, ], fun = distHaversine)
     if(!any(distances < 2000000)){
-      cat(paste0('- War fire detected more than 2000km from past activity: lat=', temp[i, 'y'],' lng=', temp[i, 'x']))
+      cat(paste0('- War fire detected very far from past activity: lat=', temp[i, 'y'],' lng=', temp[i, 'x']))
       new_area <- T
     }
   }
@@ -180,7 +180,7 @@ if(update_charts_and_animations){
   urban <- st_read('source-data/urban-areas/ne_10m_urban_areas_landscan.shp')
   urban <- urban[urban$mean_bb_xc >= 22 & urban$mean_bb_xc <= 40.2 &
                    urban$mean_bb_yc >= 45 & urban$mean_bb_yc <= 52.5, ]
-  urban$date <- Sys.Dat
+  urban$date <- Sys.Date()
 
   zones_of_control <- st_zm(st_read('source-data/ISW_APR022023/UkraineControlMapAO02APR2023.shp'))
   zones_date <- as.Date('2023-04-02')
