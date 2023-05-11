@@ -17,6 +17,7 @@ In the following maps, red indicates that fires are classified as war-related. S
 ### Spotlight: Bakhmut
 ![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_spotlight_3.png)  
 ![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_spotlight_4.png)  
+![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_spotlight_4_by_week.png)  
 
 ### Events in the past month
 ![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_last_month.png)  
