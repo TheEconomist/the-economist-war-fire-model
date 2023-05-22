@@ -3,7 +3,7 @@ library(sf)
 library(readr)
 
 # Load data linking names of files to dates to which they apply:
-fires <- read_csv('output-data/all_fires_all_cols_exact_pop_and_filter_2022_2023.csv')
+fires <- read_csv('output-data/model-objects/all_fires.csv')
 fires$obs_ID <- 1:nrow(fires)
 
 # Load map of Russia and Ukraine
@@ -18,10 +18,10 @@ ukraine_raw <- world[world$geounit == 'Ukraine', ]
 ukraine_raw <- st_make_valid(ukraine_raw)
 
 # Load shapefiles:
-ru_control <- readRDS('output-data/area_assessed_as_controlled_by_Russia_by_day.RDS')
-ua_counters <- readRDS('output-data/area_counterattacked_by_ukraine_by_day.RDS')
-ru_attacks <- readRDS('output-data/area_attacked_by_russia_by_day.RDS')
-ru_claimed <- readRDS('output-data/area_claimed_as_controlled_by_Russia_by_day.RDS')
+ru_control <- readRDS('source-data/ISW_historical/area_assessed_as_controlled_by_Russia_by_day.RDS')
+ua_counters <- readRDS('source-data/ISW_historical/area_counterattacked_by_ukraine_by_day.RDS')
+ru_attacks <- readRDS('source-data/ISW_historical/area_attacked_by_russia_by_day.RDS')
+ru_claimed <- readRDS('source-data/ISW_historical/area_claimed_as_controlled_by_Russia_by_day.RDS')
 
 # Ukraine-held is defined as the complement of the intersection of c('in Ukraine') and c('in area of Russian attacks', 'in area of Ukrainian counterattacks', 'in area of Russia control', and 'in area of Russian claimed control'). Since all fires are in Ukraine, that simplifies to the below:
 big_shp <- rbind(ru_attacks[, c("geometry", 'date')],
@@ -33,8 +33,11 @@ big_shp <- rbind(ru_attacks[, c("geometry", 'date')],
 in_ukraine_held_area <- NA
 for(i in unique(fires$date)){
   temp_fires <- fires[fires$date == i, ]
-  temp_shp <- st_union(big_shp[big_shp$date == i, ])
-
+  if(i > max(big_shp$date)){
+    temp_shp <- st_union(big_shp[big_shp$date == max(big_shp$date), ])
+  } else {
+    temp_shp <- st_union(big_shp[big_shp$date == i, ])
+  }
   point.sf <- st_as_sf(temp_fires, coords = c("LONGITUDE", "LATITUDE"))
   st_crs(point.sf) <- "WGS84"
   point.sf <- st_transform(point.sf, st_crs(temp_shp))

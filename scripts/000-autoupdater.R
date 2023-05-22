@@ -169,6 +169,11 @@ rm(new_fires)
 rm(old)
 
 # 6 - Update and save charts and data --------------------------------------------------
+
+# Update cloud data:
+source('scripts/aux_update_cloud_cover_daily_with_forecast.R')
+
+# Define war fires data frame:
 war_fires <- fires[fires$war_fire == T, ]
 
 if(update_charts_and_animations){
@@ -207,7 +212,7 @@ if(update_charts_and_animations){
 
   spotlight <- st_simplify(spotlight, dTolerance = 0.005)
   ukraine <- st_simplify(ukraine, dTolerance = 0.005)
-  clouds <- read_csv('output-data/cloud_cover_in_ukraine_by_day.csv')
+  clouds <- read_csv('output-data/cloud_cover_in_ukraine_by_day_with_forecast_for_recent_days.csv')
 
   last_week <- fires[fires$date %in% as.Date(Sys.Date():(Sys.Date()-7), origin = '1970-01-01'), ]
   last_month <- fires[fires$date %in% as.Date(Sys.Date():(Sys.Date()-30), origin = '1970-01-01'), ]
@@ -452,6 +457,9 @@ ggsave('plots/cloud_cover_by_day.png', width = 10, height = 4)
 
 ggplot(war_fires, aes(x=date, y=pop_exact, alpha = 0.5))+geom_point()+theme_minimal()+ylab('')+xlab('')+ggtitle('Population density of fires assessed as war-related')+xlab('\nNote: satellites cannot detect fires through cloud clover')+theme(legend.pos='none')
 ggsave('plots/fire_by_pop_density_per_day.png', width = 10, height = 4)
+
+# This script generates a plot of fires by day and zone of control
+source('scripts/aux_plot_fires_by_day_and_territorial_control.R')
 
 } else {
   cat("\n.... Updating data exports (charts + anmiations not updated in this run)....\n")}
