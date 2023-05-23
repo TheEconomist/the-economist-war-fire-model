@@ -462,7 +462,7 @@ ggsave('plots/fire_by_pop_density_per_day.png', width = 10, height = 4)
 source('scripts/aux_plot_fires_by_day_and_territorial_control.R')
 
 } else {
-  cat("\n.... Updating data exports (charts + anmiations not updated in this run)....\n")}
+  cat("\n.... Updating data exports (charts + animations not updated in this run)....\n")}
 
 # Export to file:
 write_csv(fires, 'output-data/ukraine_fires.csv')
