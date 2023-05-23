@@ -32,6 +32,7 @@ In the following maps, red indicates that fires are classified as war-related. S
 ![Chart of fire events assessed as war-related](plots/fire_activity_per_day.png)  
 ![Chart of fire events assessed as war-related](plots/cloud_cover_by_day.png)  
 ![Chart of fire events assessed as war-related](plots/fire_by_pop_density_per_day.png)  
+![Chart of fire events assessed as war-related](plots/attacks_per_day_by_location_of_strike.png)  
 
 ## Scripts, sources and output data
 Generating the model ensemble, as well as model outputs, maps, and analysis charts can be done by running the master script: 
