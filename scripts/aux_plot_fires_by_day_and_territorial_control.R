@@ -25,6 +25,7 @@ clouds <- read_csv('output-data/cloud_cover_in_ukraine_by_day_with_forecast_for_
 # Step 2: Merge ----------------------------------------
 
 # Merge control data and generate daily totals:
+fires$in_ukraine_held_area <- NULL
 fires <- merge(fires, control, by = c('LATITUDE', 'LONGITUDE', 'date', 'ACQ_TIME'), all.x = T)
 fires$fires_per_day <- ave(fires$fire, fires$date, FUN = function(x) sum(x, na.rm = T))
 fires$war_fires_per_day <- ave(fires$war_fire, fires$date, FUN = function(x) sum(x, na.rm = T))
