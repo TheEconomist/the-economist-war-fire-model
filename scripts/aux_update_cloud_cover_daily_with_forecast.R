@@ -1,5 +1,7 @@
 # This script updates daily cloud cover numbers using forecasts for the recent past made available by open-meteo.
 library(readr)
+library(httr)
+library(jsonlite)
 
 # Step 1: Get a grid of Ukraine
 grid <- readRDS('output-data/model-objects/ukraine_mask.RDS')
@@ -27,7 +29,7 @@ get_weather_forecast_by_lat_lng <- function(url){
 df <- data.frame()
 for(i in 1:nrow(grid)){
   url <- paste0('https://api.open-meteo.com/v1/forecast?latitude=', grid$y[i], '&longitude=', grid$x[i], '&hourly=temperature_2m,cloudcover&start_date=', start_date, '&end_date=', end_date)
-  df<- bind_rows(main_df,get_weather_forecast_by_cities(url))
+  df<- bind_rows(df,get_weather_forecast_by_lat_lng(url))
   cat('.')
 }
 
