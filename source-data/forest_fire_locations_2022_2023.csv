@@ -1,13 +1,14 @@
 lng1,lng2,lat1,lat2,start_date,end_date,note
-29.356,29.844,45.545,45,2022-01-01,2023-05-01,marsh fire in the Danube basin natural park
-28.21,30.356,45.845,45,2022-01-01,2023-05-01,crop fires north of the Danube basin natural park
-22.32,22.36,48.43,48.48,2022-01-01,2023-01-01,forest fires (some possibly crop) west of the Carpathian mountains
-22.99,23.02,48.32,48.29,2022-01-01,2023-01-01,forest fires (some possibly crop) west of the Carpathian mountains
-22.5,22.55,48.88,48.84,2022-01-01,2023-01-01,forest fires (some possibly crop) west of the Carpathian mountains
-29.85,29.98,46.6,46.52,2022-01-01,2023-01-01,forest fires (some possibly crop) west of the Moldovian border
-29.53,29.69,47.28,47.18,2022-01-01,2023-01-01,forest fires (some possibly crop) west of the Moldovian border
-32.18,32.23,50.3,50.25,2022-04-15,2022-10-01,forest fires (some possible crop) near Piddubivka
-31.9,31.99,50.55,50.45,2022-04-15,2022-10-01,forest fires (some possible crop) near Piddubivka
-30.124,30.225,47.252,47.185,2022-01-01,2023-01-01,Field fire south of Armashivka
-29.455,30.24,51.55,51.3,2022-06-01,2022-11-01,Forest fire near border with Belarus north of Ivankiv
-32.653,33.12,49.63,49.99,2022-01-01,2022-06-01,Forest fires south of Lubny
+29.356,29.844,45.545,45,01/01/2022,01/05/2023,marsh fire in the Danube basin natural park
+28.21,30.356,45.845,45,01/01/2022,01/05/2023,crop fires north of the Danube basin natural park
+22.32,22.36,48.43,48.48,01/01/2022,01/01/2023,forest fires (some possibly crop) west of the Carpathian mountains
+22.99,23.02,48.32,48.29,01/01/2022,01/01/2023,forest fires (some possibly crop) west of the Carpathian mountains
+22.5,22.55,48.88,48.84,01/01/2022,01/01/2023,forest fires (some possibly crop) west of the Carpathian mountains
+29.85,29.98,46.6,46.52,01/01/2022,01/01/2023,forest fires (some possibly crop) west of the Moldovian border
+29.53,29.69,47.28,47.18,01/01/2022,01/01/2023,forest fires (some possibly crop) west of the Moldovian border
+32.18,32.23,50.3,50.25,15/04/2022,01/10/2022,forest fires (some possible crop) near Piddubivka
+31.9,31.99,50.55,50.45,15/04/2022,01/10/2022,forest fires (some possible crop) near Piddubivka
+30.124,30.225,47.252,47.185,01/01/2022,01/01/2023,Field fire south of Armashivka
+29.455,30.24,51.55,51.3,01/06/2022,01/11/2022,Forest fire near border with Belarus north of Ivankiv
+32.653,33.12,49.63,49.99,01/01/2022,01/06/2022,Forest fires south of Lubny
+26.5,26.7,48.72,48.78,01/01/2023,01/06/2025,Cement factory (probably expanded operations or new pipes)

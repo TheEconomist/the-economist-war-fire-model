@@ -21,9 +21,9 @@ war_fire_classifier <- function(cell_day_data, # Data frame of cells with number
 
   # Exclude fires if identified as not-war-related:
   if(!missing(exclude)){
-    exclude$start_date <- as.Date(exclude$start_date, format = "%Y-%m-%d")
-    exclude$end_date <- as.Date(exclude$end_date, format = "%Y-%m-%d")
-    if(any(is.na(c(exclude$end_date, exclude$start_date))) | any(!c(exclude$end_date, exclude$start_date) %in% as.Date(as.Date('2022-01-01'):as.Date('2025-01-01'), origin = '1970-01-01'))){
+    exclude$start_date <- as.Date(exclude$start_date, format = "%d/%m/%Y")
+    exclude$end_date <- as.Date(exclude$end_date, format = "%d/%m/%Y")
+    if(any(is.na(c(exclude$end_date, exclude$start_date))) | any(!c(exclude$end_date, exclude$start_date) %in% as.Date(as.Date('2022-01-01'):as.Date('2030-01-01'), origin = '1970-01-01'))){
       print(exclude)
       stop("Manually added forest fire locations have a date issue, please inspect manually.")
     }
