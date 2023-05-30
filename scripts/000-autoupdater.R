@@ -11,6 +11,7 @@ options(readr.show_col_types = F)
 ggsave <- function(..., bg = 'white') ggplot2::ggsave(..., bg = bg)
 redo <- F
 update_charts_and_animations <- T
+render_animations <- T
 
 # Step 1: Load stable data ----------------------------------------
 cat("\n.... Load stable data ...\n")
@@ -357,6 +358,7 @@ streets <- readRDS('output-data/model-objects/streets.RDS')
   ggsave('plots/live_ukraine_fire_map_spotlight_4_by_day.png', width = 10, height = 8)
 
   # Save animation of fire activity so far
+  if(render_animations){
   rm(ukraine)
   library(gganimate)
 
@@ -447,7 +449,7 @@ streets <- readRDS('output-data/model-objects/streets.RDS')
              ylim=spotlight_zoom[c(2,4)], expand = F)
   animate(anim,  width = 10, height = 8, units = 'in', res = 150, duration = 20, nframes = 30)
   anim_save('plots/live_ukraine_fire_map_last_month_spotlight.gif')
-
+}
 # Save plots of fire activity by day:
 ggplot(war_fires, aes(x=date))+geom_bar()+theme_minimal()+ylab('')+xlab('')+ggtitle('Fires assessed as war-related per day')+xlab('\nNote: satellites cannot detect fires through cloud clover')
 ggsave('plots/fire_activity_per_day.png', width = 10, height = 4)
