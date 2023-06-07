@@ -3,6 +3,9 @@ This repository contains the source code and data associated with *The Economist
 
 In the following maps, red indicates that fires are classified as war-related. Size reflects approximate population density. 
 
+### Events in the past week
+![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_last_week.png)  
+
 ### Events since Feb 24th, 2022
 ![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map.png)  
 ![Animation of fire events assessed as war-related](plots/live_ukraine_fire_map_animated.gif)
