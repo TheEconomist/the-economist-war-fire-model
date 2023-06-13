@@ -25,11 +25,9 @@ In the following maps, red indicates that fires are classified as war-related. S
 
 ### Events in the past month
 ![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_last_month.png)  
-![Animation of fire events assessed as war-related](plots/live_ukraine_fire_map_last_month_animated.gif)
 
 ### Events in the past week
 ![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_last_week.png)  
-![Animation of fire events assessed as war-related](plots/live_ukraine_fire_map_last_week_animated.gif)
 
 ### Charts of events per day
 ![Chart of fire events assessed as war-related](plots/fire_activity_per_day.png)  

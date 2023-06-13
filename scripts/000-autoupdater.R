@@ -407,52 +407,52 @@ streets <- readRDS('output-data/model-objects/streets.RDS')
     animate(anim,  width = 10, height = 8, units = 'in', res = 150, duration = 20, nframes = length(range(fires$date)[1]:range(fires$date)[2]))
     anim_save('plots/live_ukraine_fire_map_animated.gif')
 
-    # Save animation of fire activity in last 30 days
-    anim <- ggplot(last_month)+geom_sf(data=ukraine_animate)+
-      geom_point(data = last_month[last_month$war_fire == F, ],
-                 aes(col=as.factor(war_fire), group = 1:sum(last_month$war_fire == F),
-                     x=LONGITUDE, y=LATITUDE, size = pop_exact), alpha = 0.1, col = 'darkgray')+
-      geom_point(data = last_month[last_month$war_fire == T, ],
-                 aes(group = 1:sum(last_month$war_fire == T),
-                     x=LONGITUDE, y=LATITUDE, size = pop_exact), alpha = 0.1, col= 'darkred')+
-      transition_reveal(date)+theme_minimal()+
-      ylab('')+xlab('')+theme(legend.pos = 'none')+labs(title = "{frame_along}")+
-      scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
-      scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))
-    animate(anim,  width = 10, height = 8, units = 'in', res = 150)
-    anim_save('plots/live_ukraine_fire_map_last_month_animated.gif', duration = 20, nframes = 30)
-
-    # Save animation of fire activity in last 7 days
-    anim <- ggplot(last_week)+geom_sf(data=ukraine_animate)+
-      geom_point(data = last_month[last_month$war_fire == F, ],
-                 aes(col=as.factor(war_fire), group = 1:sum(last_month$war_fire == F),
-                     x=LONGITUDE, y=LATITUDE, size = pop_exact), alpha = 0.1, col = 'darkgray')+
-      geom_point(data = last_month[last_month$war_fire == T, ],
-                 aes(group = 1:sum(last_month$war_fire == T),
-                     x=LONGITUDE, y=LATITUDE, size = pop_exact), alpha = 0.1, col= 'darkred')+
-      transition_reveal(date)+theme_minimal()+
-      ylab('')+xlab('')+theme(legend.pos = 'none')+labs(title = "{frame_along}")+
-      scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
-      scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))
-    animate(anim,  width = 10, height = 8, units = 'in', res = 150)
-    anim_save('plots/live_ukraine_fire_map_last_week_animated.gif', duration = 20, nframes = 7)
-
-    # Save animation of fire activity in spotlight location
-    anim <- ggplot(last_month)+geom_sf(data=ukraine_animate)+geom_sf(data=spotlight_animate)+
-      geom_point(data = last_month[last_month$war_fire == F, ],
-                 aes(col=as.factor(war_fire), group = 1:sum(last_month$war_fire == F),
-                     x=LONGITUDE, y=LATITUDE, size = pop_exact), alpha = 0.5, col = 'darkgray')+
-      geom_point(data = last_month[last_month$war_fire == T, ],
-                 aes(group = 1:sum(last_month$war_fire == T),
-                     x=LONGITUDE, y=LATITUDE, size = pop_exact), alpha = 0.5, col= 'darkred')+
-      transition_states(date)+theme_minimal()+
-      ylab('')+xlab('')+theme(legend.pos = 'none')+labs(title = "{closest_state}")+
-      scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
-      scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))+
-      coord_sf(xlim=spotlight_zoom[c(1,3)],
-               ylim=spotlight_zoom[c(2,4)], expand = F)
-    animate(anim,  width = 10, height = 8, units = 'in', res = 150, duration = 20, nframes = 30)
-    anim_save('plots/live_ukraine_fire_map_last_month_spotlight.gif')
+    # # Save animation of fire activity in last 30 days
+    # anim <- ggplot(last_month)+geom_sf(data=ukraine_animate)+
+    #   geom_point(data = last_month[last_month$war_fire == F, ],
+    #              aes(col=as.factor(war_fire), group = 1:sum(last_month$war_fire == F),
+    #                  x=LONGITUDE, y=LATITUDE, size = pop_exact), alpha = 0.1, col = 'darkgray')+
+    #   geom_point(data = last_month[last_month$war_fire == T, ],
+    #              aes(group = 1:sum(last_month$war_fire == T),
+    #                  x=LONGITUDE, y=LATITUDE, size = pop_exact), alpha = 0.1, col= 'darkred')+
+    #   transition_reveal(date)+theme_minimal()+
+    #   ylab('')+xlab('')+theme(legend.pos = 'none')+labs(title = "{frame_along}")+
+    #   scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
+    #   scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))
+    # animate(anim,  width = 10, height = 8, units = 'in', res = 150)
+    # anim_save('plots/live_ukraine_fire_map_last_month_animated.gif', duration = 20, nframes = 30)
+    #
+    # # Save animation of fire activity in last 7 days
+    # anim <- ggplot(last_week)+geom_sf(data=ukraine_animate)+
+    #   geom_point(data = last_month[last_month$war_fire == F, ],
+    #              aes(col=as.factor(war_fire), group = 1:sum(last_month$war_fire == F),
+    #                  x=LONGITUDE, y=LATITUDE, size = pop_exact), alpha = 0.1, col = 'darkgray')+
+    #   geom_point(data = last_month[last_month$war_fire == T, ],
+    #              aes(group = 1:sum(last_month$war_fire == T),
+    #                  x=LONGITUDE, y=LATITUDE, size = pop_exact), alpha = 0.1, col= 'darkred')+
+    #   transition_reveal(date)+theme_minimal()+
+    #   ylab('')+xlab('')+theme(legend.pos = 'none')+labs(title = "{frame_along}")+
+    #   scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
+    #   scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))
+    # animate(anim,  width = 10, height = 8, units = 'in', res = 150)
+    # anim_save('plots/live_ukraine_fire_map_last_week_animated.gif', duration = 20, nframes = 7)
+    #
+    # # Save animation of fire activity in spotlight location
+    # anim <- ggplot(last_month)+geom_sf(data=ukraine_animate)+geom_sf(data=spotlight_animate)+
+    #   geom_point(data = last_month[last_month$war_fire == F, ],
+    #              aes(col=as.factor(war_fire), group = 1:sum(last_month$war_fire == F),
+    #                  x=LONGITUDE, y=LATITUDE, size = pop_exact), alpha = 0.5, col = 'darkgray')+
+    #   geom_point(data = last_month[last_month$war_fire == T, ],
+    #              aes(group = 1:sum(last_month$war_fire == T),
+    #                  x=LONGITUDE, y=LATITUDE, size = pop_exact), alpha = 0.5, col= 'darkred')+
+    #   transition_states(date)+theme_minimal()+
+    #   ylab('')+xlab('')+theme(legend.pos = 'none')+labs(title = "{closest_state}")+
+    #   scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
+    #   scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))+
+    #   coord_sf(xlim=spotlight_zoom[c(1,3)],
+    #            ylim=spotlight_zoom[c(2,4)], expand = F)
+    # animate(anim,  width = 10, height = 8, units = 'in', res = 150, duration = 20, nframes = 30)
+    # anim_save('plots/live_ukraine_fire_map_last_month_spotlight.gif')
   }
 # Save plots of fire activity by day:
 ggplot(war_fires, aes(x=date))+geom_bar()+theme_minimal()+ylab('')+xlab('')+ggtitle('Fires assessed as war-related per day')+xlab('\nNote: satellites cannot detect fires through cloud clover')
