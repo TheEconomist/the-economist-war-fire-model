@@ -406,7 +406,8 @@ streets <- readRDS('output-data/model-objects/streets.RDS')
       scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))
     animate(anim,  width = 10, height = 8, units = 'in', res = 150, duration = 20, nframes = length(range(fires$date)[1]:range(fires$date)[2]))
     anim_save('plots/live_ukraine_fire_map_animated.gif')
-
+    # animate(anim, device = "svglite",
+            # renderer = file_renderer("~/plots/svg", prefix = "gganim_plot", overwrite = TRUE)) # Optional, exports svg.
     # # Save animation of fire activity in last 30 days
     # anim <- ggplot(last_month)+geom_sf(data=ukraine_animate)+
     #   geom_point(data = last_month[last_month$war_fire == F, ],
