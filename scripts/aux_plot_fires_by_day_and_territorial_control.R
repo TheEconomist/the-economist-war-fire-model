@@ -65,7 +65,7 @@ for(j in setdiff(colnames(war), c('date',
 }
 
 # Step 3: Chart ----------------------------------------
-write_csv(war, 'output-data/strikes_by_location_and_day.csv')
+write_csv(war[nrow(war):1, ], 'output-data/strikes_by_location_and_day.csv')
 ggplot(war[, ], aes(x=date))+
   geom_line(aes(col=paste0('7-day centered average, Russia-held, claimed or contested area\n(days with <', 100*max_cloud_coverage, '% cloud cover)'), y=war_fires_per_day_in_russia_held_area_non_cloud_days_7dma))+
   geom_line(aes(col=paste0('7-day centered average, Ukraine-held area\n(days with <', 100*max_cloud_coverage, '% cloud cover)'), y=war_fires_per_day_in_ukraine_held_area_non_cloud_days_7dma))+theme_minimal()+xlab('Sources: ISW, The Economist')+ylab('')+theme(legend.pos = 'bottom', legend.title = element_blank())+ggtitle('Fire activity assessed as war-related per day, by location of strike')
