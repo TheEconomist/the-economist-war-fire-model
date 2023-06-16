@@ -55,7 +55,7 @@ This automatically downloads the latest data, updates predictions, get exact pop
 
 All details on the procedure used to classify events are available in the above scripts. In brief, events are classified as war-related if they met the following thresholds:
 * Excess fire activity in a given 0.1 latitude by 0.1 longitude area of Ukraine on a given day is so large as to have less than 5% probability of occuring in a normal year.
-* Such excess has happened regularly in that area of the country, defined as twice within a single cell less than 50km away, at least 7 days apart and less than 180 days apart (i.e. two spaced-out events within a six-month period).
+* Such excess is substantial: it has happened regularly in that area of the country, defined as twice within a single cell less than 50km away, at least 7 days apart and less than 180 days apart (i.e. two spaced-out events within a six-month period).
 * or: A fire event takes place in a cell less than 10 days after it has meet the above two requirements. (In other words, other activity producing fire events, typically from agriculture, does not resume until 10 days after an area has seen a war event.)
 
 ## Limitations
