@@ -1,7 +1,7 @@
 # *The Economist's* Ukraine war-fire model
-This repository contains the source code and data associated with *The Economist’s* Ukraine war-fire model. This model uses statistical techniques from machine learning and satellite data on temperature anomalies to detect war events. Between February 24th, 2022, and February 18th, 2023, we detected 14,068 such events in the country. We have since added many more. 
+This repository contains the source code and data associated with *The Economist’s* Ukraine war-fire model. This model uses statistical techniques from machine learning and publicly available satellite data on temperature anomalies to detect war events. Between February 24th, 2022, and February 18th, 2023, we detected 14,068 such events in the country. We have since added many more. 
 
-If you have ideas for how we might improve this work, email to [sondresolstad@economist.com](mailto:sondresolstad@economist.com).
+If you have any ideas for how we might improve this work or the presentation of it, email [sondresolstad@economist.com](mailto:sondresolstad@economist.com).
 
 In the following maps, red indicates that fires are classified as war-related. Size reflects approximate population density. 
 
