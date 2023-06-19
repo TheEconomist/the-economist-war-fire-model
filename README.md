@@ -1,7 +1,9 @@
 # *The Economist's* Ukraine war-fire model
-This repository contains the source code and data associated with *The Economist’s* Ukraine war-fire model. This model uses statistical techniques from machine learning and satellite data on temperature anomalies to detect war events. Between February 24th, 2022, and February 18th, 2023, we detected 14,068 such events in the country. We have since added many more. 
+This repository contains the source code and data associated with *The Economist’s* Ukraine war-fire model. This model uses statistical techniques from machine learning and publicly available satellite data on temperature anomalies to detect war events. Between February 24th, 2022, and February 18th, 2023, we detected 14,068 such events in the country. We have since added many more. 
 
-If you have ideas for how we might improve this work, email to [sondresolstad@economist.com](mailto:sondresolstad@economist.com).
+See the latest data, updating several times daily, here: [Tracking the Ukraine war: where is the latest fighting?](https://www.economist.com/interactive/graphic-detail/ukraine-fires) 
+
+If you have any ideas for how we might improve this work or the presentation of it, email [sondresolstad@economist.com](mailto:sondresolstad@economist.com).
 
 In the following maps, red indicates that fires are classified as war-related. Size reflects approximate population density. 
 
@@ -55,7 +57,7 @@ This automatically downloads the latest data, updates predictions, get exact pop
 
 All details on the procedure used to classify events are available in the above scripts. In brief, events are classified as war-related if they met the following thresholds:
 * Excess fire activity in a given 0.1 latitude by 0.1 longitude area of Ukraine on a given day is so large as to have less than 5% probability of occuring in a normal year.
-* Such excess has happened regularly in that area of the country, defined as twice within a single cell less than 50km away, at least 7 days apart and less than 180 days apart (i.e. two spaced-out events within a six-month period).
+* Such excess is substantial: it has happened regularly in that area of the country, defined as twice within a single cell less than 50km away, at least 7 days apart and less than 180 days apart (i.e. two spaced-out events within a six-month period).
 * or: A fire event takes place in a cell less than 10 days after it has meet the above two requirements. (In other words, other activity producing fire events, typically from agriculture, does not resume until 10 days after an area has seen a war event.)
 
 ## Limitations
