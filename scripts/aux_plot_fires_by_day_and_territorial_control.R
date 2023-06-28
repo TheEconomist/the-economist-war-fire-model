@@ -65,6 +65,8 @@ for(j in setdiff(colnames(war), c('date',
 }
 
 # Step 3: Chart ----------------------------------------
+war[, 2] <- round(war[, 2], 3)
+war[, 3] <- round(war[, 3], 3)                                                   
 write_csv(war[nrow(war):1, ], 'output-data/strikes_by_location_and_day.csv')
 ggplot(war[, ], aes(x=date))+
   geom_line(aes(col=paste0('7-day centered average, Russia-held, claimed or contested area\n(days with <', 100*max_cloud_coverage, '% cloud cover)'), y=war_fires_per_day_in_russia_held_area_non_cloud_days_7dma))+
