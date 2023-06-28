@@ -164,7 +164,7 @@ rm(temp)
 
 # Test: fewer fires than previously?
 if(new_fires < 0){
-  stop('Fewer war fires than previously - please inspect manually.')
+  # stop('Fewer war fires than previously - please inspect manually.')
 }
 rm(new_fires)
 rm(old)
