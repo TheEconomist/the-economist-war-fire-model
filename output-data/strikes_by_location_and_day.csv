@@ -1,5 +1,5 @@
 date,cloud_cover_in_country,cloud_cover_in_east_of_country,fires_per_day,war_fires_per_day,fires_per_day_in_ukraine_held_area,war_fires_per_day_in_ukraine_held_area,fires_per_day_in_russia_held_area,war_fires_per_day_in_russia_held_area,fires_per_day_non_cloud_days_7dma,fires_per_day_7dma,war_fires_per_day_non_cloud_days_7dma,war_fires_per_day_7dma,fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,fires_per_day_in_ukraine_held_area_7dma,war_fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,war_fires_per_day_in_ukraine_held_area_7dma,fires_per_day_in_russia_held_area_non_cloud_days_7dma,fires_per_day_in_russia_held_area_7dma,war_fires_per_day_in_russia_held_area_non_cloud_days_7dma,war_fires_per_day_in_russia_held_area_7dma
-2023-07-15,0.323,0.309,40,32,33,26,7,6,40,156.25,32,89.5,33,86,26,44.25,7,70.25,6,45.25
+2023-07-15,0.311,0.304,40,32,33,26,7,6,40,156.25,32,89.5,33,86,26,44.25,7,70.25,6,45.25
 2023-07-14,0.652,0.684,180,106,102,54,78,52,40,201.4,32,131.4,33,89,26,48.4,7,112.4,6,83
 2023-07-13,0.588,0.537,205,104,105,48,100,56,40,220.16666666666666,32,151.33333333333334,33,88.33333333333333,26,47.333333333333336,7,131.83333333333334,6,104
 2023-07-12,0.552,0.547,200,116,104,49,96,67,40,205.85714285714286,32,141,33,85.42857142857143,26,45.42857142857143,7,120.42857142857143,6,95.57142857142857
