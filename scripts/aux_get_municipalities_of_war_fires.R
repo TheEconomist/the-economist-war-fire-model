@@ -71,5 +71,4 @@ locations$y <- NULL
 
 # Export:
 saveRDS(locations, 'output-data/points_to_municipality_with_extra_cols.RDS')
-saveRDS(locations[, c('LATITUDE', 'LONGITUDE', 'municipality')], 'output-data/points_to_municipality.RDS')
 write_csv(locations, 'output-data/war_fires_by_ADM3.csv')
