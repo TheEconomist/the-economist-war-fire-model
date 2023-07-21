@@ -480,3 +480,6 @@ source('scripts/aux_plot_fires_by_day_and_territorial_control.R')
 # Export to file:
 write_csv(fires, 'output-data/ukraine_fires.csv')
 write_csv(war_fires, 'output-data/ukraine_war_fires.csv')
+
+# Export war fires by ADM3:
+source('scripts/aux_get_municipalities_of_war_fires.R')
