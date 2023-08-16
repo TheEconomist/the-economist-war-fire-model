@@ -6,7 +6,8 @@ war_fire_classifier <- function(cell_day_data, # Data frame of cells with number
                                 offset_months = 1:12, # Parameter: Offset should only be used for these months
                                 min_length_of_fire_in_area = 7, # Parameter: For a location to have war events, excess fires must be detected at least this many days apart within a given 365 day interval.
                                 days_to_assign_to_war_fire_after_excess = 10, # Parameter: For how many days after a large war fire event should fire events be assigned to the 'war' category.
-                                exclude # Parameter (optional): Data frame of events locations (defined by lat1, lat2, lng1, lng2, start_date, end_date), which have been established as not war-related
+                                exclude, # Parameter (optional): Data frame of events locations (defined by lat1, lat2, lng1, lng2, start_date, end_date), which have been established as not war-related
+                                exclude_dates # Parameter (optional): vector of dates to exclude due to extreme heat
 ){
 
   # Merge cell data and cell predictions
@@ -36,6 +37,14 @@ war_fire_classifier <- function(cell_day_data, # Data frame of cells with number
                    cells$date <= exclude$end_date[i]] <- 0
     }
   }
+
+  # Exclude fires on extreme heat days
+  if(!missing(exclude_dates)){
+
+    print(paste0(sum(cells$fire[as.numeric(cells$date) %in% as.numeric(exclude_dates)]), ' fires on extreme heat days excluded from the analysis'))
+    cells$fire[as.numeric(cells$date) %in% as.numeric(exclude_dates)] <- 0
+  }
+
   # Calculate excess fires
   cells$excess_fires <- cells$fire - cells$predicted_fire - cells$offset
 
@@ -154,6 +163,13 @@ war_fire_classifier <- function(cell_day_data, # Data frame of cells with number
       }
     }
   }
+
+  # Similarly exclude fires on extreme heat days
+  if(!missing(exclude_dates)){
+
+    fires$war_fire[as.numeric(fires$date) %in% as.numeric(exclude_dates)] <- 0
+  }
+
 
 
 

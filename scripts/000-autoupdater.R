@@ -122,10 +122,11 @@ fires <- war_fire_classifier(cell_day_data = X[X$date >= as.Date('2022-02-24'), 
                              offset = 2,
                              min_length_of_fire_in_area = 10,
                              days_to_assign_to_war_fire_after_excess = 10,
-                             exclude = read_csv('source-data/forest_fire_locations_2022_2023.csv'))
+                             exclude = read_csv('source-data/forest_fire_locations_2022_2023.csv'),
+                             exclude_dates = readRDS('output-data/model-objects/exclude_dates.RDS'))
 
-ggplot(fires[!fires$war_fire, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact, col = sustained_excess))+geom_point(alpha = 0.2)+
-  geom_point(data=fires[fires$war_fire == T, ], col = 'red', alpha = 0.2)
+ggplot(fires[!fires$war_fire & fires$date >= as.Date('2023-07-16'), ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact, col = sustained_excess))+geom_point(alpha = 0.2)+
+  geom_point(data=fires[fires$war_fire == T & fires$date >= as.Date('2023-07-16'), ], col = 'red', alpha = 0.2)
 
 rm(X)
 rm(pred_mat)
