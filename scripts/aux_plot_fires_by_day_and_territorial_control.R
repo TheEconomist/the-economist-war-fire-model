@@ -42,6 +42,9 @@ war <- merge(clouds, unique(fires[, c('date', 'fires_per_day', 'war_fires_per_da
 
 war <- war[war$date >= as.Date('2022-02-23'), ]
 
+# Step 3: Add 'extreme_heat' indicator ----------------------------------------
+war$extreme_heat <- as.numeric(war$date) %in% as.numeric(readRDS('output-data/model-objects/exclude_dates.RDS'))
+                                                   
 # Generate averages for these
 war <- war[order(war$date),]
 
@@ -51,6 +54,8 @@ for(j in setdiff(colnames(war), c('date',
   war[, paste0(j, '_non_cloud_days_7dma')] <- NA
   war$temp <- war[, j]
   war$temp[war$cloud_cover_in_east_of_country > max_cloud_coverage] <- NA
+  war$temp[war$extreme_heat] <- NA
+  
   for(i in 1:nrow(war)){
     war[i, paste0(j, '_non_cloud_days_7dma')] <-
       mean(war$temp[max(c(1, i-3)):min(c(nrow(war), i+3))], na.rm = T)
@@ -63,9 +68,6 @@ for(j in setdiff(colnames(war), c('date',
       mean(war[max(c(1, i-3)):min(c(nrow(war), i+3)), j], na.rm = T)
   }
 }
-
-# Step 3: Add 'extreme_heat' indicator ----------------------------------------
-war$extreme_heat <- as.numeric(war$date) %in% as.numeric(readRDS('output-data/model-objects/exclude_dates.RDS'))
 
 # Step 4: Chart ----------------------------------------
 war[, 2] <- round(war[, 2], 3)
