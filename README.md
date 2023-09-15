@@ -67,7 +67,40 @@ Moreover, our statistical method classifying events as war-related (or not war-r
 
 Finally, we cannot currently produce accurate classifications of war-related events during periods of extreme heat (defined as when average temperatures are higher than the upper end of the 95% confidence interval of temperatures in Ukraine). During such periods (so far, only once, from April 4th to April 11th, 2023), no events are classified as war-related.  
 
-## Historical versions and sources
+## Variables in main exports
+The files [`output-data/ukraine_fires.csv`](ukraine_fires.csv) and [`output-data/ukraine_war_fires.csv`](ukraine_war_fires.csv) contain the following columns, with each row being a fire event:
+* LATITUDE: Latitude of fire event in decimal degrees
+* LONGITUDE: Longitude of fire event in decimal degrees
+* date: Date of fire event in "year-month-day" format. E.g. "2023-09-15"
+* ACQ_TIME: Time of data acquisition by satellitte in 24-hour format. I.e. 2205 equals 10:05 pm
+* id_w_time: ID of cell fire is detected in (given by longitude, latitude, day of year, and year, separated by underscores)
+* id: ID of cell fire is detected in (given by longitude, latitude, separted by underscore)
+* x: Longitude of cell fire is detected in (decimal degrees - midpoint)
+* y: Latitude of cell fire is detected in (decimal degrees - midpoint)
+* year: Year
+* time_of_year: Day of year (January 3rd = 3)
+* fire: Whether fire was detected at this location at this time. (Always 1 in these exports)
+* pop_density: Average population density of cell fire was detected in
+* city: City fire was detected in, if assessed (generally not calculated)
+* in_urban_area: TRUE if fire was detected as being within an urban area, otherwise FALSE
+* pop_exact: Population density at fire location. Note distinction between pop_exact (fire location) and pop_density (cell fire was detected within)
+* excess_fire: Number of fires in cell beyond prediction for that cell for that date, assuming no cloud cover
+* predicted_fire: Number of fires in cell predicted for that cell for that date, assuming no cloud cover
+* fire_in_window: Observed fires in that cell on that date
+* war_fire: Whether this specific fire is assessed as war-related by the model
+* sustained_excess: Whether this cell has seen sustained excess fire activity. This is used by the model to assess whether activity there is likely to be war-related
+* id_big: Location rounded to nearest degree longitude and latitude, given as rounded longitude and latitude separated by an underscore
+* length_of_war_fire_area: Number of separate days with fires assessed as war-related in area, defined by rounding locations to nearest degree longitude and latitude
+* war_fire_restrictive: Whether this specific fire was assessed as abnormal. (The model classifies fires taking place in areas immediately following abnormal fire activity as probably war-related, even if they are not themselves classified as abnormal)
+* in_ukraine_held_area: Whether fire took place in area assessed as Ukraine-controlled. Specifically, whether it took place within Ukraine but not within areas assessed as controlled by Russia by the Institute for the Study of War on the date in question
+* fires_per_day: Number of fires in Ukraine on date 
+* war_fires_per_day: Number of fires classified as war-related in Ukraine on date
+* fires_per_day_in_ukraine_held_area: Number of fires in Ukraine on date in areas assessed as Ukraine-controlled 
+* war_fires_per_day_in_ukraine_held_area: Number of fires classified as war-related in Ukraine on date  
+* fires_per_day_in_russia_held_area: Number of fires in Ukraine on date in areas not assessed as Ukraine-controlled 
+* war_fires_per_day_in_russia_held_area: Number of fires classified as war-related in Ukraine on date in areas not assessed as Ukraine-controlled 
+
+## Historical versions
 This model was first published on February 23th, 2023. 
 
 ## Acknowledgements
