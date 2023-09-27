@@ -3,9 +3,9 @@ This repository contains the source code and data associated with *The Economist
 
 See the latest data, updating several times daily, here: [Tracking the Ukraine war: where is the latest fighting?](https://www.economist.com/interactive/graphic-detail/ukraine-fires) 
 
-If you have any ideas for how we might improve this work or the presentation of it, email [sondresolstad@economist.com](mailto:sondresolstad@economist.com) or message [@Sondreus](https://twitter.com/Sondreus). If you use this data (be it for a school project or to inform national policy) we would gratefully receive a short email telling us how it is used. This data is not perfect - see section on limitations below. 
+If you have any ideas for how we might improve this work or the presentation of it, email [sondresolstad@economist.com](mailto:sondresolstad@economist.com) or message [@Sondreus](https://twitter.com/Sondreus). If you find this data useful, a few lines on how are also gratefully received via the same channels. 
 
-In the following maps, red indicates that fires are classified as war-related. Size reflects approximate population density. 
+In the following maps, red indicates that fires are classified as war-related. Size reflects approximate population density. This data is not perfect - see section on limitations below. 
 
 ### Events in the past week
 ![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_last_week.png)  
