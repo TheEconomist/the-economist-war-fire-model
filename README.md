@@ -42,14 +42,14 @@ In the following maps, red indicates that fires are classified as war-related. S
 ## Scripts, sources and output data
 Generating the model ensemble, as well as model outputs, maps, and analysis charts can be done by running the master script: 
 
-* [`scripts/00-master-script.R`](00-master-script.R)
+* [`scripts/00-master-script.R`](scripts/00-master-script.R)
 
 This script calls component scripts as well as auxiliary scripts. These produce, among other things, the following map, where each of the 14,068 dots is a fire event with a precise location (in most cases, to within 500m accuracy), a date, and a time of day.
 
 ![Chart of fire events assessed as war-related](plots/ukraine_fire_map.png)  
 
 To update the model, run:
-* [`scripts/000-autoupdater.R`](000-autoupdater.R)
+* [`scripts/000-autoupdater.R`](scripts/000-autoupdater.R)
 
 This automatically downloads the latest data, updates predictions, get exact population densities of events, runs the classifier to detect war activity, and updates all maps, charts, and animations.
 
@@ -68,7 +68,7 @@ Moreover, our statistical method classifying events as war-related (or not war-r
 Finally, we cannot currently produce accurate classifications of war-related events during periods of extreme heat (defined as when average temperatures are higher than the upper end of the 95% confidence interval of temperatures in Ukraine). During such periods (so far, only once, from April 4th to April 11th, 2023), no events are classified as war-related.  
 
 ## Variables in main exports
-The files [`output-data/ukraine_fires.csv`](ukraine_fires.csv) and [`output-data/ukraine_war_fires.csv`](ukraine_war_fires.csv) contain the following columns, with each row being a fire event:
+The files [`output-data/ukraine_fires.csv`](output-data/ukraine_fires.csv) and [`output-data/ukraine_war_fires.csv`](output-data/ukraine_war_fires.csv) contain the following columns, with each row being a fire event:
 * LATITUDE: Latitude of fire event in decimal degrees
 * LONGITUDE: Longitude of fire event in decimal degrees
 * date: Date of fire event in "year-month-day" format. E.g. "2023-09-15"
