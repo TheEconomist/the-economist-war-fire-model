@@ -43,7 +43,7 @@ if(nrow(check_points) > 0){
     cat(paste0('\r\r ', round(i/nrow(check_points)*100, 2), '% complete ......... \r\r'))
   }
 
-  known_points <- rbind(known_points, known_points)
+  known_points <- rbind(check_points, known_points)
 }
 
 # Save cache
