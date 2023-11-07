@@ -90,4 +90,5 @@ res$change_in_percent <- ave(res$area_in_square_km, res$type, FUN = function(x) 
 # Add source
 res$source <- 'Institute for the Study of War'
 
+# Export:
 write_csv(res, 'output-data/areas_of_control_daily_summary.csv')
