@@ -1,7 +1,8 @@
 date,cloud_cover_in_country,cloud_cover_in_east_of_country,fires_per_day,war_fires_per_day,fires_per_day_in_ukraine_held_area,war_fires_per_day_in_ukraine_held_area,fires_per_day_in_russia_held_area,war_fires_per_day_in_russia_held_area,extreme_heat,fires_per_day_non_cloud_days_7dma,fires_per_day_7dma,war_fires_per_day_non_cloud_days_7dma,war_fires_per_day_7dma,fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,fires_per_day_in_ukraine_held_area_7dma,war_fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,war_fires_per_day_in_ukraine_held_area_7dma,fires_per_day_in_russia_held_area_non_cloud_days_7dma,fires_per_day_in_russia_held_area_7dma,war_fires_per_day_in_russia_held_area_non_cloud_days_7dma,war_fires_per_day_in_russia_held_area_7dma,extreme_heat_non_cloud_days_7dma,extreme_heat_7dma
-2023-11-06,0.542,0.577,92,59,26,7,66,52,FALSE,NA,57,NA,24.25,NA,25.25,NA,4.75,NA,31.75,NA,19.5,NA,0
-2023-11-05,0.816,0.817,45,15,12,6,33,9,FALSE,NA,62.2,NA,25,NA,33,NA,6.4,NA,29.2,NA,18.6,NA,0
-2023-11-04,0.927,0.946,17,8,5,1,12,7,FALSE,NA,73.33333333333333,NA,30.833333333333332,NA,37.333333333333336,NA,11.5,NA,36,NA,19.333333333333332,NA,0
+2023-11-07,0.306,0.253,NA,NA,NA,NA,NA,NA,FALSE,NA,51.333333333333336,NA,27.333333333333332,NA,14.333333333333334,NA,4.666666666666667,NA,37,NA,22.666666666666668,0,0
+2023-11-06,0.544,0.581,92,59,26,7,66,52,FALSE,NA,57,NA,24.25,NA,25.25,NA,4.75,NA,31.75,NA,19.5,0,0
+2023-11-05,0.816,0.817,45,15,12,6,33,9,FALSE,NA,62.2,NA,25,NA,33,NA,6.4,NA,29.2,NA,18.6,0,0
+2023-11-04,0.927,0.946,17,8,5,1,12,7,FALSE,NA,73.33333333333333,NA,30.833333333333332,NA,37.333333333333336,NA,11.5,NA,36,NA,19.333333333333332,0,0
 2023-11-03,0.783,0.784,74,15,58,5,16,10,FALSE,482,131.71428571428572,180,52.142857142857146,275,71.28571428571429,89,22.571428571428573,207,60.42857142857143,91,29.571428571428573,0,0
 2023-11-02,0.574,0.667,83,28,64,13,19,15,FALSE,424.5,171,163,64.57142857142857,208,87.71428571428571,69.5,28.714285714285715,216.5,83.28571428571429,93.5,35.857142857142854,0,0
 2023-11-01,0.778,0.764,129,60,59,37,70,23,FALSE,380.6666666666667,206.42857142857142,151,80.57142857142857,177.66666666666666,102.71428571428571,60,33.714285714285715,203,103.71428571428571,91,46.857142857142854,0,0
