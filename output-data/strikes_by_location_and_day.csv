@@ -1,8 +1,8 @@
 date,cloud_cover_in_country,cloud_cover_in_east_of_country,fires_per_day,war_fires_per_day,fires_per_day_in_ukraine_held_area,war_fires_per_day_in_ukraine_held_area,fires_per_day_in_russia_held_area,war_fires_per_day_in_russia_held_area,extreme_heat,fires_per_day_non_cloud_days_7dma,fires_per_day_7dma,war_fires_per_day_non_cloud_days_7dma,war_fires_per_day_7dma,fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,fires_per_day_in_ukraine_held_area_7dma,war_fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,war_fires_per_day_in_ukraine_held_area_7dma,fires_per_day_in_russia_held_area_non_cloud_days_7dma,fires_per_day_in_russia_held_area_7dma,war_fires_per_day_in_russia_held_area_non_cloud_days_7dma,war_fires_per_day_in_russia_held_area_7dma,extreme_heat_non_cloud_days_7dma,extreme_heat_7dma
-2023-11-15,0.92,0.912,10,8,10,8,0,0,FALSE,NA,30,NA,9.75,NA,18.75,NA,6.25,NA,11.25,NA,3.5,NA,0
-2023-11-14,0.803,0.764,51,15,37,14,14,1,FALSE,NA,30,NA,11.6,NA,19.2,NA,7.4,NA,10.8,NA,4.2,NA,0
-2023-11-13,0.705,0.744,41,7,26,3,15,4,FALSE,NA,36.833333333333336,NA,13,NA,22.833333333333332,NA,7.833333333333333,NA,14,NA,5.166666666666667,NA,0
-2023-11-12,0.892,0.866,18,9,2,0,16,9,FALSE,NA,36.57142857142857,NA,12.571428571428571,NA,23.142857142857142,NA,7.571428571428571,NA,13.428571428571429,NA,5,NA,0
+2023-11-15,0.931,0.926,11,9,11,9,0,0,FALSE,NA,30.25,NA,10,NA,19,NA,6.5,NA,11.25,NA,3.5,NA,0
+2023-11-14,0.803,0.764,51,15,37,14,14,1,FALSE,NA,30.2,NA,11.8,NA,19.4,NA,7.6,NA,10.8,NA,4.2,NA,0
+2023-11-13,0.705,0.744,41,7,26,3,15,4,FALSE,NA,37,NA,13.166666666666666,NA,23,NA,8,NA,14,NA,5.166666666666667,NA,0
+2023-11-12,0.892,0.866,18,9,2,0,16,9,FALSE,NA,36.714285714285715,NA,12.714285714285714,NA,23.285714285714285,NA,7.714285714285714,NA,13.428571428571429,NA,5,NA,0
 2023-11-11,0.971,0.97,30,19,21,12,9,7,FALSE,NA,42.142857142857146,NA,15,NA,25.285714285714285,NA,8.571428571428571,NA,16.857142857142858,NA,6.428571428571429,NA,0
 2023-11-10,0.642,0.548,71,20,41,10,30,10,FALSE,286,75.71428571428571,144,33.42857142857143,119,37,31,11,167,38.714285714285715,113,22.428571428571427,0,0
 2023-11-09,0.59,0.643,35,10,25,6,10,4,FALSE,286,90.28571428571429,144,44.857142857142854,119,41.42857142857143,31,13.714285714285714,167,48.857142857142854,113,31.142857142857142,0,0
