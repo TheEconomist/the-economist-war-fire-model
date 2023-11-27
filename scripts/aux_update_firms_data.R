@@ -39,7 +39,7 @@ write_csv(data.frame(dates = updated_data), 'output-data/dates_of_successfully_a
 
 # Append to data and save:
 old_fires <- read_csv('output-data/firms_update.csv')
-fires <- rbind(fires, old_fires)
+fires <- rbind(fires[, colnames(old_fires)], old_fires)
 fires <- fires[!duplicated(paste0(fires$latitude, '-', fires$longitude, '-', fires$acq_date, '-', fires$acq_time, '-', fires$satellite)), ]
 write_csv(fires, 'output-data/firms_update.csv') } else {
   stop('Update failed - check rate limits.')
