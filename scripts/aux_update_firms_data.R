@@ -14,10 +14,12 @@ for(i in sat_systems){
                  "/UKR/", days)
   temp <- read_csv(link, show_col_types = F)
 
-  if(nrow(fires) > 0 & nrow(temp) > 0){
-    fires <- rbind(fires[, intersect(colnames(fires), colnames(temp))], temp[, intersect(colnames(fires), colnames(temp))])
-    } else {
-    fires <- temp}
+  if(length(temp) > 0){
+    if(nrow(fires) > 0 & nrow(temp) > 0){
+      fires <- rbind(fires[, intersect(colnames(fires), colnames(temp))], temp[, intersect(colnames(fires), colnames(temp))])
+      } else {
+      fires <- temp}
+  }
 
   cat(paste0('Loaded most recent ', days, " days of data from ", i, ". New fires = ", nrow(fires), "\n"))
 }
