@@ -16,3 +16,5 @@ __pycache__/
 # Javascript
 node_modules
 .Rproj.user
+
+output-data/model-objects/boot_predictions.csv
