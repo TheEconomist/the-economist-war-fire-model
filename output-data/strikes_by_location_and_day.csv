@@ -1,8 +1,9 @@
 date,cloud_cover_in_country,cloud_cover_in_east_of_country,fires_per_day,war_fires_per_day,fires_per_day_in_ukraine_held_area,war_fires_per_day_in_ukraine_held_area,fires_per_day_in_russia_held_area,war_fires_per_day_in_russia_held_area,extreme_heat,fires_per_day_non_cloud_days_7dma,fires_per_day_7dma,war_fires_per_day_non_cloud_days_7dma,war_fires_per_day_7dma,fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,fires_per_day_in_ukraine_held_area_7dma,war_fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,war_fires_per_day_in_ukraine_held_area_7dma,fires_per_day_in_russia_held_area_non_cloud_days_7dma,fires_per_day_in_russia_held_area_7dma,war_fires_per_day_in_russia_held_area_non_cloud_days_7dma,war_fires_per_day_in_russia_held_area_7dma,extreme_heat_non_cloud_days_7dma,extreme_heat_7dma
-2024-01-31,0.641,0.617,12,2,8,2,4,0,FALSE,18,12.25,8,3.75,12,8.75,7,2.75,6,3.5,1,1,0,0
-2024-01-30,0.389,0.455,18,8,12,7,6,1,FALSE,18,10,8,3,12,7.2,7,2.2,6,2.8,1,0.8,0,0
-2024-01-29,0.665,0.666,14,4,11,2,3,2,FALSE,18,8.666666666666666,8,2.5,12,6,7,1.8333333333333333,6,2.6666666666666665,1,0.6666666666666666,0,0
-2024-01-28,0.889,0.931,5,1,4,0,1,1,FALSE,18,8.666666666666666,8,2.5,12,6,7,1.8333333333333333,6,2.6666666666666665,1,0.6666666666666666,0,0
+2024-02-01,0.754,0.775,NA,NA,NA,NA,NA,NA,FALSE,18,15,8,5,12,10.333333333333334,7,3.6666666666666665,6,4.666666666666667,1,1.3333333333333333,0,0
+2024-01-31,0.644,0.621,13,3,8,2,5,1,FALSE,18,12.5,8,4,12,8.75,7,2.75,6,3.75,1,1.25,0,0
+2024-01-30,0.389,0.455,18,8,12,7,6,1,FALSE,18,10.2,8,3.2,12,7.2,7,2.2,6,3,1,1,0,0
+2024-01-29,0.665,0.666,14,4,11,2,3,2,FALSE,18,8.833333333333334,8,2.6666666666666665,12,6,7,1.8333333333333333,6,2.8333333333333335,1,0.8333333333333334,0,0
+2024-01-28,0.889,0.931,5,1,4,0,1,1,FALSE,18,8.833333333333334,8,2.6666666666666665,12,6,7,1.8333333333333333,6,2.8333333333333335,1,0.8333333333333334,0,0
 2024-01-27,0.91,0.927,1,0,1,0,0,0,FALSE,18,8,8,2.6,12,5.6,7,1.8,6,2.4,1,0.8,0,0
 2024-01-26,0.928,0.95,2,0,0,0,2,0,FALSE,NA,4.8,NA,1.2,NA,3.2,NA,0.4,NA,1.6,NA,0.8,NA,0
 2024-01-25,0.96,0.967,NA,NA,NA,NA,NA,NA,FALSE,NA,3.8,NA,1,NA,2.4,NA,0.2,NA,1.4,NA,0.8,NA,0
