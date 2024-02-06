@@ -251,7 +251,7 @@ if(update_charts_and_animations){
              ylim=c(max(last_month$LATITUDE[last_month$war_fire == T])+0.5, 44), expand = F)
   ggsave('plots/live_ukraine_fire_map_last_month.png', width = 10, height = 8)
 
-
+  if(nrow(last_week) > 0){
   ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+
     geom_sf(data=zones_of_control, col='red', fill=NA)+
     geom_point(data = last_week[last_week$war_fire == 0, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
@@ -264,7 +264,9 @@ if(update_charts_and_animations){
     coord_sf(xlim=c(min(last_week$LONGITUDE[last_week$war_fire == T])-3, 41),
              ylim=c(max(last_week$LATITUDE[last_week$war_fire == T])+0.5, 44), expand = F)
   ggsave('plots/live_ukraine_fire_map_last_week.png', width = 10, height = 8)
+  }
 
+  if(nrow(last_month) > 0){
   # Generate spotlight plots:
   ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+geom_sf(data=spotlight, col='black', alpha = 0.8)+geom_sf(data=zones_of_control, col='red', fill = NA)+geom_sf(data=urban, fill = 'darkgray')+
     geom_point(data = last_month[last_month$war_fire == 0, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
@@ -277,7 +279,7 @@ if(update_charts_and_animations){
     coord_sf(xlim=spotlight_zoom[c(1,3)],
              ylim=spotlight_zoom[c(2,4)], expand = F)
   ggsave('plots/live_ukraine_fire_map_spotlight_1.png', width = 10, height = 8)
-
+    
   ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+geom_sf(data=spotlight, col='black', alpha = 0.8)+geom_sf(data=zones_of_control, col='red', fill = NA)+geom_sf(data=urban, fill = 'darkgray')+
     geom_point(data =last_month[, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact, col=date), alpha = 0.2)+theme_minimal()+xlab('')+ylab('')+
     scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
@@ -367,7 +369,8 @@ streets <- readRDS('output-data/model-objects/streets.RDS')
     coord_sf(xlim=spotlight_zoom_2[c(1,3)],
              ylim=spotlight_zoom_2[c(2,4)], expand = F)+facet_wrap(date~.)
   ggsave('plots/live_ukraine_fire_map_spotlight_4_by_day.png', width = 10, height = 8)
-
+  }
+  
   # Save animation of fire activity so far
   if(render_animations){
     rm(ukraine)
