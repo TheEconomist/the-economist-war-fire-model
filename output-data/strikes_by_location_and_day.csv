@@ -1,8 +1,8 @@
 date,cloud_cover_in_country,cloud_cover_in_east_of_country,fires_per_day,war_fires_per_day,fires_per_day_in_ukraine_held_area,war_fires_per_day_in_ukraine_held_area,fires_per_day_in_russia_held_area,war_fires_per_day_in_russia_held_area,extreme_heat,fires_per_day_non_cloud_days_7dma,fires_per_day_7dma,war_fires_per_day_non_cloud_days_7dma,war_fires_per_day_7dma,fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,fires_per_day_in_ukraine_held_area_7dma,war_fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,war_fires_per_day_in_ukraine_held_area_7dma,fires_per_day_in_russia_held_area_non_cloud_days_7dma,fires_per_day_in_russia_held_area_7dma,war_fires_per_day_in_russia_held_area_non_cloud_days_7dma,war_fires_per_day_in_russia_held_area_7dma,extreme_heat_non_cloud_days_7dma,extreme_heat_7dma
-2024-02-16,0.856,0.973,6,2,5,1,1,1,FALSE,NA,11.75,NA,2.75,NA,5,NA,1.75,NA,6.75,NA,1,NA,0
-2024-02-15,0.871,0.977,27,9,14,6,13,3,FALSE,NA,15.4,NA,2.6,NA,10,NA,1.8,NA,5.4,NA,0.8,NA,0
-2024-02-14,0.919,0.981,10,0,1,0,9,0,FALSE,NA,13.166666666666666,NA,2.1666666666666665,NA,8.666666666666666,NA,1.5,NA,4.5,NA,0.6666666666666666,NA,0
-2024-02-13,0.973,0.974,4,0,0,0,4,0,FALSE,NA,12.142857142857142,NA,1.8571428571428572,NA,7.857142857142857,NA,1.2857142857142858,NA,4.285714285714286,NA,0.5714285714285714,NA,0
+2024-02-16,0.843,0.965,12,2,11,1,1,1,FALSE,NA,13.25,NA,2.75,NA,6.5,NA,1.75,NA,6.75,NA,1,NA,0
+2024-02-15,0.871,0.977,27,9,14,6,13,3,FALSE,NA,16.6,NA,2.6,NA,11.2,NA,1.8,NA,5.4,NA,0.8,NA,0
+2024-02-14,0.919,0.981,10,0,1,0,9,0,FALSE,NA,14.166666666666666,NA,2.1666666666666665,NA,9.666666666666666,NA,1.5,NA,4.5,NA,0.6666666666666666,NA,0
+2024-02-13,0.973,0.974,4,0,0,0,4,0,FALSE,NA,13,NA,1.8571428571428572,NA,8.714285714285714,NA,1.2857142857142858,NA,4.285714285714286,NA,0.5714285714285714,NA,0
 2024-02-12,0.93,0.956,30,2,30,2,0,0,FALSE,NA,11.857142857142858,NA,1.5714285714285714,NA,7.571428571428571,NA,1.1428571428571428,NA,4.285714285714286,NA,0.42857142857142855,NA,0
 2024-02-11,0.962,0.982,2,0,2,0,0,0,FALSE,NA,13.571428571428571,NA,0.2857142857142857,NA,11.142857142857142,NA,0.2857142857142857,NA,2.4285714285714284,NA,0,NA,0
 2024-02-10,0.938,0.946,6,0,3,0,3,0,FALSE,NA,19.285714285714285,NA,1.1428571428571428,NA,14,NA,0.7142857142857143,NA,5.285714285714286,NA,0.42857142857142855,NA,0
