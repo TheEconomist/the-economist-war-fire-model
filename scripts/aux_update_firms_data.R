@@ -2,7 +2,7 @@
 library(readr)
 
 # Define map key and sat systems used
-map_key <- as.character(read_csv('firms_api_key.csv')[2])
+map_key <- Sys.getenv("FIRMS_API_KEY")
 sat_systems <- c("VIIRS_SNPP_NRT", "MODIS_NRT", "VIIRS_NOAA20_NRT", "VIIRS_SNPP_NRT") # This excludes standard processing systems "MODIS_SP", and "VIIRS_SNPP_SP"
 days <- 10
 
