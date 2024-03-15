@@ -26,7 +26,7 @@ X_fire_exp <- war_fire_classifier(cell_day_data = X_mat[X_mat$date > as.Date('20
                                   offset = 2,
                                   min_length_of_fire_in_area = 10,
                                   days_to_assign_to_war_fire_after_excess = 10,
-                                  exclude = read_csv('source-data/forest_fire_locations_2022_2023.csv'))
+                                  exclude = read_csv('source-data/forest_fire_locations_2022_2024.csv'))
 
 if(inspect){
 

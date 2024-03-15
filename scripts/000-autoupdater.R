@@ -122,7 +122,7 @@ fires <- war_fire_classifier(cell_day_data = X[X$date >= as.Date('2022-02-24'), 
                              offset = 2,
                              min_length_of_fire_in_area = 10,
                              days_to_assign_to_war_fire_after_excess = 10,
-                             exclude = read_csv('source-data/forest_fire_locations_2022_2023.csv'),
+                             exclude = read_csv('source-data/forest_fire_locations_2022_2024.csv'),
                              exclude_dates = readRDS('output-data/model-objects/exclude_dates.RDS'))
 
 ggplot(fires[!fires$war_fire & fires$date >= as.Date('2023-07-16'), ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact, col = sustained_excess))+geom_point(alpha = 0.2)+
@@ -279,7 +279,7 @@ if(update_charts_and_animations){
     coord_sf(xlim=spotlight_zoom[c(1,3)],
              ylim=spotlight_zoom[c(2,4)], expand = F)
   ggsave('plots/live_ukraine_fire_map_spotlight_1.png', width = 10, height = 8)
-    
+
   ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+geom_sf(data=spotlight, col='black', alpha = 0.8)+geom_sf(data=zones_of_control, col='red', fill = NA)+geom_sf(data=urban, fill = 'darkgray')+
     geom_point(data =last_month[, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact, col=date), alpha = 0.2)+theme_minimal()+xlab('')+ylab('')+
     scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
@@ -370,7 +370,7 @@ streets <- readRDS('output-data/model-objects/streets.RDS')
              ylim=spotlight_zoom_2[c(2,4)], expand = F)+facet_wrap(date~.)
   ggsave('plots/live_ukraine_fire_map_spotlight_4_by_day.png', width = 10, height = 8)
   }
-  
+
   # Save animation of fire activity so far
   if(render_animations){
     rm(ukraine)
