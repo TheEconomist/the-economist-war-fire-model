@@ -166,13 +166,13 @@ rm(temp)
 # Test: fewer fires than previously?
 if(new_fires < 0){
 
-  if(nrow(read_csv('source-data/forest_fire_locations_2022_2023.csv')) > readRDS('output-data/model-objects/n_manual_exceptions.RDS')){
+  if(nrow(read_csv('source-data/forest_fire_locations_2022_2024.csv')) > readRDS('output-data/model-objects/n_manual_exceptions.RDS')){
     message('Note: Fewer war fires than previously - probably due to manual exclusion (e.g. forest fire).')
   } else {
     message('Fewer war fires than previously - please inspect manually.')
   }
 }
-saveRDS(nrow(read_csv('source-data/forest_fire_locations_2022_2023.csv')), 'output-data/model-objects/n_manual_exceptions.RDS')
+saveRDS(nrow(read_csv('source-data/forest_fire_locations_2022_2024.csv')), 'output-data/model-objects/n_manual_exceptions.RDS')
 rm(new_fires)
 rm(old)
 
