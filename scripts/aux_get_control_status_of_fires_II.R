@@ -18,16 +18,17 @@ ukraine_raw <- world[world$geounit == 'Ukraine', ]
 ukraine_raw <- st_make_valid(ukraine_raw)
 
 # Load shapefiles:
-ru_control <- readRDS('source-data/ISW_historical/area_assessed_as_controlled_by_Russia_by_day.RDS')
-ua_counters <- readRDS('source-data/ISW_historical/area_counterattacked_by_ukraine_by_day.RDS')
-ru_attacks <- readRDS('source-data/ISW_historical/area_attacked_by_russia_by_day.RDS')
-ru_claimed <- readRDS('source-data/ISW_historical/area_claimed_as_controlled_by_Russia_by_day.RDS')
 
 # Ukraine-held is defined as the complement of the intersection of c('in Ukraine') and c('in area of Russian attacks', 'in area of Ukrainian counterattacks', 'in area of Russia control', and 'in area of Russian claimed control'). Since all fires are in Ukraine, that simplifies to the below:
-big_shp <- rbind(ru_attacks[, c("geometry", 'date')],
-                 ua_counters[, c("geometry", 'date')],
-                 ru_control[, c("geometry", 'date')],
-                 ru_claimed[, c("geometry", 'date')])
+big_shp <- rbind(readRDS('source-data/ISW_historical/ClaimedRussian_shapes.RDS'),
+                     readRDS('source-data/ISW_historical/ClaimedUkrainian_shapes.RDS'),
+                     readRDS('source-data/ISW_historical/ControlMap_shapes.RDS'),
+                     readRDS('source-data/ISW_historical/RussianAdvances_shapes.RDS'))
+# To update this file, run "aux_generate_shapefile_archives.R".
+
+colnames(big_shp) <- c('date', 'geometry')
+big_shp <- big_shp[, c('geometry', 'date')]
+big_shp$date <- as.Date(big_shp$date)
 
 # Loop through dates:
 in_ukraine_held_area <- NA

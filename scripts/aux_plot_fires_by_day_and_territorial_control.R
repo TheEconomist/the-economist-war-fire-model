@@ -21,6 +21,7 @@ control <- read_csv('output-data/control_status_of_fires_II.csv')
 # Load fire data
 fires <- read_csv('output-data/ukraine_fires.csv')
 clouds <- read_csv('output-data/cloud_cover_in_ukraine_by_day_with_forecast_for_recent_days.csv')
+clouds <- clouds[!duplicated(clouds$date), ]
 
 # Step 2: Merge ----------------------------------------
 
@@ -33,14 +34,24 @@ fires$fires_per_day_in_ukraine_held_area <- ave(fires$in_ukraine_held_area, fire
 fires$war_fires_per_day_in_ukraine_held_area <- ave(fires$war_fire*fires$in_ukraine_held_area, fires$date, FUN = function(x) sum(x, na.rm = T))
 fires$fires_per_day_in_russia_held_area <- ave(!fires$in_ukraine_held_area, fires$date, FUN = function(x) sum(x, na.rm = T))
 fires$war_fires_per_day_in_russia_held_area <- ave(fires$war_fire*!fires$in_ukraine_held_area, fires$date, FUN = function(x) sum(x, na.rm = T))
+dd_fires <- unique(fires[!duplicated(fires$date), c('date', 'fires_per_day', 'war_fires_per_day',
+                          'fires_per_day_in_ukraine_held_area',
+                          'war_fires_per_day_in_ukraine_held_area',
+                          'fires_per_day_in_russia_held_area',
+                          'war_fires_per_day_in_russia_held_area')])
 
-war <- merge(clouds, unique(fires[, c('date', 'fires_per_day', 'war_fires_per_day',
-                                      'fires_per_day_in_ukraine_held_area',
-                                      'war_fires_per_day_in_ukraine_held_area',
-                                      'fires_per_day_in_russia_held_area',
-                                      'war_fires_per_day_in_russia_held_area')]), all.x = T)
-
+# Below condition is fix for when cloud data is more current than fire data:
+war <- merge(clouds, dd_fires, all = T)
 war <- war[war$date >= as.Date('2022-02-23'), ]
+
+# If no fires detected, set to 0:
+for(i in c('fires_per_day', 'war_fires_per_day',
+           'fires_per_day_in_ukraine_held_area',
+           'war_fires_per_day_in_ukraine_held_area',
+           'fires_per_day_in_russia_held_area',
+           'war_fires_per_day_in_russia_held_area')){
+  war[is.na(war[, i]), i] <- 0
+}
 
 # Step 3: Generate averages for these
 war <- war[order(war$date),]
@@ -51,7 +62,7 @@ for(j in setdiff(colnames(war), c('date',
   war[, paste0(j, '_non_cloud_days_7dma')] <- NA
   war$temp <- war[, j]
   war$temp[war$cloud_cover_in_east_of_country > max_cloud_coverage] <- NA
-  
+
   for(i in 1:nrow(war)){
     war[i, paste0(j, '_non_cloud_days_7dma')] <-
       mean(war$temp[max(c(1, i-3)):min(c(nrow(war), i+3))], na.rm = T)
@@ -65,14 +76,22 @@ for(j in setdiff(colnames(war), c('date',
   }
 }
 
+# Test:
+if(any(is.na(war$fires_per_day) | is.na(war$war_fires_per_day))){
+  stop('
+       NAs in fires by day summary.
+       See "aux_plot_fires_by_day_and_territorial_control.R"')
+}
+
 # Step 4: Chart ----------------------------------------
+
 war[, 2] <- round(war[, 2], 3)
 war[, 3] <- round(war[, 3], 3)
-war <- war[!is.na(war$date), ]                                                   
+war <- war[!is.na(war$date), ]
 write_csv(war[nrow(war):1, ], 'output-data/strikes_by_location_and_day.csv')
 ggplot(war[, ], aes(x=date))+
   geom_line(aes(col=paste0('7-day centered average, Russia-held, claimed or contested area\n(days with <', 100*max_cloud_coverage, '% cloud cover)'), y=war_fires_per_day_in_russia_held_area_non_cloud_days_7dma))+
-  geom_line(aes(col=paste0('7-day centered average, Ukraine-held area\n(days with <', 100*max_cloud_coverage, '% cloud cover)'), y=war_fires_per_day_in_ukraine_held_area_non_cloud_days_7dma))+theme_minimal()+xlab('Sources: ISW, The Economist')+ylab('')+theme(legend.pos = 'bottom', legend.title = element_blank())+ggtitle('Fire activity assessed as war-related per day, by location of strike')
+  geom_line(aes(col=paste0('7-day centered average, Ukraine-held area\n(days with <', 100*max_cloud_coverage, '% cloud cover)'), y=war_fires_per_day_in_ukraine_held_area_non_cloud_days_7dma))+theme_minimal()+xlab('Sources: ISW, The Economist')+ylab('')+theme(legend.position = 'bottom', legend.title = element_blank())+ggtitle('Fire activity assessed as war-related per day, by location of strike')
 
 ggsave('plots/attacks_per_day_by_location_of_strike.png', width = 10, height = 4)
 
