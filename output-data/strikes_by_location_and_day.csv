@@ -1,8 +1,8 @@
 date,cloud_cover_in_country,cloud_cover_in_east_of_country,fires_per_day,war_fires_per_day,fires_per_day_in_ukraine_held_area,war_fires_per_day_in_ukraine_held_area,fires_per_day_in_russia_held_area,war_fires_per_day_in_russia_held_area,fires_per_day_non_cloud_days_7dma,fires_per_day_7dma,war_fires_per_day_non_cloud_days_7dma,war_fires_per_day_7dma,fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,fires_per_day_in_ukraine_held_area_7dma,war_fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,war_fires_per_day_in_ukraine_held_area_7dma,fires_per_day_in_russia_held_area_non_cloud_days_7dma,fires_per_day_in_russia_held_area_7dma,war_fires_per_day_in_russia_held_area_non_cloud_days_7dma,war_fires_per_day_in_russia_held_area_7dma
-2024-04-27,0.511,0.514,116,48,81,38,35,10,NA,63.5,NA,24.75,NA,46.5,NA,20.25,NA,17,NA,4.5
-2024-04-26,0.771,0.85,68,31,52,31,16,0,NA,59.2,NA,24.4,NA,40.2,NA,16.8,NA,19,NA,7.6
-2024-04-25,0.88,0.892,34,10,27,9,7,1,NA,76.83333333333333,NA,34.833333333333336,NA,47.666666666666664,NA,20.333333333333332,NA,29.166666666666668,NA,14.5
-2024-04-24,0.836,0.839,36,10,26,3,10,7,NA,75.71428571428571,NA,37.285714285714285,NA,46.714285714285715,NA,21.142857142857142,NA,29,NA,16.142857142857142
+2024-04-27,0.507,0.505,119,51,84,41,35,10,NA,64.25,NA,25.5,NA,47.25,NA,21,NA,17,NA,4.5
+2024-04-26,0.771,0.85,68,31,52,31,16,0,NA,59.8,NA,25,NA,40.8,NA,17.4,NA,19,NA,7.6
+2024-04-25,0.88,0.892,34,10,27,9,7,1,NA,77.33333333333333,NA,35.333333333333336,NA,48.166666666666664,NA,20.833333333333332,NA,29.166666666666668,NA,14.5
+2024-04-24,0.836,0.839,36,10,26,3,10,7,NA,76.14285714285714,NA,37.714285714285715,NA,47.142857142857146,NA,21.571428571428573,NA,29,NA,16.142857142857142
 2024-04-23,0.724,0.663,42,23,15,3,27,20,NA,85.57142857142857,NA,47.714285714285715,NA,61.57142857142857,NA,33,NA,24,NA,14.714285714285714
 2024-04-22,0.772,0.714,165,87,85,38,80,49,NA,99,NA,57.857142857142854,NA,67,NA,36.714285714285715,NA,32,NA,21.142857142857142
 2024-04-21,0.837,0.812,69,52,41,26,28,26,NA,99,NA,59.142857142857146,NA,64.71428571428571,NA,36.42857142857143,NA,34.285714285714285,NA,22.714285714285715
