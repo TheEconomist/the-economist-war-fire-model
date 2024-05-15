@@ -1,0 +1,49 @@
+name: update
+on:
+  workflow_dispatch:
+#  schedule:
+#   - cron: "0 4,10,14,22 * * *"
+concurrency:
+  group: ${{ github.ref }}
+jobs:
+  run:
+    name: Update data
+    runs-on: the-economist-war-fire-model
+    container:
+      image: ghcr.io/theeconomist/the-economist-war-fire-model:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.PACKAGE_ACCESS_TOKEN }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          lfs: true  
+      - name: Run R script
+        run: |
+          . /opt/conda/etc/profile.d/conda.sh && conda activate base
+
+          cat output-data/model-objects/boot_predictions.csv.* > output-data/model-objects/boot_predictions.csv
+          Rscript -e "source('scripts/000-autoupdater.R')"
+          split -l 500000 output-data/model-objects/boot_predictions.csv output-data/model-objects/boot_predictions.csv.
+
+          git status
+
+          # git config --local user.email "action@github.com"
+          # git config --local user.name "GitHub Action"
+
+          # git add output-data/model-objects
+          # git commit --allow-empty -m "Data auto-update" -a
+
+          # git push
+        shell: bash
+        env:
+          FIRMS_API_KEY: ${{ secrets.FIRMS_API_KEY }}
+      # - name: Report failure
+      #   if: failure()
+      #   run: |
+      #     curl -X POST -H "Content-type: application/json" --data '{ "channel":"${{ secrets.SLACK_CHANNEL }}", "text":":x: <@UTBFTA7Q9> <@U02N72XERFW> The Economist War Fire Model failed to update. Please check the logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}", "unfurl_links": false }' ${{ secrets.SLACK_WEBHOOK }}
+      # - name: Report success
+      #   if: success()
+      #   run: |
+      #     curl -X POST -H "Content-type: application/json" --data '{ "channel":"${{ secrets.SLACK_CHANNEL }}", "text":":ok: The Economist War Fire Model has been updated. Logs are available at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}", "unfurl_links": false }' ${{ secrets.SLACK_WEBHOOK }}
