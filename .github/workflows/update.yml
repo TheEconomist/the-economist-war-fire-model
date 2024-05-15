@@ -13,7 +13,7 @@ jobs:
       image: ghcr.io/theeconomist/the-economist-war-fire-model:latest
       credentials:
         username: ${{ github.actor }}
-        password: ${{ secrets.PACKAGE_ACCESS_TOKEN }}
+        password: ${{ secrets.github_token }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
