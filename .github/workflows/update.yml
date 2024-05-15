@@ -18,7 +18,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
-          lfs: true  
+          lfs: true
       - name: Run R script
         run: |
           . /opt/conda/etc/profile.d/conda.sh && conda activate base
