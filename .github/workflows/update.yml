@@ -31,21 +31,19 @@ jobs:
   
       - name: Commit changes
         run: |
+          git config --global --add safe.directory /__w/the-economist-war-fire-model/the-economist-war-fire-model
 
-          git status
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
 
-          # git config --local user.email "action@github.com"
-          # git config --local user.name "GitHub Action"
+          git add output-data/model-objects
+          git commit --allow-empty -m "Data auto-update" -a
 
-          # git add output-data/model-objects
-          # git commit --allow-empty -m "Data auto-update" -a
+          git push
 
-          # git push
-      # - name: Report failure
-      #   if: failure()
-      #   run: |
-      #     curl -X POST -H "Content-type: application/json" --data '{ "channel":"${{ secrets.SLACK_CHANNEL }}", "text":":x: <@UTBFTA7Q9> <@U02N72XERFW> The Economist War Fire Model failed to update. Please check the logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}", "unfurl_links": false }' ${{ secrets.SLACK_WEBHOOK }}
-      # - name: Report success
-      #   if: success()
-      #   run: |
-      #     curl -X POST -H "Content-type: application/json" --data '{ "channel":"${{ secrets.SLACK_CHANNEL }}", "text":":ok: The Economist War Fire Model has been updated. Logs are available at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}", "unfurl_links": false }' ${{ secrets.SLACK_WEBHOOK }}
+      - name: Report failure
+        if: failure()
+        run: |
+          curl -X POST -H "Content-type: application/json" --data '{ "channel":"${{ secrets.SLACK_CHANNEL }}", "text":":x: <@UTBFTA7Q9> <@U02N72XERFW> The Economist War Fire Model failed to update. Please check the logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}", "unfurl_links": false }' ${{ secrets.SLACK_WEBHOOK }}
+
+          
