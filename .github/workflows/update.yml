@@ -25,7 +25,10 @@ jobs:
           cat output-data/model-objects/boot_predictions.csv.* > output-data/model-objects/boot_predictions.csv
           Rscript -e "source('scripts/000-autoupdater.R')"
           split -l 500000 output-data/model-objects/boot_predictions.csv output-data/model-objects/boot_predictions.csv.
-
+        shell: bash
+        env:
+          FIRMS_API_KEY: ${{ secrets.FIRMS_API_KEY }}
+  
       - name: Commit changes
         run: |
 
@@ -38,9 +41,6 @@ jobs:
           # git commit --allow-empty -m "Data auto-update" -a
 
           # git push
-        shell: bash
-        env:
-          FIRMS_API_KEY: ${{ secrets.FIRMS_API_KEY }}
       # - name: Report failure
       #   if: failure()
       #   run: |
