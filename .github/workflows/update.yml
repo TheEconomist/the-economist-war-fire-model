@@ -16,16 +16,18 @@ jobs:
         password: ${{ secrets.github_token }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - name: Run R script
         run: |
           . /opt/conda/etc/profile.d/conda.sh && conda activate base
-
           cat output-data/model-objects/boot_predictions.csv.* > output-data/model-objects/boot_predictions.csv
           Rscript -e "source('scripts/000-autoupdater.R')"
           split -l 500000 output-data/model-objects/boot_predictions.csv output-data/model-objects/boot_predictions.csv.
+
+      - name: Commit changes
+        run: |
 
           git status
 
