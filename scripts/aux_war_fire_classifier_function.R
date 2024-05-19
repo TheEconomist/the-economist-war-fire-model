@@ -79,7 +79,7 @@ war_fire_classifier <- function(cell_day_data, # Data frame of cells with number
       set.seed(112358)
       fires$war_fire[fires$id_w_time == i] <- sample(c(rep(1, temp_vector[1]), rep(0, length(temp_vector)-temp_vector[1])))
     }
-    cat(paste0('\r\r\r\r calculating for: ', i, '// time per cell & day: ', round(difftime(Sys.time(), start, units = 'secs'), 5), 's // ', round(100*ind/total, 5), '% complete...............'))
+   # cat(paste0('\r\r\r\r calculating for: ', i, '// time per cell & day: ', round(difftime(Sys.time(), start, units = 'secs'), 5), 's // ', round(100*ind/total, 5), '% complete...............'))
   }
 
   # In areas with mass excess (i.e. beyond median of cells in fire locations with excess), set all fires to war-related (this assumes none not-war-related fire events in places with beyond median excess)
