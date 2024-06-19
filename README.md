@@ -17,21 +17,8 @@ In the following maps, red indicates that fires are classified as war-related. S
 ### Events day-by-day, since Feb 24th, 2022
 ![Animation of fire events assessed as war-related](plots/live_ukraine_fire_map_animated_day_by_day.gif)
 
-### Spotlight: Donetsk
-![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_spotlight_1.png)  
-![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_spotlight_2.png)  
-
-### Spotlight: Bakhmut
-![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_spotlight_3.png)  
-![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_spotlight_4.png)  
-![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_spotlight_4_by_week.png)  
-![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_spotlight_4_by_day.png)  
-
 ### Events in the past month
 ![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_last_month.png)  
-
-### Events in the past week
-![Chart of fire events assessed as war-related](plots/live_ukraine_fire_map_last_week.png)  
 
 ### Charts of events per day
 ![Chart of fire events assessed as war-related](plots/fire_activity_per_day.png)  
