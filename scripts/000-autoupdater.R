@@ -487,3 +487,6 @@ write_csv(war_fires, 'output-data/ukraine_war_fires.csv')
 
 # Export war fires by ADM3:
 source('scripts/aux_get_municipalities_of_war_fires.R')
+
+# Update Russia fire data:
+source('scripts/aux_update_firms_data_RU.R')
