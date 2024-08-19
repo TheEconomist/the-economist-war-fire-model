@@ -24,7 +24,7 @@ if(!archive_cache){
   write_csv(archive[as.Date(archive$acq_date) >= as.Date('2022-01-01'), ], '/Users/sondresolstad/Github/war-torch-detection-system/source-data/fire-archive-data/RUS/archive_since_2022.csv')
 
   old_fires <- read_csv('output-data/firms_update_RU.csv')
-  old_fires <- rbind(old_fires, archive[as.Date(archive$acq_date) >= as.Date('2022-02-21'), colnames(old_fires)])
+  old_fires <- rbind(old_fires, archive[as.Date(archive$acq_date) >= as.Date('2022-02-21') & archive$latitude < 53.2 & archive$longitude < 43.1, colnames(old_fires)])
   old_fires[!duplicated(paste0(old_fires$latitude, '-', old_fires$longitude, '-', old_fires$acq_date, '-', old_fires$acq_time, '-', old_fires$satellite)), ]
   write_csv(old_fires, 'output-data/firms_update_RU.csv')
 }
@@ -69,6 +69,7 @@ if(nrow(fires) > 0){
   old_fires <- read_csv('output-data/firms_update_RU.csv')
   fires <- rbind(fires[, colnames(old_fires)], old_fires)
   fires <- fires[!duplicated(paste0(fires$latitude, '-', fires$longitude, '-', fires$acq_date, '-', fires$acq_time, '-', fires$satellite)), ]
+  fires <- fires[fires$latitude < 53.2 & fires$longitude < 43.1, ] # Restrict to nearby Russia
   write_csv(fires, 'output-data/firms_update_RU.csv') } else {
     stop('Update failed - check rate limits.')
   }
