@@ -2,6 +2,7 @@
 library(readr)
 library(httr)
 library(jsonlite)
+update_historical <- F
 
 # Step 1: Get a grid of Ukraine
 grid <- readRDS('output-data/model-objects/ukraine_mask.RDS')
