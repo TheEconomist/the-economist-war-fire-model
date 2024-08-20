@@ -98,14 +98,19 @@ daily_oblast_data <- daily_oblast_data %>%
   group_by(oblast, russia_controlled) %>%
   arrange(date) %>%
   mutate(rolling_avg = rollmean(events, k = 7, fill = NA, align = 'right')) %>%
+  rename(within_30k_of_Russian_controlled_territory = within_30km) %>%
   ungroup()
 
 # Visualize the data with a focus on key oblasts
+
+# Ease replication through visualiser export:
+write_csv(daily_oblast_data, 'output-data/oblast_activity_by_day.csv')
+daily_oblast_data <- read_csv('output-data/oblast_activity_by_day.csv')
 ggplot(daily_oblast_data %>%
          filter(oblast %in% c('Zaporizka', 'Khersonska', 'Kharkivska', 'Donetska', 'Kursk Oblast') &
                   date >= as.Date('2024-06-01') &
                   !(russia_controlled & country == 'UKR')),
-       aes(x = date, y = events, fill = within_30km, color = within_30km)) +
+       aes(x = date, y = events, fill = within_30k_of_Russian_controlled_territory, color = within_30k_of_Russian_controlled_territory)) +
   geom_vline(aes(xintercept = as.Date('2024-08-06'))) +
   geom_bar(stat = "identity") +
   geom_line(aes(y = rolling_avg, group = '1'), color = "black", size = 1, linetype = "solid") +
