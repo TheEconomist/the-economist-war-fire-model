@@ -90,42 +90,20 @@ oblast_data <- oblast_data[oblast_data$date < Sys.Date(), ]
 
 # Summarize the number of events within each oblast per day
 daily_oblast_data <- oblast_data %>%
-  group_by(country, date, oblast, russia_controlled, within_30km) %>%
+  group_by(country, date, oblast, russia_controlled) %>%
   summarise(events = n(), .groups = 'drop')
-
-# Calculate the 7-day moving average for the number of events in each oblast
-daily_oblast_data <- daily_oblast_data %>%
-  group_by(oblast, russia_controlled) %>%
-  arrange(date) %>%
-  mutate(rolling_avg = rollmean(events, k = 7, fill = NA, align = 'right')) %>%
-  rename(within_30k_of_Russian_controlled_territory = within_30km) %>%
-  ungroup()
+daily_oblast_data$geometry <- NULL
 
 # Visualize the data with a focus on key oblasts
+ggplot(daily_oblast_data[daily_oblast_data$oblast %in% c('Zaporizka', 'Khersonska', 'Kharkivska', 'Donetska', 'Kursk Oblast', 'Luhanska') & daily_oblast_data$date >= as.Date('2024-07-01'), ], aes(x=date, y=events, fill=russia_controlled))+geom_col()+facet_wrap(russia_controlled~oblast)
 
 # Ease replication through visualiser export:
-write_csv(daily_oblast_data, 'output-data/oblast_activity_by_day.csv')
+write_csv(daily_oblast_data %>%
+            filter(oblast %in% c('Zaporizka', 'Khersonska', 'Kharkivska', 'Donetska', 'Kursk Oblast', 'Luhanska') &
+                     !(russia_controlled & country == 'UKR')) %>% select(country, date, oblast, events), 'output-data/oblast_activity_by_day.csv')
 daily_oblast_data <- read_csv('output-data/oblast_activity_by_day.csv')
-ggplot(daily_oblast_data %>%
-         filter(oblast %in% c('Zaporizka', 'Khersonska', 'Kharkivska', 'Donetska', 'Kursk Oblast') &
-                  date >= as.Date('2024-06-01') &
-                  !(russia_controlled & country == 'UKR')),
-       aes(x = date, y = events, fill = within_30k_of_Russian_controlled_territory, color = within_30k_of_Russian_controlled_territory)) +
-  geom_vline(aes(xintercept = as.Date('2024-08-06'))) +
-  geom_bar(stat = "identity") +
-  geom_line(aes(y = rolling_avg, group = '1'), color = "black", size = 1, linetype = "solid") +
-  facet_wrap(country ~ oblast) +
-  labs(x = 'Vertical lines = Kursk incursion begins, black line = 7-day average\n\n*War-related fires in parts of Ukraine not held by Russia, as \n assessed by statistical model. In Russia, all fire events in oblast.',
-       title = 'Detected fires*', y = '')
 
-ggplot(daily_oblast_data %>%
-         filter(oblast %in% c('Zaporizka', 'Khersonska', 'Kharkivska', 'Donetska', 'Kursk Oblast') &
-                  date >= as.Date('2024-08-06') &
-                  !(russia_controlled & country == 'UKR')),
-       aes(x = date, y = events, fill = country, color = country)) +
-  geom_vline(aes(xintercept = as.Date('2024-08-06'))) +
-  geom_bar(stat = "identity") +
-  geom_line(aes(y = rolling_avg), color = "black", size = 1, linetype = "solid") +
-  facet_wrap(~ oblast) +
-  labs(x = 'Vertical lines = Kursk incursion begins, black line = 7-day average\n\n*War-related fires in parts of Ukraine not held by Russia, as \n assessed by statistical model. In Russia, all fire events in oblast.',
-       title = 'Detected fires*', y = '')
+# Quote for text
+summary(daily_oblast_data$events[daily_oblast_data$oblast == "Kursk Oblast" & daily_oblast_data$date >= as.Date('2024-07-01') & daily_oblast_data$date < as.Date('2024-08-01')])
+
+ggplot(daily_oblast_data[daily_oblast_data$date >= as.Date('2024-07-01'), ], aes(x=date, y=events, fill=country))+geom_col()+facet_wrap(.~oblast)
