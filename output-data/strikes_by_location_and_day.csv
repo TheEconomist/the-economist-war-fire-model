@@ -1,5 +1,5 @@
 date,cloud_cover_in_country,cloud_cover_in_east_of_country,fires_per_day,war_fires_per_day,fires_per_day_in_ukraine_held_area,war_fires_per_day_in_ukraine_held_area,fires_per_day_in_russia_held_area,war_fires_per_day_in_russia_held_area,fires_per_day_non_cloud_days_7dma,fires_per_day_7dma,war_fires_per_day_non_cloud_days_7dma,war_fires_per_day_7dma,fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,fires_per_day_in_ukraine_held_area_7dma,war_fires_per_day_in_ukraine_held_area_non_cloud_days_7dma,war_fires_per_day_in_ukraine_held_area_7dma,fires_per_day_in_russia_held_area_non_cloud_days_7dma,fires_per_day_in_russia_held_area_7dma,war_fires_per_day_in_russia_held_area_non_cloud_days_7dma,war_fires_per_day_in_russia_held_area_7dma
-2024-11-12,0.854,0.793,0,0,0,0,0,0,0,3.4,0,0,0,2.4,0,0,0,1,0,0
+2024-11-12,0.852,0.792,0,0,0,0,0,0,0,3.4,0,0,0,2.4,0,0,0,1,0,0
 2024-11-11,0.841,0.931,5,0,5,0,0,0,0,8,0,1.6666666666666667,0,6.166666666666667,0,1.6666666666666667,0,1.8333333333333333,0,0
 2024-11-10,0.693,0.812,4,0,4,0,0,0,42.5,19,4,2.5714285714285716,32.5,14.571428571428571,3.5,2.4285714285714284,10,4.428571428571429,0.5,0.14285714285714285
 2024-11-09,0.76,0.759,8,0,3,0,5,0,85,27.571428571428573,8,4,65,22.428571428571427,7,3.857142857142857,20,5.142857142857143,1,0.14285714285714285
