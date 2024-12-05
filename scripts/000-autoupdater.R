@@ -10,7 +10,7 @@ library(anytime)
 options(readr.show_col_types = F)
 ggsave <- function(..., bg = 'white') ggplot2::ggsave(..., bg = bg)
 redo <- F
-update_charts_and_animations <- T
+update_charts_and_animations <- F
 render_animations <- wday(Sys.Date())==1
 
 # Step 1: Load stable data ----------------------------------------
