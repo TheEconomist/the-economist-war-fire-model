@@ -52,8 +52,22 @@ X_mat$date[X_mat$year == 2024 & X_mat$time_of_year >= 59] <- X_mat$date[X_mat$ye
 X_mat <- rbind(X_mat, temp)
 
 write_csv(X_mat, 'output-data/model-objects/stable_covariates.csv')
+
 library(lubridate)
 write_csv(X_mat[year(X_mat$date) == 2022, ], 'output-data/model-objects/stable_covariates_2022.csv')
 write_csv(X_mat[year(X_mat$date) == 2023, ], 'output-data/model-objects/stable_covariates_2023.csv')
 write_csv(X_mat[year(X_mat$date) == 2024, ], 'output-data/model-objects/stable_covariates_2024.csv')
+
+# Appendum: years beyond 2024. We use 2023 as the source because it is not a leap year
+X_mat <- read_csv('output-data/model-objects/stable_covariates_2023.csv')
+
+# Shift dates forward by exactly 2 calendar years
+X_mat$date <- X_mat$date %m+% years(2)
+
+# Update 'year' column from the new dates
+X_mat$year <- year(X_mat$date)
+
+# Filter to 2025 onward
+X_mat <- X_mat[X_mat$date >= as.Date('2025-01-01'), ]
+write_csv(X_mat[year(X_mat$date) == 2025, ], 'output-data/model-objects/stable_covariates_2025.csv')
 
