@@ -10,7 +10,7 @@ library(anytime)
 options(readr.show_col_types = F)
 ggsave <- function(..., bg = 'white') ggplot2::ggsave(..., bg = bg)
 redo <- F
-update_charts_and_animations <- F
+update_charts_and_animations <- T
 render_animations <- wday(Sys.Date())==1
 
 # Step 1: Load stable data ----------------------------------------
@@ -475,11 +475,11 @@ ggsave('plots/cloud_cover_by_day.png', width = 10, height = 4)
 ggplot(war_fires, aes(x=date, y=pop_exact, alpha = 0.5))+geom_point()+theme_minimal()+ylab('')+xlab('')+ggtitle('Population density of fires assessed as war-related')+xlab('\nNote: satellites cannot detect fires through cloud clover')+theme(legend.pos='none')
 ggsave('plots/fire_by_pop_density_per_day.png', width = 10, height = 4)
 
-# This script generates a plot of fires by day and zone of control
-source('scripts/aux_plot_fires_by_day_and_territorial_control.R')
-
 } else {
   cat("\n.... Updating data exports (charts + animations not updated in this run)....\n")}
+
+# This script generates an output csv as well as a plot of fires by day and zone of control
+source('scripts/aux_plot_fires_by_day_and_territorial_control.R')
 
 # Export to file:
 write_csv(fires, 'output-data/ukraine_fires.csv')
