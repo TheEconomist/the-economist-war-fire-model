@@ -58,7 +58,7 @@ if(update_historical){
 # Loop through locations and save results:
 df <- data.frame()
 for(i in 1:nrow(grid)){
-  url <- paste0('https://api.open-meteo.com/v1/forecast?latitude=', grid$y[i], '&longitude=', grid$x[i], '&hourly=temperature_2m,cloudcover&start_date=', start_date, '&end_date=', end_date)
+  url <- paste0('https://api.open-meteo.com/v1/forecast?latitude=', grid$y[i], '&longitude=', grid$x[i], '&hourly=temperature_2m,cloudcover&start_date=', min(c(start_date, end_date-1), na.rm = T), '&end_date=', end_date)
   df <- bind_rows(df,get_weather_forecast_by_lat_lng(url))
   cat('.')
 }
