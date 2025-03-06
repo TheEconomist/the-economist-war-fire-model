@@ -2,7 +2,9 @@
 library(readr)
 library(httr)
 library(jsonlite)
-update_historical <- F
+library(tidyverse)
+library(anytime)
+update_historical <- T
 
 # Step 1: Get a grid of Ukraine
 grid <- readRDS('output-data/model-objects/ukraine_mask.RDS')
@@ -28,8 +30,10 @@ get_weather_forecast_by_lat_lng <- function(url){
 
 if(update_historical){
   historical <- data.frame()
-  start_date <- min(clouds$date[is.na(clouds$cloud_cover_in_country)], na.rm = T)
+  start_date <- min(c(clouds$date[is.na(clouds$cloud_cover_in_country)], max(clouds$date, na.rm = T)+1), na.rm = T)
   end_date <- Sys.Date()
+  if(!start_date >= end_date){
+
   for(i in 1:nrow(grid)[1]){
     url <- paste0('https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=', grid$y[i], '&longitude=', grid$x[i], '&hourly=temperature_2m,cloudcover&start_date=', start_date, '&end_date=', end_date)
     historical <- bind_rows(historical,get_weather_forecast_by_lat_lng(url))
@@ -48,13 +52,14 @@ if(update_historical){
   clouds <- clouds[!clouds$date %in% historical$date, ]
   clouds <- rbind(clouds, historical)
   write_csv(clouds, 'output-data/cloud_cover_in_ukraine_by_day.csv')
+  }
 }
 
 # Loop through locations and save results:
 df <- data.frame()
 for(i in 1:nrow(grid)){
   url <- paste0('https://api.open-meteo.com/v1/forecast?latitude=', grid$y[i], '&longitude=', grid$x[i], '&hourly=temperature_2m,cloudcover&start_date=', start_date, '&end_date=', end_date)
-  df<- bind_rows(df,get_weather_forecast_by_lat_lng(url))
+  df <- bind_rows(df,get_weather_forecast_by_lat_lng(url))
   cat('.')
 }
 
