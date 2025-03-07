@@ -69,7 +69,7 @@ df$hourly.cloudcover <- df$hourly.cloudcover/100
 df$cloud_cover_in_country <- ave(df$hourly.cloudcover, df$date, FUN = function(x) mean(x, na.rm = T))
 df <- df[df$longitude >= 30, ]
 df$cloud_cover_in_east_of_country <- ave(df$hourly.cloudcover, df$date, FUN = function(x) mean(x, na.rm = T))
-df <- na.omit(unique(df[, c('date', 'cloud_cover_in_country', 'cloud_cover_in_east_of_country')]))
+df <- na.omit(unique(df[!duplicated(df$date), c('date', 'cloud_cover_in_country', 'cloud_cover_in_east_of_country')]))
 
 # Save
 clouds <- clouds[!clouds$date %in% df$date, ]
