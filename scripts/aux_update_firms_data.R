@@ -6,13 +6,32 @@ map_key <- Sys.getenv("FIRMS_API_KEY")
 sat_systems <- c("VIIRS_SNPP_NRT", "MODIS_NRT", "VIIRS_NOAA20_NRT", "VIIRS_SNPP_NRT") # This excludes standard processing systems "MODIS_SP", and "VIIRS_SNPP_SP"
 days <- 10
 
+# Helper: One retry on failure
+download_with_one_retry <- function(url, ...) {
+  out <- tryCatch(
+    readr::read_csv(url, ...),
+    error = function(e) {
+      cat("First attempt failed, waiting 10 min and retrying...\n")
+      Sys.sleep(601)
+      # Second (final) attempt
+      tryCatch(
+        readr::read_csv(url, ...),
+        error = function(e2) {
+          stop("Second attempt failed: ", conditionMessage(e2))
+        }
+      )
+    }
+  )
+  out
+}
+
 fires <- data.frame()
 for(i in sat_systems){
   link <- paste0("https://firms.modaps.eosdis.nasa.gov/api/country/csv/",
                  map_key, "/",
                  i,
                  "/UKR/", days)
-  temp <- read_csv(link, show_col_types = F)
+  temp <- download_with_one_retry(url = link, show_col_types = FALSE)
 
   if(length(temp) > 0){
     if(nrow(fires) > 0 & nrow(temp) > 0){
