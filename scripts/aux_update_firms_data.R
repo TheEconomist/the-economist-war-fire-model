@@ -32,6 +32,7 @@ for(i in sat_systems){
                  i,
                  "/UKR/", days)
   temp <- download_with_one_retry(url = link, show_col_types = FALSE)
+  Sys.sleep(1)
 
   if(length(temp) > 0){
     if(nrow(fires) > 0 & nrow(temp) > 0){
