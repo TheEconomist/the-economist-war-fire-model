@@ -14,7 +14,8 @@ ukr <- st_make_valid(ukr)  # safety
 rus_admin1 <- ne_states(country = "Russia", returnclass = "sf") |>
   st_make_valid() |>
   st_transform(4326)
-crimea <- rus_admin1[tolower(rus_admin1$name) %in% c("crimea", "krym", "sevastopol"), ] |> st_union(st_geometry(crimea)) |> st_make_valid()
+crimea <- rus_admin1[tolower(rus_admin1$name) %in% c("crimea", "krym", "sevastopol"), ]
+crimea <- st_union(st_geometry(crimea)) |> st_make_valid()
 
 # Merge with Ukraine geometry
 ukr <- st_union(st_geometry(ukr), crimea) |> st_make_valid() |>
@@ -47,6 +48,9 @@ for(file in dir('source-data/firms-imports/2025/')){
     temp[, intersect(colnames(add_fires), colnames(temp))])
   }
 }
+
+add_fires$acq_time <- as.POSIXct(add_fires$acq_time, format = "%H:%M:%S", tz = "UTC")
+add_fires$acq_time <- format(add_fires$acq_time, "%H%M")
 
 # 3) Convert coordinates to points:
 add_fires$fire_id <- 1:nrow(add_fires)
