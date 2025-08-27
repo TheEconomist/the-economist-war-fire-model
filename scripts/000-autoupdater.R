@@ -12,6 +12,7 @@ ggsave <- function(..., bg = 'white') ggplot2::ggsave(..., bg = bg)
 redo <- F
 update_charts_and_animations <- T
 render_animations <- wday(Sys.Date())==1
+tests <- T
 
 # Step 1: Load stable data ----------------------------------------
 cat("\n.... Load stable data ...\n")
@@ -135,44 +136,47 @@ rm(all_fires)
 # 5 - Run tests: --------------------------------------------------
 cat("\n.... Running tests....\n")
 
-# Test: vast number of new war fires?
-old <- read_csv('output-data/ukraine_fires.csv')
-new_fires <- sum(fires$war_fire) - sum(old$war_fire)
- cat(paste0('\n Recorded ', new_fires, ' new war fires in this update.\n'))
-if(new_fires > 5000){
-  stop('Over 5000 new war fires detected in this update - please inspect manually.')
-}
+if(tests){
+  # Test: vast number of new war fires?
+  old <- read_csv('output-data/ukraine_fires.csv')
+  new_fires <- sum(fires$war_fire) - sum(old$war_fire)
+   cat(paste0('\n Recorded ', new_fires, ' new war fires in this update.\n'))
+  if(new_fires > 5000){
+    stop('Over 5000 new war fires detected in this update - please inspect manually.')
+  }
 
-# Test: fighting in new area of the country?
-library(geosphere)
-temp <- unique(fires[!fires$id %in% old$id & fires$war_fire == T,
-                     c('x', 'y')])
-new_area <- F
-if(nrow(temp) > 0){
-  for(i in 1:nrow(temp)){
-    distances <- distm(unique(old[old$war_fire == T, c('x', 'y')]),
-                      temp[i, ], fun = distHaversine)
-    if(!any(distances < 2000000)){
-      cat(paste0('- War fire detected very far from past activity: lat=', temp[i, 'y'],' lng=', temp[i, 'x']))
-      new_area <- T
+  # Test: fighting in new area of the country?
+  library(geosphere)
+  temp <- unique(fires[!fires$id %in% old$id & fires$war_fire == T,
+                       c('x', 'y')])
+  new_area <- F
+  if(nrow(temp) > 0){
+    for(i in 1:nrow(temp)){
+      distances <- distm(unique(old[old$war_fire == T, c('x', 'y')]),
+                        temp[i, ], fun = distHaversine)
+      if(!any(distances < 2000000)){
+        cat(paste0('- War fire detected very far from past activity: lat=', temp[i, 'y'],' lng=', temp[i, 'x']))
+        new_area <- T
+      }
+    }
+    if(new_area){
+      stop('New area of fighting - please inspect manually.')
     }
   }
-  if(new_area){
-    stop('New area of fighting - please inspect manually.')
-  }
-}
-rm(temp)
+  rm(temp)
 
-# Test: fewer fires than previously?
-if(new_fires < 0){
+  # Test: fewer fires than previously?
+  if(new_fires < 0){
 
-  if(nrow(read_csv('source-data/forest_fire_locations_2022_2024.csv')) > readRDS('output-data/model-objects/n_manual_exceptions.RDS')){
-    message('Note: Fewer war fires than previously - probably due to manual exclusion (e.g. forest fire).')
-  } else {
-    message('Fewer war fires than previously - please inspect manually.')
+    if(nrow(read_csv('source-data/forest_fire_locations_2022_2024.csv')) > readRDS('output-data/model-objects/n_manual_exceptions.RDS')){
+      message('Note: Fewer war fires than previously - probably due to manual exclusion (e.g. forest fire).')
+    } else {
+      message('Fewer war fires than previously - please inspect manually.')
+    }
   }
+  saveRDS(nrow(read_csv('source-data/forest_fire_locations_2022_2024.csv')), 'output-data/model-objects/n_manual_exceptions.RDS')
 }
-saveRDS(nrow(read_csv('source-data/forest_fire_locations_2022_2024.csv')), 'output-data/model-objects/n_manual_exceptions.RDS')
+
 rm(new_fires)
 rm(old)
 
