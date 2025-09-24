@@ -34,11 +34,13 @@ if(update_historical){
   end_date <- Sys.Date()
   if(!start_date >= end_date){
 
-  for(i in 1:nrow(grid)[1]){
+  for(i in 1:nrow(grid)){
     url <- paste0('https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=', grid$y[i], '&longitude=', grid$x[i], '&hourly=temperature_2m,cloudcover&start_date=', start_date, '&end_date=', end_date)
-    historical <- bind_rows(historical,get_weather_forecast_by_lat_lng(url))
+    temp <- get_weather_forecast_by_lat_lng(url)
+    historical <- bind_rows(historical,)
     print(summary(historical$hourly.cloudcover))
     cat('.')
+    Sys.sleep(1)
   }
   # Simplify
   historical$date <- anydate(historical$hourly.time)
