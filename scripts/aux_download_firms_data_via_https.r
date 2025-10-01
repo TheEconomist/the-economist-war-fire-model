@@ -11,6 +11,8 @@ suppressPackageStartupMessages({
 # Read EDL token from env (set in GH Actions secret or your shell)
 edl_token <- Sys.getenv("EARTHDATA_TOKEN")
 
+cat(paste0('\nNOTE: Earthdata token expires after 60 days--check this if errors occur. It was created ', Sys.Date()-as.Date('2025-10-01', tz = 'UTC'), ' days ago.'))
+
 if (!nzchar(edl_token)) {
   stop("EARTHDATA_TOKEN env var is missing.")
 }
