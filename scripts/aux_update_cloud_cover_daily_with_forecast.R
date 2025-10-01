@@ -44,7 +44,7 @@ if(update_historical){
   }
   # Simplify
   historical$date <- anydate(as.character(historical$hourly.time))
-  df$date <- anydate(as.character(df$hourly.time))  historical$hourly.cloudcover[historical$hourly.cloudcover < 0] <- 0
+  historical$hourly.cloudcover[historical$hourly.cloudcover < 0] <- 0
   historical$hourly.cloudcover[historical$hourly.cloudcover > 100] <- 100
   historical$hourly.cloudcover <- historical$hourly.cloudcover/100
   historical$cloud_cover_in_country <- ave(historical$hourly.cloudcover, historical$date, FUN = function(x) mean(x, na.rm = T))
@@ -66,7 +66,7 @@ for(i in 1:nrow(grid)){
 }
 
 # Simplify
-df$date <- anydate(df$hourly.time)
+df$date <- anydate(as.character(df$hourly.time))
 df$hourly.cloudcover <- df$hourly.cloudcover/100
 df$cloud_cover_in_country <- ave(df$hourly.cloudcover, df$date, FUN = function(x) mean(x, na.rm = T))
 df <- df[df$longitude >= 30, ]
