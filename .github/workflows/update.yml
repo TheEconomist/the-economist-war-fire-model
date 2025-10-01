@@ -2,7 +2,7 @@ name: update
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 5,11 * * *"
+    - cron: "0 2,14 * * *"
 concurrency:
   group: ${{ github.ref }}
 jobs:
