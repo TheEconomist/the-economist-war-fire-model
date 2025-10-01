@@ -2,7 +2,7 @@ name: Download FIRMS Global data
 
 on:
   schedule:
-    - cron: "0 05 * * *"   # 
+    - cron: "0 1,13 * * *"   # 
   workflow_dispatch: {}
 
 jobs:
