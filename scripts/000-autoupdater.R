@@ -13,6 +13,7 @@ redo <- F
 update_charts_and_animations <- T
 render_animations <- wday(Sys.Date())==1
 tests <- T
+use_manual_data_add <- readRDS('output-data/model-objects/archive_2025_cache.RDS') != length(dir('source-data/firms-imports/2025/'))
 
 # Step 1: Load stable data ----------------------------------------
 cat("\n.... Load stable data ...\n")
@@ -34,7 +35,11 @@ stable <- stable[stable$date <= Sys.Date() & stable$date >= as.Date('2022-02-24'
 cat("\n.... Updating fire data ...\n")
 
 # This script updates the firms data to the present day:
-source('scripts/aux_update_firms_data.R')
+if(use_manual_data_add){
+  source('scripts/aux_add_fires_manually.R')
+} else {
+  source('scripts/aux_update_firms_data.R')
+}
 
 # This script defines the function "generate_data" which generates a day-cell data frame of fire activity (and selected covariates), and, if selected, updates a csv at the fire-location-time level with population density and region covariates. Since we load all stable covariates in the step above, these are not needed in the update run.
 source('scripts/01-construct-training-and-prediction-data.R')
