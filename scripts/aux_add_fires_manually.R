@@ -1,18 +1,27 @@
 # Script to deal with NASA API outage. Files downloaded manually for all 3 systems here: https://nrt3.modaps.eosdis.nasa.gov/archive/FIRMS/ (selecting the global version)
 
 # List of packages you need
-pkgs <- c("rnaturalearth", "rnaturalearthdata", "rnaturalearthhires")
+# --- repo setup ---
+repo_vec <- c(ropensci = "https://ropensci.r-universe.dev",
+              CRAN     = "https://cloud.r-project.org")
+options(repos = repo_vec)
 
-# Install only if not already installed
-for (p in pkgs) {
-  if (!requireNamespace(p, quietly = TRUE)) {
-    install.packages(p)
-  }
+# --- deps install ---
+pkgs <- c("sf", "rnaturalearth", "rnaturalearthdata")
+to_install <- pkgs[!sapply(pkgs, requireNamespace, quietly = TRUE)]
+if (length(to_install)) install.packages(to_install, quiet = TRUE)
+
+# Try hires but don’t fail if it’s unavailable
+if (!requireNamespace("rnaturalearthhires", quietly = TRUE)) {
+  try(install.packages("rnaturalearthhires", quiet = TRUE), silent = TRUE)
 }
 
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
+
+ne_scale <- if (requireNamespace("rnaturalearthhires", quietly = TRUE)) "large" else "medium"
+
 library(readr)
 
 # 1) Get Ukraine’s country polygon (WGS84 / EPSG:4326)
