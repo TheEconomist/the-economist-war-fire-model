@@ -18,6 +18,7 @@ if (!nzchar(edl_token)) {
 # Local base dir that already contains many FIRMS .txt files (per system)
 # You can override via env; default "data"
 local_base <- "source-data/firms-imports/2025/"
+local_dir  <- local_base  # single shared directory across systems
 
 # The four systems (Global)
 systems <- c(
@@ -90,13 +91,14 @@ all_downloaded <- list()
 
 # Find the most recent file in the data, re-download it (in case partial) and all files published since
 max_local <- local_max_num(local_dir)-1
+# current local max trailing number
+cat("Local dir:", local_dir, " | Max trailing number:", max_local, "\n")
+
 for (sys in systems) {
   cat("\n=== System:", sys, "===\n")
   remote_dir <- sprintf("%s/%s/Global/", base_url, sys)
   local_dir  <- file.path(local_base)
 
-  # current local max trailing number
-  cat("Local dir:", local_dir, " | Max trailing number:", max_local, "\n")
 
   # fetch and parse remote listing
   listing_html <- fetch_listing(remote_dir, edl_token)
