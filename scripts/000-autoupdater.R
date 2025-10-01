@@ -36,7 +36,9 @@ cat("\n.... Updating fire data ...\n")
 
 # This script updates the firms data to the present day:
 if(use_manual_data_add){
+  cat("\n.... Defaulting to HTTPS....\n")
   source('scripts/aux_add_fires_manually.R')
+  cat("\n.... Update complete....\n")
 } else {
   source('scripts/aux_update_firms_data.R')
 }
