@@ -24,6 +24,14 @@ jobs:
         with:
           r-version: '4.4.1'   # <- pin instead of "stable"
 
+      - name: Cache R packages
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-r-4.4.1-httr2-rvest-xml2
+          restore-keys: |
+            ${{ runner.os }}-r-
+
       - name: Install required R packages
         run: |
           Rscript -e 'install.packages(c("httr2","rvest","xml2"), repos="https://cran.rstudio.com")'
