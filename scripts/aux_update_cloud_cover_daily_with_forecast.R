@@ -32,7 +32,7 @@ if(update_historical){
   historical <- data.frame()
   start_date <- min(c(clouds$date[is.na(clouds$cloud_cover_in_country)], max(clouds$date, na.rm = T)+1), na.rm = T)
   end_date <- Sys.Date()
-  if(!start_date >= end_date){
+  if(start_date < end_date){
 
   for(i in 1:nrow(grid)){
     url <- paste0('https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=', grid$y[i], '&longitude=', grid$x[i], '&hourly=temperature_2m,cloudcover&start_date=', start_date, '&end_date=', end_date)
@@ -43,8 +43,8 @@ if(update_historical){
     Sys.sleep(1)
   }
   # Simplify
-  historical$date <- anydate(historical$hourly.time)
-  historical$hourly.cloudcover[historical$hourly.cloudcover < 0] <- 0
+  historical$date <- anydate(as.character(historical$hourly.time))
+  df$date <- anydate(as.character(df$hourly.time))  historical$hourly.cloudcover[historical$hourly.cloudcover < 0] <- 0
   historical$hourly.cloudcover[historical$hourly.cloudcover > 100] <- 100
   historical$hourly.cloudcover <- historical$hourly.cloudcover/100
   historical$cloud_cover_in_country <- ave(historical$hourly.cloudcover, historical$date, FUN = function(x) mean(x, na.rm = T))
