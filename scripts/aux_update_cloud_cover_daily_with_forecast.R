@@ -37,7 +37,7 @@ if(update_historical){
   for(i in 1:nrow(grid)){
     url <- paste0('https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=', grid$y[i], '&longitude=', grid$x[i], '&hourly=temperature_2m,cloudcover&start_date=', start_date, '&end_date=', end_date)
     temp <- get_weather_forecast_by_lat_lng(url)
-    historical <- bind_rows(historical,)
+    historical <- bind_rows(historical, temp)
     print(summary(historical$hourly.cloudcover))
     cat('.')
     Sys.sleep(1)
