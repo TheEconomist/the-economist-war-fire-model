@@ -7,7 +7,7 @@ on:
 
 jobs:
   download:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04   # <- avoid 24.04 resolution issues (optional but safest)
     env:
       EARTHDATA_TOKEN: ${{ secrets.EARTHDATA_TOKEN }}
     steps:
@@ -17,7 +17,7 @@ jobs:
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: 'stable'
+          r-version: '4.4.1'   # <- pin instead of "stable"
 
       - name: Install required R packages
         run: |
@@ -25,10 +25,13 @@ jobs:
 
       - name: Run FIRMS download script
         run: Rscript scripts/aux_download_firms_data_via_https.r
+        env:
+          EARTHDATA_TOKEN: ${{ secrets.EARTHDATA_TOKEN }}
 
       - name: Commit and push new data
         run: |
           if [ -n "$(git status --porcelain source-data/firms-imports/2025 || true)" ]; then
+            git config --global --add safe.directory "$GITHUB_WORKSPACE"
             git config user.name "github-actions"
             git config user.email "actions@users.noreply.github.com"
             git add source-data/firms-imports/2025
@@ -37,3 +40,4 @@ jobs:
           else
             echo "No new files."
           fi
+    
