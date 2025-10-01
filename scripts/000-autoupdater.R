@@ -13,7 +13,7 @@ redo <- F
 update_charts_and_animations <- T
 render_animations <- wday(Sys.Date())==1
 tests <- T
-use_manual_data_add <- readRDS('output-data/model-objects/archive_2025_cache.RDS') != length(dir('source-data/firms-imports/2025/'))
+use_manual_data_add <- T 
 
 # Step 1: Load stable data ----------------------------------------
 cat("\n.... Load stable data ...\n")
