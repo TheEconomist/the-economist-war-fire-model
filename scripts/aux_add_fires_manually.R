@@ -1,6 +1,15 @@
 # Script to deal with NASA API outage. Files downloaded manually for all 3 systems here: https://nrt3.modaps.eosdis.nasa.gov/archive/FIRMS/ (selecting the global version)
 
-# install.packages(c("sf", "rnaturalearth", "rnaturalearthdata"))  # if needed
+# List of packages you need
+pkgs <- c("rnaturalearth", "rnaturalearthdata")
+
+# Install only if not already installed
+for (p in pkgs) {
+  if (!requireNamespace(p, quietly = TRUE)) {
+    install.packages(p)
+  }
+}
+
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
