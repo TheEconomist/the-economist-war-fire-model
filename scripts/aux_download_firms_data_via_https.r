@@ -70,29 +70,40 @@ parse_txt_files <- function(html_text) {
 }
 
 # Download a single file to dest using httr2 (preserves filename)
-download_file <- function(url, dest_dir, token) {
+download_file <- function(url, dest_dir, token, overwrite = TRUE) {
   if (!dir.exists(dest_dir)) dir.create(dest_dir, recursive = TRUE, showWarnings = FALSE)
   fn <- basename(url)
   dest <- file.path(dest_dir, fn)
-  if (file.exists(dest)) return(invisible(dest))
+
+  # Skip unless we explicitly want to overwrite this file
+  if (file.exists(dest) && !overwrite) return(invisible(dest))
+
   req <- request(url) |>
     req_headers(Authorization = paste("Bearer", token)) |>
     req_timeout(120) |>
     req_error(is_error = function(resp) FALSE) # don't throw; let us handle
+
   resp <- req_perform(req)
   if (resp_status(resp) >= 400) {
     warning(sprintf("Failed %s -> HTTP %s", fn, resp_status(resp)))
     return(invisible(NULL))
   }
-  writeBin(resp_body_raw(resp), dest)
-  dest
+
+  # Write to a temp file and atomically replace (safer if interrupted)
+  tmp <- tempfile(pattern = paste0(fn, ".part_"))
+  writeBin(resp_body_raw(resp), tmp)
+  if (file.exists(dest)) file.remove(dest)
+  file.rename(tmp, dest)
+
+  invisible(dest)
 }
+
 
 # ---- Main ----
 all_downloaded <- list()
 
 # Find the most recent file in the data, re-download it (in case partial) and all files published since
-max_local <- local_max_num(local_dir)-1
+max_local <- local_max_num(local_dir)-2
 # current local max trailing number
 cat("Local dir:", local_dir, " | Max trailing number:", max_local, "\n")
 

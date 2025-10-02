@@ -39,7 +39,7 @@ crimea <- st_union(st_geometry(crimea)) |> st_make_valid()
 ukr <- st_union(st_geometry(ukr), crimea) |> st_make_valid() |>
   st_transform(4326)
 
-# 2) Load fires data from last 2 weeks
+# 2) Load fires data manually acquired
 add_fires <- data.frame()
 for(file in dir('source-data/firms-imports/2025/')){
   temp <- read_csv(paste0('source-data/firms-imports/2025/', file))
