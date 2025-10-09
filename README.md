@@ -3,6 +3,8 @@ This repository contains the source code and data associated with *The Economist
 
 See the latest data, updating several times daily, here: [Tracking the Ukraine war: where is the latest fighting?](https://www.economist.com/interactive/graphic-detail/ukraine-fires) 
 
+To see our data and code used to construct and update our meta-estimate of Russian losses in the conflict, see [our dedicated repo, here.](https://github.com/TheEconomist/the-economist-ukraine-war-dead-and-wounded-estimates)
+
 If you have any ideas for how we might improve this work or the presentation of it, email [sondresolstad@economist.com](mailto:sondresolstad@economist.com) or message [@Sondreus](https://twitter.com/Sondreus). If you find this data useful, a few lines on how are also gratefully received via the same channels. 
 
 In the following maps, red indicates that fires are classified as war-related. Size reflects approximate population density. This data is not perfect - see section on limitations below. 
