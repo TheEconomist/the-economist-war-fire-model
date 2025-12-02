@@ -44,7 +44,13 @@ add_fires <- data.frame()
 for(file in dir('source-data/firms-imports/2025/')){
   temp <- read_csv(paste0('source-data/firms-imports/2025/', file))
 
+  if(!"acq_date" %in% colnames(temp))
+  {
+    stop(paste0('Problem in manually downloaded file ', file, ' please inspec'))
+  }
+
   instrument <- NA
+
   if(grepl("VIIRS", file)){
     instrument <- 'VIIRS'
   } else {
@@ -53,6 +59,7 @@ for(file in dir('source-data/firms-imports/2025/')){
     }
   }
   temp$instrument <- instrument
+
 
   if(max(as.Date(temp$acq_date)) < as.Date('2025-08-01')){
     stop()
