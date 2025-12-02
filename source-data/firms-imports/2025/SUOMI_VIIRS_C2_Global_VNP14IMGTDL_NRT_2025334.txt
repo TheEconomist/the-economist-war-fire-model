@@ -29,7 +29,7 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700' rel='stylesheet' type='text/css'>
     <meta name="csrf-param" content="authenticity_token" />
-<meta name="csrf-token" content="YWv9DOIrmU1oqLa71xdpsRfDDLpV31Qo28bJK2tQ_ndcbDOTPRzauBur8u4IVzcqmW_YOM7S9fc14uFpEKhC4w" />
+<meta name="csrf-token" content="_cn2VEN6VW1Zn3lGcisi7r5HsuWENgbG1xcjGIiqEKTPG4dGmFsqz6H39rZYu-wWxFvsbM5zFwOiYtaRCn79Fg" />
     
 
     <!-- Grid background: http://subtlepatterns.com/graphy/ -->
@@ -70,7 +70,7 @@
     </h3>
 
   </div>
-  <form id="login" action="/login" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="fEqRNScy0SJPCMaGuysENCQSdYj1ZVRdeJjZX_ZFY9RBTV-q-AWS1zwLgtNka1qvqr6hCm5o9YKWvPEdjb3fQA" autocomplete="off" />
+  <form id="login" action="/login" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="3iwc7ecCCqELyXKQ2XQ-MCprLCCWHR8Uh7wmdgmR5tXs_m3_PCN1A_Oh_WDz5PDIUHdyqdxYDtHyydP_i0ULZw" autocomplete="off" />
   <p>
     <label for="username">Username</label>
     <i class="fa fa-question-circle fa-question-circle--blue user-name" title="Login using either your Username or Email Address"></i>
@@ -88,7 +88,7 @@
     <input type="hidden" name="redirect_uri" id="redirect_uri" value="https://nrt3.modaps.eosdis.nasa.gov/oauth/callback" autocomplete="off" />
   </p>
         <p><input type="hidden" name="response_type" id="response_type" value="code" autocomplete="off" /></p>
-      <p><input type="hidden" name="state" id="state" value="Gtazi0HT4LZCYk8V2VnrhsKSpgfnmb" autocomplete="off" /></p>
+      <p><input type="hidden" name="state" id="state" value="fb872ppv9BPSm7lfNKjJ8Y3i6Nqh3M" autocomplete="off" /></p>
       <p><input type="checkbox" name="stay_in" id="stay_in" value="1" checked="checked" /> <label for="stay_in">Stay signed in (this is a private workstation)</label></p>
 
   <br/>
@@ -127,7 +127,7 @@
     <br/>
     <div class="idfs-button-alignment">
 
-          <a class="eui-btn--round eui-btn--blue" href="/users/new?client_id=sXTOeM-6RH5fuK3TacT_Ag&amp;redirect_uri=https%3A%2F%2Fnrt3.modaps.eosdis.nasa.gov%2Foauth%2Fcallback&amp;response_type=code&amp;state=Gtazi0HT4LZCYk8V2VnrhsKSpgfnmb">Register for a Profile</a>
+          <a class="eui-btn--round eui-btn--blue" href="/users/new?client_id=sXTOeM-6RH5fuK3TacT_Ag&amp;redirect_uri=https%3A%2F%2Fnrt3.modaps.eosdis.nasa.gov%2Foauth%2Fcallback&amp;response_type=code&amp;state=fb872ppv9BPSm7lfNKjJ8Y3i6Nqh3M">Register for a Profile</a>
     <div>
 </aside>
 
@@ -222,3 +222,9 @@
     
   </body>
 </html>
+<script id="f5_cspm">(function(){var f5_cspm={f5_p:'PJGPFGGIHLENMLPNGFBKKDBAMEPFCHDJBDLBGGHPEOIGLFOPGNGKMLCBKIFECMJGLFCBLCMJAAGPKHMBALNAODOIAAEHNABFBKFLBIGJIPPDEOJJHCAKNIBBKIGNFACB',setCharAt:function(str,index,chr){if(index>str.length-1)return str;return str.substr(0,index)+chr+str.substr(index+1);},get_byte:function(str,i){var s=(i/16)|0;i=(i&15);s=s*32;return((str.charCodeAt(i+16+s)-65)<<4)|(str.charCodeAt(i+s)-65);},set_byte:function(str,i,b){var s=(i/16)|0;i=(i&15);s=s*32;str=f5_cspm.setCharAt(str,(i+16+s),String.fromCharCode((b>>4)+65));str=f5_cspm.setCharAt(str,(i+s),String.fromCharCode((b&15)+65));return str;},set_latency:function(str,latency){latency=latency&0xffff;str=f5_cspm.set_byte(str,40,(latency>>8));str=f5_cspm.set_byte(str,41,(latency&0xff));str=f5_cspm.set_byte(str,35,2);return str;},wait_perf_data:function(){try{var wp=window.performance.timing;if(wp.loadEventEnd>0){var res=wp.loadEventEnd-wp.navigationStart;if(res<60001){var cookie_val=f5_cspm.set_latency(f5_cspm.f5_p,res);window.document.cookie='f5avr0232430352aaaaaaaaaaaaaaaa_cspm_='+encodeURIComponent(cookie_val)+';path=/;'+'';}
+return;}}
+catch(err){return;}
+setTimeout(f5_cspm.wait_perf_data,100);return;},go:function(){var chunk=window.document.cookie.split(/\s*;\s*/);for(var i=0;i<chunk.length;++i){var pair=chunk[i].split(/\s*=\s*/);if(pair[0]=='f5_cspm'&&pair[1]=='1234')
+{var d=new Date();d.setTime(d.getTime()-1000);window.document.cookie='f5_cspm=;expires='+d.toUTCString()+';path=/;'+';';setTimeout(f5_cspm.wait_perf_data,100);}}}}
+f5_cspm.go();}());</script>
