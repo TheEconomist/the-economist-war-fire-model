@@ -41,6 +41,8 @@ ukr <- st_union(st_geometry(ukr), crimea) |> st_make_valid() |>
 
 # 2) Load fires data manually acquired
 add_fires <- data.frame()
+all_dates <- c()  # before the loop
+
 for(file in dir('source-data/firms-imports/2025/')){
   temp <- read_csv(paste0('source-data/firms-imports/2025/', file))
 
@@ -72,6 +74,9 @@ for(file in dir('source-data/firms-imports/2025/')){
     add_fires[, intersect(colnames(add_fires), colnames(temp))],
     temp[, intersect(colnames(add_fires), colnames(temp))])
   }
+
+  # track dates from the raw global file
+  all_dates <- c(all_dates, unique(temp$acq_date))
 }
 
 add_fires$acq_time <- as.POSIXct(add_fires$acq_time, format = "%H:%M:%S", tz = "UTC")
@@ -114,12 +119,18 @@ fires <- fires[!duplicated(paste0(fires$latitude, '_',
 
 # Record successful update:
 updated <- read_csv('output-data/dates_of_successfully_acquired_fire_data.csv')
-if(length(min(add_fires$acq_date):max(add_fires$acq_date)) == length(unique(add_fires$acq_date))){
-  updated_data <- unique(c(min(add_fires$acq_date):max(add_fires$acq_date), read_csv('output-data/dates_of_successfully_acquired_fire_data.csv')$dates))
-  write_csv(data.frame(dates = updated_data), 'output-data/dates_of_successfully_acquired_fire_data.csv')
+all_dates <- as.Date(all_dates)
+
+if (length(seq(min(all_dates), max(all_dates), by = "day")) ==
+    length(unique(all_dates))) {
+
+  updated_data <- unique(c(seq(min(all_dates), max(all_dates), by = "day"),
+                           read_csv('output-data/dates_of_successfully_acquired_fire_data.csv')$dates))
+  write_csv(data.frame(dates = updated_data),
+            'output-data/dates_of_successfully_acquired_fire_data.csv')
 
 } else {
-  stop('Are you missing some dates?')
+  stop('Are you missing some *files*?')
 }
 
 # Export back to fire archive:
