@@ -41,7 +41,7 @@ ukr <- st_union(st_geometry(ukr), crimea) |> st_make_valid() |>
 
 # 2) Load fires data manually acquired
 add_fires <- data.frame()
-all_dates <- c()  # before the loop
+all_dates <- as.Date(character())  # before the loop
 
 for(file in dir('source-data/firms-imports/2025/')){
   temp <- read_csv(paste0('source-data/firms-imports/2025/', file))
@@ -78,7 +78,6 @@ for(file in dir('source-data/firms-imports/2025/')){
   # track dates from the raw global file
   all_dates <- c(all_dates, unique(temp$acq_date))
 }
-
 add_fires$acq_time <- as.POSIXct(add_fires$acq_time, format = "%H:%M:%S", tz = "UTC")
 add_fires$acq_time <- format(add_fires$acq_time, "%H%M")
 
