@@ -8,7 +8,7 @@ str_name <-'source-data/nightlights 2018/Harmonized_DN_NTL_2018_simVIIRS.tif'
 imported_raster=raster(str_name)
 
 # Generate target grid
-rounding_para <- readRDS('output-data/rounding_para.RDS')
+rounding_para <- readRDS('output-data/model-objects/rounding_para.RDS')
 target_grid <- expand.grid('x'= seq(21.9, 40.3,
                                     by = rounding_para),
                            'y'= seq(44.4, 52.4,

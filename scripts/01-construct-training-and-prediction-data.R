@@ -73,17 +73,37 @@ generate_data <- function(year_min = 2015,
   X_fire$geometry <- NULL
   X_fire$fire <- 1
 
-  # Generate no-fire observations
-  X_nofire <- expand.grid('x'= seq(21.9, 40.3,
-                                   by = rounding_para),
-                          'y'= seq(44.4, 52.4,
-                                   by = rounding_para),
-                          'date' = as.Date(as.Date(paste0(min(X_fire$year), '-01-01')):as.Date(paste0("2023-12-31")),
-                                           origin = '1970-01-01'))
-  X_nofire$year <- year(X_nofire$date)
-  X_nofire$time_of_year <- yday(X_nofire$date)
-  X_nofire$date <- NULL
-  X_nofire$fire <- 0
+  # Generate no-fire observations (cached on disk)
+  no_fire_grid_path <- 'output-data/model-objects/no_fire_grid.RDS'
+  date_min <- as.Date(paste0(min(X_fire$year), '-01-01'))
+  date_max <- as.Date('2023-12-31')
+  X_nofire <- NULL
+  if(file.exists(no_fire_grid_path)){
+    X_nofire <- readRDS(no_fire_grid_path)
+    cache_year_min <- attr(X_nofire, "year_min")
+    cache_date_max <- attr(X_nofire, "date_max")
+    if(is.null(cache_year_min) || is.null(cache_date_max) ||
+       cache_year_min != min(X_fire$year) ||
+       as.character(cache_date_max) != as.character(date_max)){
+      X_nofire <- NULL
+    }
+  }
+
+  if(is.null(X_nofire)){
+    X_nofire <- expand.grid('x'= seq(21.9, 40.3,
+                                     by = rounding_para),
+                            'y'= seq(44.4, 52.4,
+                                     by = rounding_para),
+                            'date' = as.Date(date_min:date_max,
+                                             origin = '1970-01-01'))
+    X_nofire$year <- year(X_nofire$date)
+    X_nofire$time_of_year <- yday(X_nofire$date)
+    X_nofire$date <- NULL
+    X_nofire$fire <- 0
+    attr(X_nofire, "year_min") <- min(X_fire$year)
+    attr(X_nofire, "date_max") <- date_max
+    saveRDS(X_nofire, no_fire_grid_path)
+  }
 
   X_fire$id <- paste0(X_fire$x, '-', X_fire$y)
   X_nofire$id <- paste0(X_nofire$x, '-', X_nofire$y)
@@ -94,20 +114,26 @@ generate_data <- function(year_min = 2015,
     if(get_pop_data){
     cat('5. Add population data\n')
 
-    # Data on urban density
-    # Source: https://www.worldpop.org/geodata/summary?id=49349
-    worldpop_raw <- read_csv('source-data/worldpop/ukr_pd_2020_1km_UNadj_ASCII_XYZ.csv')
+    worldpop_cache_path <- 'output-data/model-objects/worldpop_cache.RDS'
+    if(file.exists(worldpop_cache_path)){
+      worldpop <- readRDS(worldpop_cache_path)
+    } else {
+      # Data on urban density
+      # Source: https://www.worldpop.org/geodata/summary?id=49349
+      worldpop_raw <- read_csv('source-data/worldpop/ukr_pd_2020_1km_UNadj_ASCII_XYZ.csv')
 
-    # For urban density
-    worldpop <- worldpop_raw
-    worldpop$x <- as.numeric(round(worldpop$X/rounding_para)*rounding_para)
-    worldpop$y <- as.numeric(round(worldpop$Y/rounding_para)*rounding_para)
-    worldpop$id <- paste0(worldpop$x, '-', worldpop$y)
-    worldpop$pop_density <- ave(worldpop$Z, worldpop$id, FUN = mean)
-    worldpop <- worldpop[!duplicated(worldpop$id), ]
+      # For urban density
+      worldpop <- worldpop_raw
+      worldpop$x <- as.numeric(round(worldpop$X/rounding_para)*rounding_para)
+      worldpop$y <- as.numeric(round(worldpop$Y/rounding_para)*rounding_para)
+      worldpop$id <- paste0(worldpop$x, '-', worldpop$y)
+      worldpop$pop_density <- ave(worldpop$Z, worldpop$id, FUN = mean)
+      worldpop <- worldpop[!duplicated(worldpop$id), ]
+      worldpop <- worldpop[!is.na(worldpop$pop_density), c('x', 'y', 'id', 'pop_density')]
+      saveRDS(worldpop, worldpop_cache_path)
+    }
 
-    saveRDS(worldpop[!is.na(worldpop$pop_density),
-                     c('x', 'y', 'id')], 'output-data/model-objects/ukraine_mask.RDS')
+    saveRDS(worldpop[, c('x', 'y', 'id')], 'output-data/model-objects/ukraine_mask.RDS')
 
     X_fire <- X_fire[X_fire$id %in% worldpop$id, ]
     X_nofire <- X_nofire[X_nofire$id %in% worldpop$id, ]
@@ -129,40 +155,51 @@ generate_data <- function(year_min = 2015,
   if(get_urban_areas){
     cat(' - Add data on urban areas...\n')
 
-    # Data on urban areas
-    # Source: https://earthworks.stanford.edu/catalog/stanford-yk247bg4748
-    urban_raw <- st_read('source-data/urban-areas/ne_10m_urban_areas_landscan.shp', quiet =T)
-    urban_raw <- urban_raw[urban_raw$min_bb_yma > 44 & urban_raw$min_bb_xma > 22 &
-                             urban_raw$max_bb_yma < 52 & urban_raw$max_bb_xma < 40, ]
+    urban_cache_path <- 'output-data/model-objects/urban_city_map.RDS'
+    if(file.exists(urban_cache_path)){
+      urban_map <- readRDS(urban_cache_path)
+    } else {
+      urban_map <- data.frame(id = character(),
+                              city = character(),
+                              stringsAsFactors = FALSE)
+    }
 
-    # Add urban area information:
-    X_fire$obs_ID <- 1:nrow(X_fire)
-    urban <- urban_raw
-    urban <- st_make_valid(urban)
-    st_crs(urban) <- 'EPSG:6383'
-    urban <- st_transform(urban, crs = 'EPSG:6383')
-    urban <- suppressWarnings(suppressMessages(st_buffer(urban, dist = 10000)))
-    urban <- st_transform(urban, crs = "EPSG:4326")
+    missing_ids <- setdiff(unique(X_fire$id), urban_map$id)
+    if(length(missing_ids) > 0){
+      # Data on urban areas
+      # Source: https://earthworks.stanford.edu/catalog/stanford-yk247bg4748
+      urban_raw <- st_read('source-data/urban-areas/ne_10m_urban_areas_landscan.shp', quiet =T)
+      urban_raw <- urban_raw[urban_raw$min_bb_yma > 44 & urban_raw$min_bb_xma > 22 &
+                               urban_raw$max_bb_yma < 52 & urban_raw$max_bb_xma < 40, ]
 
-    sf::sf_use_s2(FALSE)
-    point.sf <- st_as_sf(X_fire, coords = c("LONGITUDE", "LATITUDE"))
-    st_crs(point.sf) <- st_crs(urban)
+      # Prepare urban polygons once
+      urban <- st_make_valid(urban_raw)
+      st_crs(urban) <- 'EPSG:6383'
+      urban <- st_transform(urban, crs = 'EPSG:6383')
+      urban <- suppressWarnings(suppressMessages(st_buffer(urban, dist = 10000)))
+      urban <- st_transform(urban, crs = "EPSG:4326")
+      urban <- urban[order(urban$max_pop_al), ]
 
-    X_fire$city <- NA
-    urban <- urban[order(urban$max_pop_al), ] # Order by total population
-    cat('\nEstablishing region of fire events.\n\nCompleted for: ')
-    for(i in 1:nrow(urban)){
-
-      urban_temp <- urban[i, ]
-
-      st_crs(point.sf) <- st_crs(urban_temp)
-      points_in_urban_area <- suppressWarnings(suppressMessages(st_intersection(point.sf, urban_temp)))
-
-      if(length(points_in_urban_area$obs_ID) > 0){
-      X_fire$city[X_fire$obs_ID %in% points_in_urban_area$obs_ID] <- as.character(urban_temp$name_conv)[1]
+      # Map missing grid IDs to cities using a single join
+      points <- X_fire[X_fire$id %in% missing_ids, c('id', 'LONGITUDE', 'LATITUDE')]
+      points <- points[!duplicated(points$id), ]
+      sf::sf_use_s2(FALSE)
+      points_sf <- st_as_sf(points, coords = c("LONGITUDE", "LATITUDE"), crs = 4326)
+      st_crs(points_sf) <- st_crs(urban)
+      joined <- suppressWarnings(suppressMessages(st_join(points_sf, urban, left = TRUE)))
+      joined_df <- as.data.frame(joined)
+      if(nrow(joined_df) > 0){
+        joined_df <- joined_df[order(joined_df$id, joined_df$max_pop_al), ]
+        joined_df <- joined_df[!duplicated(joined_df$id, fromLast = TRUE), ]
+        new_map <- data.frame(id = joined_df$id,
+                              city = as.character(joined_df$name_conv),
+                              stringsAsFactors = FALSE)
+        urban_map <- unique(rbind(urban_map, new_map))
+        saveRDS(urban_map, urban_cache_path)
       }
     }
-    cat('\n')
+
+    X_fire <- merge(X_fire, urban_map, by = 'id', all.x = TRUE)
 
   # Fix a few city names:
   X_fire$city[X_fire$city == 'Donetsk, Donetsk'] <- 'Donetsk'
@@ -222,7 +259,14 @@ generate_data <- function(year_min = 2015,
     cat('7. Add nightlights data\n')
 
     # source('scripts/aux_get_nightlights_data.R')
-    nightlights <- readRDS('output-data/nightlights.RDS')
+    nightlights_cache_path <- 'output-data/model-objects/nightlights_cache.RDS'
+    if(file.exists(nightlights_cache_path)){
+      nightlights <- readRDS(nightlights_cache_path)
+    } else {
+      nightlights <- readRDS('output-data/nightlights.RDS')
+      nightlights <- nightlights[, c('id', 'nightlights')]
+      saveRDS(nightlights, nightlights_cache_path)
+    }
     nightlights <- nightlights[nightlights$id %in% X$id, ]
 
     X <- merge(X, nightlights[, c('id', 'nightlights')], by = 'id', all.x = T)
@@ -371,6 +415,9 @@ generate_data <- function(year_min = 2015,
     cat('10. Feature-engineering on fire data in grid format, excluding cloud days\n')
 
     X <- X[order(X$date), ]
+    if(is.null(X$fire_raw)){
+      X$fire_raw <- X$fire
+    }
 
     cat('Generate mean number of fires in the cell in the past:\n')
     X$average_past_fires_by_1x1_location_no_clouds <-
@@ -418,8 +465,10 @@ generate_data <- function(year_min = 2015,
     X <- X[order(X$date), ]
     rm(temp)
 
-    X$fire <- X$fire_raw
-    X$fire_raw <- NULL
+    if(!is.null(X$fire_raw)){
+      X$fire <- X$fire_raw
+      X$fire_raw <- NULL
+    }
 
     if(save_cache){
       saveRDS(X, 'output-data/X_matrix.RDS') # Save cache
@@ -484,12 +533,20 @@ generate_data <- function(year_min = 2015,
     X <- X[order(X$date), ]
     rm(temp)
 
+
+    if(save_cache){
+      saveRDS(X, 'output-data/X_matrix.RDS') # Save cache
+    }
+
   } else {cat('11. Generate average cloud cover variables - skipped\n')}
 
   # 12. Generate continuous fire in cell variables ------------------------------
   if(get_continuous_fire){
     cat('12. Get continuous fire in cell variables\n')
     X <- X[order(X$date), ]
+    if(!"fire" %in% colnames(X)){
+      stop("Missing 'fire' column before step 12. Check prior feature engineering steps.")
+    }
 
     X$fire_raw <- X$fire
     X$fire_binary <- X$fire
@@ -506,10 +563,12 @@ generate_data <- function(year_min = 2015,
     X$fire_binary <- X$fire
     X$fire_binary[X$fire_binary != 0] <- 1
 
-    X$continuous_length_of_any_fire_in_cell_no_clouds <-
-      ave(X$fire_binary, X$id, FUN = function(x){
-        ave(c(0, x[-length(x)]), cumsum(c(0, x[-length(x)]) == 0), FUN = cumsum)
-      })
+    if("cloud" %in% colnames(X)){
+      X$continuous_length_of_any_fire_in_cell_no_clouds <-
+        ave(X$fire_binary, X$id, FUN = function(x){
+          ave(c(0, x[-length(x)]), cumsum(c(0, x[-length(x)]) == 0), FUN = cumsum)
+        })
+    }
 
     X$fire <- X$fire_raw
     } else {cat('12. Get continuous fire in cell variables - skipped\n')}
@@ -538,6 +597,10 @@ generate_data <- function(year_min = 2015,
       cat(i)
       cat('\n\n')
       X[, paste0(i, '_30da')] <- as.numeric(ave(X[, i], X$id_5x5, FUN = ma))
+    }
+
+    if(save_cache){
+      saveRDS(X, 'output-data/X_matrix.RDS') # Save cache
     }
   } else {cat('13. Get 30-day averages - skipped\n')
 }

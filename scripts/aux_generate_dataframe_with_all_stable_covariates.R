@@ -5,7 +5,11 @@ library(readr)
 X_mat <- readRDS('output-data/X_matrix.RDS')
 
 # Subset to first year of the war (we use covariates as they were here for succeeding predictions)
-X_mat <- X_mat[X_mat$date %in% as.Date('2022-02-24'):as.Date('2023-02-23'), ]
+X_mat$date <- as.Date(X_mat$date)
+X_mat <- X_mat[
+  X_mat$date >= as.Date("2022-02-24") &
+    X_mat$date <= as.Date("2023-02-23"),
+]
 
 # Define stable covariates
 stable <- c("id", "month", "id_5x5", "x", "y",
@@ -37,7 +41,7 @@ X_mat <- X_mat_year_1 <- X_mat[, c('year', 'date', stable)]
 
 # Generate frame for next 3 years of war:
 for(i in 1:3){
-  temp <- X_mat_year_1
+  temp <- X_mat_year_1[, ]
   temp$year <- temp$year + i
   temp$date <- temp$date + i*365
   X_mat <- rbind(X_mat, temp)
@@ -59,15 +63,22 @@ write_csv(X_mat[year(X_mat$date) == 2023, ], 'output-data/model-objects/stable_c
 write_csv(X_mat[year(X_mat$date) == 2024, ], 'output-data/model-objects/stable_covariates_2024.csv')
 
 # Appendum: years beyond 2024. We use 2023 as the source because it is not a leap year
-X_mat <- read_csv('output-data/model-objects/stable_covariates_2023.csv')
+X_mat_2023 <- read_csv('output-data/model-objects/stable_covariates_2023.csv',
+                       col_types = cols(.default = col_guess(), date = col_date()))
+if(nrow(X_mat_2023) == 0){
+  stop("stable_covariates_2023.csv is empty; regenerate stable covariates before extending years.")
+}
+if(!inherits(X_mat_2023$date, "Date")){
+  X_mat_2023$date <- as.Date(X_mat_2023$date)
+}
+target_year <- year(Sys.Date())
+target_year <- max(target_year, 2025)
 
-# Shift dates forward by exactly 2 calendar years
-X_mat$date <- X_mat$date %m+% years(2)
-
-# Update 'year' column from the new dates
-X_mat$year <- year(X_mat$date)
-
-# Filter to 2025 onward
-X_mat <- X_mat[X_mat$date >= as.Date('2025-01-01'), ]
-write_csv(X_mat[year(X_mat$date) == 2025, ], 'output-data/model-objects/stable_covariates_2025.csv')
-
+for (yr in 2025:target_year) {
+  X_mat <- X_mat_2023
+  X_mat$date <- X_mat$date %m+% years(yr - 2023)
+  X_mat$year <- year(X_mat$date)
+  X_mat <- X_mat[X_mat$date >= as.Date(paste0(yr, "-01-01")), ]
+  write_csv(X_mat[year(X_mat$date) == yr, ],
+            paste0('output-data/model-objects/stable_covariates_', yr, '.csv'))
+}
