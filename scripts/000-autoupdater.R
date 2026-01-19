@@ -15,6 +15,21 @@ render_animations <- wday(Sys.Date())==1
 tests <- T
 use_manual_data_add <- T 
 
+# Helper: safe bounds for coord_sf() when there are no war-fires in the window
+get_bounds <- function(df, fallback = c(xmin = 22, xmax = 41, ymin = 44, ymax = 53)) {
+  wf <- df[df$war_fire == TRUE &
+             is.finite(df$LONGITUDE) &
+             is.finite(df$LATITUDE), ]
+  if (nrow(wf) == 0) return(fallback)
+
+  c(
+    xmin = min(wf$LONGITUDE) - 3,
+    xmax = 41,
+    ymin = 44,
+    ymax = max(wf$LATITUDE) + 0.5
+  )
+}
+
 # Step 1: Load stable data ----------------------------------------
 cat("\n.... Load stable data ...\n")
 
@@ -213,6 +228,8 @@ if(update_charts_and_animations){
 
   zones_of_control <- st_zm(st_read('source-data/ISW_APR022023/UkraineControlMapAO02APR2023.shp'))
   zones_date <- as.Date('2023-04-02')
+  # Keep CRS consistent across layers (ISW shapefile is often EPSG:3857)
+  zones_of_control <- st_transform(zones_of_control, st_crs(ukraine))
 
   # Select spotlight
   spotlight_ADM1_EN <- "Donetska"
@@ -240,6 +257,9 @@ if(update_charts_and_animations){
   last_week <- fires[fires$date %in% as.Date(Sys.Date():(Sys.Date()-7), origin = '1970-01-01'), ]
   last_month <- fires[fires$date %in% as.Date(Sys.Date():(Sys.Date()-30), origin = '1970-01-01'), ]
 
+  b_month <- get_bounds(last_month)
+  b_week <- get_bounds(last_week)
+
   ggplot()+geom_sf(data=ukraine, col='darkgray', fill='lightgray')+
     geom_point(data = fires[fires$war_fire == 0, ], aes(x=LONGITUDE, y=LATITUDE, size = pop_exact),
                col = 'black', alpha = 0.025)+
@@ -258,8 +278,9 @@ if(update_charts_and_animations){
     theme_minimal()+theme(legend.position = 'none')+xlab('')+ylab('')+
     scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
     scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))+ggtitle(paste0('Fire activity between ', Sys.Date()-7, ' to ', Sys.Date(), "\n(Zones of control as per ISW, ", zones_date, ")"))+
-    coord_sf(xlim=c(min(last_month$LONGITUDE[last_month$war_fire == T])-3, 41),
-             ylim=c(max(last_month$LATITUDE[last_month$war_fire == T])+0.5, 44), expand = F)
+    coord_sf(xlim = b_month[c("xmin", "xmax")],
+             ylim = b_month[c("ymin", "ymax")],
+             expand = FALSE, lims_method = "geometry_bbox")
   ggsave('plots/live_ukraine_fire_map_last_month.png', width = 10, height = 8)
 
   if(nrow(last_week) > 0){
@@ -272,8 +293,9 @@ if(update_charts_and_animations){
     theme_minimal()+theme(legend.position = 'none')+xlab('')+ylab('')+
     scale_x_continuous(breaks = round(seq(20, 50, by = 1),1)) +
     scale_y_continuous(breaks = round(seq(30, 90, by = 1),1))+ggtitle(paste0('Fire activity between ', Sys.Date()-7, ' to ', Sys.Date(), "\n(Zones of control as per ISW, ", zones_date, ")"))+
-    coord_sf(xlim=c(min(last_week$LONGITUDE[last_week$war_fire == T])-3, 41),
-             ylim=c(max(last_week$LATITUDE[last_week$war_fire == T])+0.5, 44), expand = F)
+    coord_sf(xlim = b_week[c("xmin", "xmax")],
+             ylim = b_week[c("ymin", "ymax")],
+             expand = FALSE, lims_method = "geometry_bbox")
   ggsave('plots/live_ukraine_fire_map_last_week.png', width = 10, height = 8)
   }
 
