@@ -5,6 +5,10 @@ on:
     - cron: "1 0/3 * * *"   # 
   workflow_dispatch: {}
 
+concurrency:
+  group: war-fire-model-autoupdate
+  cancel-in-progress: true
+
 jobs:
   download:
     runs-on: ubuntu-22.04   # <- avoid 24.04 resolution issues (optional but safest)
