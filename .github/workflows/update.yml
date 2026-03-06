@@ -41,7 +41,8 @@ jobs:
           git add output-data/model-objects
           git commit --allow-empty -m "Data auto-update" -a
 
-          git push
+          git pull --rebase origin master
+          git push origin HEAD:master
 
       - name: Report failure
         if: failure()
