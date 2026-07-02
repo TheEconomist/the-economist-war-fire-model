@@ -30,12 +30,22 @@ jobs:
           fetch-depth: 2
           clean: true
 
+      - name: Check Ukraine war data token
+        run: |
+          if [ -z "$UKRAINE_WAR_DATA_TOKEN" ]; then
+            echo "UKRAINE_WAR_DATA_TOKEN is required to read TheEconomist/ukraine-war-data from this workflow."
+            exit 1
+          fi
+        shell: bash
+        env:
+          UKRAINE_WAR_DATA_TOKEN: ${{ secrets.UKRAINE_WAR_DATA_TOKEN }}
+
       - name: Checkout Ukraine war data
         uses: actions/checkout@v5
         with:
           repository: TheEconomist/ukraine-war-data
           path: _ukraine-war-data
-          token: ${{ secrets.github_token }}
+          token: ${{ secrets.UKRAINE_WAR_DATA_TOKEN }}
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             output-data/ISW-shapefiles
