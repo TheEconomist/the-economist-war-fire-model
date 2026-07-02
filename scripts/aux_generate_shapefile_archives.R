@@ -11,15 +11,28 @@ library(units)
 library(readr)
 library(anytime)
 
+default_isw_shapefiles_dir <- '/Users/sondresolstad/Github/ukraine-war-data/output-data/ISW-shapefiles'
+isw_shapefiles_dir <- Sys.getenv('ISW_SHAPEFILES_DIR', unset = default_isw_shapefiles_dir)
+
+if (!dir.exists(isw_shapefiles_dir)) {
+  stop(paste0('ISW shapefiles directory not found: ', isw_shapefiles_dir))
+}
+
+days_with_data <- dir(isw_shapefiles_dir)
+days_with_data <- days_with_data[grepl('^[0-9]{4}-[0-9]{2}-[0-9]{2}$', days_with_data)]
+days_with_data <- days_with_data[order(as.Date(days_with_data))]
+
+if (length(days_with_data) == 0) {
+  stop(paste0('No dated ISW shapefile folders found in: ', isw_shapefiles_dir))
+}
+
 # Generate containers and set index
 for(j in c("ControlMap", "RussianAdvances", "ClaimedRussian", "ClaimedUkrainian")){
   res <- data.frame()
   ind <- 0
 
-  days_with_data <- dir('/Users/sondresolstad/Github/ukraine-war-data/output-data/ISW-shapefiles/')[order(as.Date(dir('/Users/sondresolstad/Github/ukraine-war-data/output-data/ISW-shapefiles/')))]
-
   for(i in sort(days_with_data)){
-    files <- dir(paste0('/Users/sondresolstad/Github/ukraine-war-data/output-data/ISW-shapefiles/', i))
+    files <- dir(file.path(isw_shapefiles_dir, i))
     control <- grep(j, files, value = T)
     if(length(control) != 1){
       message(paste0('Warning: Missing control map for ', i))
@@ -27,7 +40,7 @@ for(j in c("ControlMap", "RussianAdvances", "ClaimedRussian", "ClaimedUkrainian"
     } else {
       tryCatch(
         {
-          temp <- st_read(paste0('/Users/sondresolstad/Github/ukraine-war-data/output-data/ISW-shapefiles/', i, '/', control), quiet = T) %>%
+          temp <- st_read(file.path(isw_shapefiles_dir, i, control), quiet = T) %>%
             st_transform("EPSG:6381") %>%
             st_zm() %>%
             st_simplify(dTolerance = 100)
@@ -62,6 +75,5 @@ for(j in c("ControlMap", "RussianAdvances", "ClaimedRussian", "ClaimedUkrainian"
   }
   saveRDS(big_shp, paste0("source-data/ISW_historical/", j, '_shapes.RDS'))
 }
-
 
 

@@ -1,0 +1,69 @@
+name: Update ISW archives
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 7 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-isw-archives
+  cancel-in-progress: true
+
+jobs:
+  run:
+    name: Update ISW historical archives
+    runs-on: the-economist-war-fire-model
+    container:
+      image: ghcr.io/theeconomist/the-economist-war-fire-model:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 2
+          clean: true
+
+      - name: Checkout Ukraine war data
+        uses: actions/checkout@v4
+        with:
+          repository: TheEconomist/ukraine-war-data
+          path: _ukraine-war-data
+          token: ${{ secrets.UKRAINE_WAR_DATA_TOKEN || github.token }}
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            output-data/ISW-shapefiles
+
+      - name: Refresh ISW archives
+        run: |
+          . /opt/conda/etc/profile.d/conda.sh && conda activate base
+          Rscript scripts/aux_generate_shapefile_archives.R
+        shell: bash
+        env:
+          ISW_SHAPEFILES_DIR: _ukraine-war-data/output-data/ISW-shapefiles
+
+      - name: Commit changes
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          if git diff --quiet -- source-data/ISW_historical; then
+            echo "No ISW archive changes."
+            exit 0
+          fi
+
+          git add source-data/ISW_historical
+          git commit -m "Update ISW historical archives"
+          git pull --rebase origin master
+          git push origin HEAD:master
+
+      - name: Report failure
+        if: failure()
+        run: |
+          curl -X POST -H "Content-type: application/json" --data '{ "channel":"${{ secrets.SLACK_CHANNEL }}", "text":":x: <@UTBFTA7Q9> <@U02N72XERFW> The Economist War Fire Model failed to update ISW archives. Please check the logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}", "unfurl_links": false }' ${{ secrets.SLACK_WEBHOOK }}
