@@ -24,18 +24,18 @@ jobs:
         password: ${{ secrets.github_token }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           lfs: true
           fetch-depth: 2
           clean: true
 
       - name: Checkout Ukraine war data
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: TheEconomist/ukraine-war-data
           path: _ukraine-war-data
-          token: ${{ secrets.UKRAINE_WAR_DATA_TOKEN || github.token }}
+          token: ${{ secrets.github_token }}
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             output-data/ISW-shapefiles
