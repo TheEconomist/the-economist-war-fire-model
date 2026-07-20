@@ -29,7 +29,7 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
       <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700' rel='stylesheet' type='text/css'>
     <meta name="csrf-param" content="authenticity_token" />
-<meta name="csrf-token" content="hWHdrIV8g7810hTnbL1dv0TiAN9b6lwAGbR72dB_foNfE8_vW4FD9tKZ7fUIaUOTlIBhkNoIO9wRc9PlJczMrw" />
+<meta name="csrf-token" content="-0ED_ipF5j2yn_Xsc4-Yl4LXSsRvFoKuDbMqKBSWcaBBHIF2m_aBx4D2uEd_WpLCSPU_5cUnJAdm4yrtCfJGiw" />
     
 
     <!-- Grid background: http://subtlepatterns.com/graphy/ -->
@@ -67,7 +67,7 @@
     </h3>
 
   </div>
-  <form id="login" action="/login" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="-1RQWfYBd9A4nmZYHmt-k3mg4yYdpVuVdBtwROZKrQ_0yZ59iE31ex0MYRcvF4G-xk7HS1gyD6tHbxjpkZOxWw" />
+  <form id="login" action="/login" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="H8RoXCKcs6ejJ9a_NsOQaJRg__-Tg0E4XOt9WMfk51_O-1iJsnV74bl9Df9HULoSUqZ8cfCGoQwct-wJ_-Z7XQ" />
   <p>
     <label for="username">Username</label>
     <i class="fa fa-question-circle fa-question-circle--blue user-name" title="Login using either your Username or Email Address"></i>
@@ -85,7 +85,7 @@
     <input type="hidden" name="redirect_uri" id="redirect_uri" value="https://nrt3.modaps.eosdis.nasa.gov/oauth/callback" />
   </p>
         <p><input type="hidden" name="response_type" id="response_type" value="code" /></p>
-      <p><input type="hidden" name="state" id="state" value="mfuB4wiev70WNgJ1qCbbEeMNTrDOfV" /></p>
+      <p><input type="hidden" name="state" id="state" value="qTc78giXGCkM4EpLFpKm5jKpY7sxZb" /></p>
       <p><input type="checkbox" name="stay_in" id="stay_in" value="1" checked="checked" /> <label for="stay_in">Stay signed in (this is a private workstation)</label></p>
 
   <br/>
@@ -124,7 +124,7 @@
     <br/>
     <div class="idfs-button-alignment">
 
-          <a class="eui-btn--round eui-btn--blue" href="/users/new?client_id=sXTOeM-6RH5fuK3TacT_Ag&amp;redirect_uri=https%3A%2F%2Fnrt3.modaps.eosdis.nasa.gov%2Foauth%2Fcallback&amp;response_type=code&amp;state=mfuB4wiev70WNgJ1qCbbEeMNTrDOfV">Register for a Profile</a>
+          <a class="eui-btn--round eui-btn--blue" href="/users/new?client_id=sXTOeM-6RH5fuK3TacT_Ag&amp;redirect_uri=https%3A%2F%2Fnrt3.modaps.eosdis.nasa.gov%2Foauth%2Fcallback&amp;response_type=code&amp;state=qTc78giXGCkM4EpLFpKm5jKpY7sxZb">Register for a Profile</a>
     <div>
 </aside>
 
