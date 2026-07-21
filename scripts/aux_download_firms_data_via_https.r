@@ -141,6 +141,7 @@ for (sys in systems) {
   downloaded <- character(0)
   for (f in new_files) {
     url <- paste0(remote_dir, f)
+    print(url)
     path <- download_file(url, local_dir, edl_token)
     if (!is.null(path)) {
       cat("  ✓ ", basename(path), "\n", sep = "")
