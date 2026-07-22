@@ -44,6 +44,7 @@ jobs:
         run: Rscript scripts/aux_download_firms_data_via_https.r
         env:
           EARTHDATA_TOKEN: ${{ secrets.EARTHDATA_TOKEN }}
+          EARTHDATA_TOKEN_EXPIRES: ${{ vars.EARTHDATA_TOKEN_EXPIRES }}
 
       - name: Commit and push new data
         run: |
@@ -58,3 +59,7 @@ jobs:
             echo "No new files."
           fi
     
+      - name: Report failure
+        if: failure()
+        run: |
+          curl -X POST -H "Content-type: application/json" --data '{ "channel":"${{ secrets.SLACK_CHANNEL }}", "text":":x: <@UTBFTA7Q9> <@U02N72XERFW> FIRMS data failed to update. Please check the logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}", "unfurl_links": false }' ${{ secrets.SLACK_WEBHOOK }}

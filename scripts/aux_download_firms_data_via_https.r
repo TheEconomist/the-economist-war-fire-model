@@ -10,11 +10,14 @@ suppressPackageStartupMessages({
 # ---- Config ----
 # Read EDL token from env (set in GH Actions secret or your shell)
 edl_token <- Sys.getenv("EARTHDATA_TOKEN")
-
-cat(paste0('\nNOTE: Earthdata token expires after 60 days--check this if errors occur. It was created ', Sys.Date()-as.Date('2025-12-02', tz = 'UTC'), ' days ago.'))
+edl_token_expires <- Sys.getenv("EARTHDATA_TOKEN_EXPIRES")
 
 if (!nzchar(edl_token)) {
   stop("EARTHDATA_TOKEN env var is missing.")
+}
+
+if (Sys.time() > as.POSIXct(edl_token_expires, tz = "UTC")) {
+  stop("EarthData API key has expired")
 }
 
 # Local base dir that already contains many FIRMS .txt files (per system)
