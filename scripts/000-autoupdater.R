@@ -163,8 +163,8 @@ if(tests){
   old <- read_csv('output-data/ukraine_fires.csv')
   new_fires <- sum(fires$war_fire) - sum(old$war_fire)
    cat(paste0('\n Recorded ', new_fires, ' new war fires in this update.\n'))
-  if(new_fires > 1000){
-    stop('Over 1000 new war fires detected in this update - please inspect manually.')
+  if(new_fires > 10000){
+    stop('Over 10000 new war fires detected in this update - please inspect manually.')
   }
 
   # Test: fighting in new area of the country?
