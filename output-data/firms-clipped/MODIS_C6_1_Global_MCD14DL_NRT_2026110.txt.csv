@@ -1,0 +1,4 @@
+latitude,longitude,brightness,scan,track,acq_date,acq_time,satellite,confidence,version,bright_t31,frp,daynight,instrument
+48.3517,37.49621,301.12,1.08,1.04,2026-04-20,07:09:00,T,45,6.1NRT,288.76,4.31,D,MODIS
+48.34938,37.51017,304.31,1.08,1.04,2026-04-20,07:09:00,T,59,6.1NRT,288.64,6.44,D,MODIS
+47.86457,33.43388,328.87,1.02,1.01,2026-04-20,07:09:00,T,74,6.1NRT,293.53,27.37,D,MODIS

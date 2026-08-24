@@ -162,9 +162,12 @@ if(tests){
   # Test: vast number of new war fires?
   old <- read_csv('output-data/ukraine_fires.csv')
   new_fires <- sum(fires$war_fire) - sum(old$war_fire)
-   cat(paste0('\n Recorded ', new_fires, ' new war fires in this update.\n'))
-  if(new_fires > 5000){
-    stop('Over 5000 new war fires detected in this update - please inspect manually.')
+  # Scale the threshold by days of new data: nothing is saved until these tests pass, so after
+  # one failed update the backlog grows and a fixed limit would trip on every subsequent run
+  new_days <- max(1, as.numeric(max(fires$date) - max(old$date)))
+  cat(paste0('\n Recorded ', new_fires, ' new war fires in this update, covering ', new_days, ' new day(s).\n'))
+  if(new_fires > 5000 * new_days){
+    stop('Over 5000 new war fires per day of new data detected in this update - please inspect manually.')
   }
 
   # Test: fighting in new area of the country?
