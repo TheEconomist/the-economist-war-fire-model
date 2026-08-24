@@ -1,8 +1,8 @@
 name: Download FIRMS Global data
 
 on:
-#  schedule:
-#    - cron: "1 0/3 * * *"   # 
+  schedule:
+    - cron: "1 0/3 * * *"
   workflow_dispatch: {}
 
 concurrency:
