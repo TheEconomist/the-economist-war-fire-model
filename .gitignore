@@ -22,3 +22,5 @@ output-data/X_matrix.RDS
 output-data/X_temp.RDS
 scripts/000-autoupdater-local.R
 .history/
+output-data/model-objects/checkpoints/
+Rplots.pdf

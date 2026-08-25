@@ -19,9 +19,9 @@ ukraine_raw <- st_make_valid(ukraine_raw)
 
 # Load shapefiles:
 
-# Ukraine-held is defined as the complement of the intersection of c('in Ukraine') and c('in area of Russian attacks', 'in area of Ukrainian counterattacks', 'in area of Russia control', and 'in area of Russian claimed control'). Since all fires are in Ukraine, that simplifies to the below:
+# Ukraine-held is defined as the complement of the intersection of c('in Ukraine') and c('in area of Russian attacks', 'in area of Russia control', and 'in area of Russian claimed control'). Since all fires are in Ukraine, that simplifies to the below.
+# ISW's "claimed Ukrainian counteroffensives" layer is deliberately not included: ISW never retires its polygons, so the layer permanently carries the 2022 Kyiv, Kharkiv and Kherson counteroffensive areas, which would otherwise count liberated territory as Russia-held or contested indefinitely.
 big_shp <- rbind(readRDS('source-data/ISW_historical/ClaimedRussian_shapes.RDS'),
-                     readRDS('source-data/ISW_historical/ClaimedUkrainian_shapes.RDS'),
                      readRDS('source-data/ISW_historical/ControlMap_shapes.RDS'),
                      readRDS('source-data/ISW_historical/RussianAdvances_shapes.RDS'))
 # To update this file, run "aux_generate_shapefile_archives.R".

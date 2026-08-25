@@ -27,3 +27,8 @@ lng1,lng2,lat1,lat2,start_date,end_date,note
 32.70924181856682,33.26875818143318,50.08518018018018,49.72481981981982,15/08/2024,20/09/2024,Forest fires (as implied by fire pattern)
 34.198304129709875,34.75169587029013,49.54918018018018,49.18881981981982,15/08/2024,20/09/2024,Forest fires (as implied by fire pattern)
 28.226675801536423,28.789324198463575,50.35318018018018,49.99281981981982,15/08/2024,20/09/2024,Forest fires (as implied by fire pattern)
+30.25,30.45,51.05,50.95,15/08/2026,01/09/2026,Forest fires in Polissia south of the Chornobyl zone near Ivankiv (same area as Aug 2024)
+28.65,29.25,51.55,51.15,15/08/2026,01/09/2026,Forest fires in Polissia near Narodychi and Ovruch (same area as Aug 2024)
+30.15,30.35,51.45,51.15,15/08/2026,01/09/2026,Forest fires inside the Chornobyl exclusion zone
+28.5,30.4,46.6,45.55,15/07/2026,01/09/2026,Crop fires in and north of the Danube basin natural park (same area as 2022-2024; southern edge kept above the Danube ports so potential strikes on Izmail/Reni/Kiliia are not suppressed)
+29.356,29.844,45.55,45.0,15/07/2026,01/09/2026,Marsh fires in the Danube delta natural park (same area as 2022 exclusion)
