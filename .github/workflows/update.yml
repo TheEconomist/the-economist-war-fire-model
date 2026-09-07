@@ -1,8 +1,15 @@
 name: update
 on:
   workflow_dispatch:
+    inputs:
+      update_charts:
+        description: Render charts and animations during this manual run
+        required: true
+        type: boolean
+        default: true
   schedule:
-    - cron: "0 2,14 * * *"
+    - cron: "0 2 * * *"
+    - cron: "0 14 * * *"
 concurrency:
   group: ${{ github.ref }}
 jobs:
@@ -17,19 +24,24 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        env:
+          GIT_LFS_SKIP_SMUDGE: "1"
         with:
-          lfs: true
-          fetch-depth: 2          # <- important: no shallow history
+          lfs: false
+          fetch-depth: 2          # shallow, with enough history for the rebase below
           clean: true             # <- remove working tree junk
+      - name: Pull required LFS files
+        run: |
+          git lfs install --local --skip-smudge
+          git lfs pull --exclude="output-data/model-objects/boot_predictions*,output-data/model-objects/stable_covariates.csv,source-data/firms-imports/2000-2022/**,output-data/war_fires_by_ADM3.csv"
       - name: Run R script
         run: |
           . /opt/conda/etc/profile.d/conda.sh && conda activate base
-          cat output-data/model-objects/boot_predictions.csv.* > output-data/model-objects/boot_predictions.csv
           Rscript -e "source('scripts/000-autoupdater.R')"
-          split -l 500000 output-data/model-objects/boot_predictions.csv output-data/model-objects/boot_predictions.csv.
         shell: bash
         env:
           FIRMS_API_KEY: ${{ secrets.FIRMS_API_KEY }}
+          UPDATE_CHARTS_AND_ANIMATIONS: ${{ (github.event_name == 'workflow_dispatch' && inputs.update_charts) || github.event.schedule == '0 2 * * *' }}
   
       - name: Commit changes
         run: |
@@ -38,11 +50,13 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          git add output-data/model-objects
+          git add output-data/model-objects output-data/firms-clipped
           git commit --allow-empty -m "Data auto-update" -a
 
-          git pull --rebase origin master
-          git push origin HEAD:master
+          git pull --rebase origin "$TARGET_BRANCH"
+          git push origin "HEAD:$TARGET_BRANCH"
+        env:
+          TARGET_BRANCH: ${{ github.ref_name }}
 
       - name: Report failure
         if: failure()

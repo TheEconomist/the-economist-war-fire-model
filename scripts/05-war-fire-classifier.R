@@ -8,7 +8,6 @@ X_mat <- readRDS('output-data/X_matrix.RDS')
 
 cat('\n Running war fires classifier. See script "05-war-fire-classifier.R" for details.\n')
 
-pred_mat <- read_csv('output-data/model-objects/pred_matrix.csv')
 pred_mat <- readRDS('output-data/X_mat_with_preds.RDS')
 pred_mat$predicted_fire <- pred_mat$prediction_upper_90
 pred_mat$predicted_fire[pred_mat$predicted_fire < 0] <- 0

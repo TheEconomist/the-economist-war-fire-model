@@ -60,6 +60,15 @@ war_fire_classifier <- function(cell_day_data, # Data frame of cells with number
   cells$fire_in_window <- cells$fire
   fires <- merge(fires, cells[, c('excess_fire', 'id_w_time', 'predicted_fire', 'fire_in_window')], by='id_w_time')
 
+  # Keep assignments reproducible when merge/input ordering changes between updates.
+  fires <- fires[order(fires$id_w_time,
+                       fires$date,
+                       fires$ACQ_TIME,
+                       fires$LATITUDE,
+                       fires$LONGITUDE,
+                       na.last = TRUE), ]
+  rownames(fires) <- NULL
+
   # Set war fire tag to default:
   fires$war_fire <- NA
   fires$war_fire[fires$excess_fire == 0] <- 0
@@ -178,4 +187,3 @@ war_fire_classifier <- function(cell_day_data, # Data frame of cells with number
   cat(paste0('\n            ', sum(fires$war_fire_restrictive == 1), ' (restrictive). \n'))
   return(fires)
 }
-

@@ -89,10 +89,11 @@ war[, 2] <- round(war[, 2], 3)
 war[, 3] <- round(war[, 3], 3)
 war <- war[!is.na(war$date), ]
 write_csv(war[nrow(war):1, ], 'output-data/strikes_by_location_and_day.csv')
-ggplot(war[, ], aes(x=date))+
-  geom_line(aes(col=paste0('7-day centered average, Russia-held, claimed or contested area\n(days with <', 100*max_cloud_coverage, '% cloud cover)'), y=war_fires_per_day_in_russia_held_area_non_cloud_days_7dma))+
-  geom_line(aes(col=paste0('7-day centered average, Ukraine-held area\n(days with <', 100*max_cloud_coverage, '% cloud cover)'), y=war_fires_per_day_in_ukraine_held_area_non_cloud_days_7dma))+theme_minimal()+xlab('Sources: ISW, The Economist')+ylab('')+theme(legend.position = 'bottom', legend.title = element_blank())+ggtitle('Fire activity assessed as war-related per day, by location of strike')
+if(!exists('update_charts_and_animations') || update_charts_and_animations){
+  ggplot(war[, ], aes(x=date))+
+    geom_line(aes(col=paste0('7-day centered average, Russia-held, claimed or contested area\n(days with <', 100*max_cloud_coverage, '% cloud cover)'), y=war_fires_per_day_in_russia_held_area_non_cloud_days_7dma))+
+    geom_line(aes(col=paste0('7-day centered average, Ukraine-held area\n(days with <', 100*max_cloud_coverage, '% cloud cover)'), y=war_fires_per_day_in_ukraine_held_area_non_cloud_days_7dma))+theme_minimal()+xlab('Sources: ISW, The Economist')+ylab('')+theme(legend.position = 'bottom', legend.title = element_blank())+ggtitle('Fire activity assessed as war-related per day, by location of strike')
 
-ggsave('plots/attacks_per_day_by_location_of_strike.png', width = 10, height = 4)
-
+  ggsave('plots/attacks_per_day_by_location_of_strike.png', width = 10, height = 4)
+}
 

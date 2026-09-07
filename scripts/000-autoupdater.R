@@ -10,8 +10,8 @@ library(anytime)
 options(readr.show_col_types = F)
 ggsave <- function(..., bg = 'white') ggplot2::ggsave(..., bg = bg)
 redo <- F
-update_charts_and_animations <- T
-render_animations <- wday(Sys.Date())==1
+update_charts_and_animations <- !tolower(Sys.getenv('UPDATE_CHARTS_AND_ANIMATIONS', unset = 'true')) %in% c('false', '0', 'no')
+render_animations <- update_charts_and_animations && wday(Sys.Date())==1
 tests <- T
 use_manual_data_add <- T 
 
@@ -96,12 +96,39 @@ source('scripts/03-generate-predictions-from-model-ensemble.R')
 # The following lines generates predictions for each cell-day:
 if(redo){
   preds <- ensemble_predict(X_mat = X)
-  write_csv(as.data.frame(preds[[1]]), 'output-data/model-objects/boot_predictions.csv')
+
+  # A full rebuild replaces all prior bootstrap bases/increments with bounded,
+  # independently readable base chunks.
+  model_dir <- 'output-data/model-objects'
+  old_boot_files <- list.files(
+    model_dir,
+    pattern = '^boot_predictions([.]csv[.][a-z]+|_base_[0-9]+[.]csv|_increment_.*[.]csv)$',
+    full.names = TRUE)
+  old_pred_increments <- list.files(
+    model_dir,
+    pattern = '^pred_matrix_increment_.*[.]csv$',
+    full.names = TRUE)
+  unlink(c(old_boot_files, old_pred_increments))
+
+  boot_predictions <- as.data.frame(preds[[1]])
+  if(nrow(boot_predictions) == 0){
+    stop('Full rebuild produced no bootstrap predictions.')
+  }
+  boot_chunk_size <- 499999L
+  boot_chunk <- ceiling(seq_len(nrow(boot_predictions)) / boot_chunk_size)
+  for(i in unique(boot_chunk)){
+    write_csv(
+      boot_predictions[boot_chunk == i, , drop = FALSE],
+      file.path(model_dir, sprintf('boot_predictions_base_%03d.csv', i)))
+  }
+  rm(boot_predictions, boot_chunk)
+
   write_csv(as.data.frame(preds[[2]]), 'output-data/model-objects/pred_matrix.csv')
+  cached_preds_2 <- as.data.frame(preds[[2]])
 } else {
-  # Load cached predictions:
-  cached_preds_1 <- read_csv('output-data/model-objects/boot_predictions.csv')
-  cached_preds_2 <- read_csv('output-data/model-objects/pred_matrix.csv')
+  # Load the immutable base prediction matrix and append-only update chunks:
+  source('scripts/aux_load_prediction_matrix.R')
+  cached_preds_2 <- load_prediction_matrix()
 
   # Predict for missing dates and cells:
   if(any(!paste0(X$date, '_', X$id) %in% paste0(cached_preds_2$date, '_', cached_preds_2$id))){
@@ -115,9 +142,22 @@ if(redo){
     X <- readRDS('output-data/model-objects/temp.RDS') # Load temporary cache for memory optim
     unlink('output-data/model-objects/temp.RDS') # Unlink temporary cache
 
-    # Append new predictions to cache:
-    write_csv(rbind(as.data.frame(cached_preds_1), as.data.frame(preds[[1]])), 'output-data/model-objects/boot_predictions.csv')
-    write_csv(rbind(as.data.frame(cached_preds_2), as.data.frame(preds[[2]])), 'output-data/model-objects/pred_matrix.csv')
+    # Store only new bootstrap predictions. Historical chunks are immutable, avoiding
+    # a multi-GB download, rewrite, split and upload on every update.
+    run_id <- Sys.getenv('GITHUB_RUN_ID', unset = format(Sys.time(), '%Y%m%dT%H%M%SZ', tz = 'UTC'))
+    run_attempt <- Sys.getenv('GITHUB_RUN_ATTEMPT', unset = '1')
+    boot_chunk_path <- file.path(
+      'output-data/model-objects',
+      paste0('boot_predictions_increment_', run_id, '_', run_attempt, '.csv'))
+    write_csv(as.data.frame(preds[[1]]), boot_chunk_path)
+
+    # Store only new summary predictions and add them to the in-memory cache used below.
+    pred_chunk_path <- file.path(
+      'output-data/model-objects',
+      paste0('pred_matrix_increment_', run_id, '_', run_attempt, '.csv'))
+    new_summary_preds <- as.data.frame(preds[[2]])
+    write_csv(new_summary_preds, pred_chunk_path)
+    cached_preds_2 <- rbind(as.data.frame(cached_preds_2), new_summary_preds)
   }
 }
 
@@ -125,7 +165,7 @@ if(redo){
 cat("\n.... Running classifier ....\n")
 
 # Get prediction matrix
-pred_mat <- read_csv('output-data/model-objects/pred_matrix.csv')
+pred_mat <- cached_preds_2
 pred_mat <- pred_mat[pred_mat$date >= as.Date('2022-02-24'), ]
 pred_mat$predicted_fire <- pred_mat$prediction_upper_95
 pred_mat$predicted_fire[pred_mat$predicted_fire < 0] <- 0
@@ -215,7 +255,6 @@ war_fires <- fires[fires$war_fire == T, ]
 
 # Export to file:
 write_csv(fires, 'output-data/ukraine_fires.csv')
-write_csv(war_fires, 'output-data/ukraine_war_fires.csv')
 
 if(update_charts_and_animations){
   cat("\n.... Updating charts and data exports....\n")

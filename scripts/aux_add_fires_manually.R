@@ -67,8 +67,9 @@ unlink(cache_path(gone))
 manifest <- manifest[!manifest$file %in% gone, ]
 
 cached_md5 <- manifest$md5[match(raw_files, manifest$file)]
-to_process <- raw_files[is.na(cached_md5) | cached_md5 != hashes]
-cat(paste0('\n', length(raw_files), ' raw FIRMS files, ', length(to_process), ' new or changed since last run.\n'))
+cache_exists <- file.exists(cache_path(raw_files))
+to_process <- raw_files[!cache_exists | is.na(cached_md5) | cached_md5 != hashes]
+cat(paste0('\n', length(raw_files), ' raw FIRMS files, ', length(to_process), ' new, changed, or missing from cache.\n'))
 
 ukr_bbox <- st_bbox(ukr)
 
@@ -184,4 +185,3 @@ if (length(seq(min(all_dates), max(all_dates), by = "day")) ==
 
 # Export back to fire archive:
 write_csv(fires, 'output-data/firms_update.csv')
-
