@@ -32,8 +32,8 @@ jobs:
           clean: true             # <- remove working tree junk
       - name: Pull required LFS files
         run: |
-          git lfs install --local --skip-smudge
-          git lfs pull --exclude="output-data/model-objects/boot_predictions*,output-data/model-objects/stable_covariates.csv,source-data/firms-imports/2000-2022/**,output-data/war_fires_by_ADM3.csv"
+          git -C "$GITHUB_WORKSPACE" lfs install --local --skip-smudge
+          git -C "$GITHUB_WORKSPACE" lfs pull --exclude="output-data/model-objects/boot_predictions*,output-data/model-objects/stable_covariates.csv,source-data/firms-imports/2000-2022/**,output-data/war_fires_by_ADM3.csv"
       - name: Run R script
         run: |
           . /opt/conda/etc/profile.d/conda.sh && conda activate base
