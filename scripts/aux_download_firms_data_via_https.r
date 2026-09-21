@@ -54,12 +54,50 @@ local_max_num <- function(dir_path) {
   max(nums)
 }
 
+# Perform a request again after transient network errors and NASA server errors.
+# A GitHub-hosted runner can occasionally time out before opening a connection;
+# 4xx responses are returned immediately because retries cannot fix bad credentials
+# or a malformed request.
+perform_with_retry <- function(req, description, max_attempts = 4L) {
+  for (attempt in seq_len(max_attempts)) {
+    response <- tryCatch(req_perform(req), error = function(e) e)
+
+    if (!inherits(response, "error")) {
+      status <- resp_status(response)
+      if (status < 400 || !(status == 429 || status >= 500)) {
+        return(response)
+      }
+      failure <- sprintf("HTTP %s", status)
+    } else {
+      failure <- conditionMessage(response)
+    }
+
+    if (attempt == max_attempts) {
+      stop(
+        sprintf("%s failed after %d attempts: %s", description, max_attempts, failure),
+        call. = FALSE
+      )
+    }
+
+    delay <- 15 * 2 ^ (attempt - 1L)
+    message(sprintf(
+      "%s failed on attempt %d/%d (%s); retrying in %d seconds...",
+      description, attempt, max_attempts, failure, delay
+    ))
+    Sys.sleep(delay)
+  }
+}
+
 # GET HTML of a directory listing with auth header
 fetch_listing <- function(url, token) {
   req <- request(url) |>
     req_headers(Authorization = paste("Bearer", token)) |>
-    req_timeout(60)
-  resp <- req_perform(req)
+    req_timeout(60) |>
+    req_error(is_error = function(resp) FALSE)
+  resp <- perform_with_retry(req, sprintf("Listing %s", url))
+  if (resp_status(resp) >= 400) {
+    stop(sprintf("Listing %s -> HTTP %s", url, resp_status(resp)), call. = FALSE)
+  }
   resp_body_string(resp)
 }
 
@@ -86,7 +124,7 @@ download_file <- function(url, dest_dir, token, overwrite = TRUE) {
     req_timeout(120) |>
     req_error(is_error = function(resp) FALSE) # don't throw; let us handle
 
-  resp <- req_perform(req)
+  resp <- perform_with_retry(req, sprintf("Download %s", fn))
   if (resp_status(resp) >= 400) {
     warning(sprintf("Failed %s -> HTTP %s", fn, resp_status(resp)))
     return(invisible(NULL))
